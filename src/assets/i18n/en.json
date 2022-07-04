@@ -1,0 +1,317 @@
+{
+  "forgotPin": {
+    "title": "Pin Reset",
+    "tagline": "Enter the mobile number associated with the account",
+    "fields": [
+      {
+        "label": "Mobile number",
+        "placeholder": "Enter mobile number"
+      }
+    ],
+    "buttons": [
+      {
+        "title": "Proceed"
+      }
+    ]
+  },
+  "home": {
+    "Send": "Send",
+    "Money": "Money",
+    "Request": "Request",
+    "Transfer": "Transfer",
+    "To_Bank": "to Bank",
+    "International": "International",
+    "Mobile": "Mobile",
+    "Recharge": "Recharge",
+    "Postpaid": "Postpaid",
+    "Bill": "Bill",
+    "Electricity": "Electricity",
+    "Broadband": "Broadband",
+    "Landline": "Landline",
+    "TV": "TV",
+    "Water": "Water",
+    "Gas": "Gas",
+    "Withdraw": "Withdraw",
+    "Cash": "Cash",
+    "Pay": "Pay",
+    "Merchant": "Merchant",
+    "View": "View",
+    "Less": "Less",
+    "Pay_now": "Pay now",
+    "About_MobiquityPay": "About MobiquityPay",
+    "About_MobiquityPay_Description": "Trusted by over 27 million users, mobiquityPay is one of the most popular platforms for online recharge, bill payment, and other financial services. The mobiquityPay portal offers an easy, convenient, and secure experience and its user-friendly interface allow users to transact in no time with zero hassle at all.",
+    "Online_Recharge_Title": "Online Recharge– Mobile, DTH etc.",
+    "Online_Recharge_Description": "When it comes to online recharge, mobiquitypay serves all your needs and provides exceptional rewards and cashback offers.",
+    "Utility_Bill_Payments_Title": "Utility Bill Payments –Electricity, Gas, & Water Bill Payment",
+    "Utility_Bill_Payments_Description": "When it comes to utility bill payments, mobiquitypay serves all your needs and provides exceptional rewards and cashback offers.",
+    "Other_Financial_Services_Title": "Other Financial Services- Send Money, Recieve Money, Pay Merchant",
+    "Other_Financial_Services_Description": "When it comes to other financial services, mobiquitypay serves all your needs and provides exceptional rewards and cashback offers."
+  },
+  "login": {
+    "title": "Login via mobile number",
+    "tagline": "Enter your mobile number and PIN to login.",
+    "label": ["Mobile number", "PIN"],
+    "a": ["Forgot PIN?", "Register"],
+    "b": ["LOGIN"],
+    "p": ["Don’t have an account?"]
+  },
+  "otp": {
+    "title": "Mobile number verification",
+    "headings": ["Verification"],
+    "paragraphs": ["Enter OTP sent to ", "Resend OTP in 00:", "Attempts left 4"],
+    "spans": ["+91 9872819277"],
+    "buttons": ["Verify"]
+  },
+  "register": {
+    "cols": [
+      {
+        "fields": [
+          { "p": "Contact & ", "br": "Personal details" },
+          { "p": "Address", "br": "Details" },
+          { "p": "KYC", "br": "Details" },
+          { "p": "Set", "br": "PIN" }
+        ]
+      },
+      {
+        "parts": [
+          {
+            "h": "Contact Details",
+            "sh": "Personal Details",
+            "div": [
+              {
+                "label": "Mobile number",
+                "placeholder": "Enter mobile number"
+              },
+              {
+                "label": "Email ID",
+                "placeholder": "Enter Email ID (Optional)"
+              },
+              {
+                "label": "Referral Code",
+                "placeholder": "Enter (Optional)"
+              },
+              {
+                "label": "First name",
+                "placeholder": "Enter first name"
+              },
+              {
+                "label": "Middle Name",
+                "placeholder": "Enter middle name(Optional)"
+              },
+              {
+                "label": "Last name",
+                "placeholder": "Enter last name"
+              },
+              {
+                "label": "Date of Birth",
+                "placeholder": "Select date (Optional)"
+              },
+              {
+                "label": "Payment ID",
+                "placeholder": "Enter payment ID (Optional)"
+              },
+              {
+                "label": "Gender",
+                "radio1": "Male",
+                "radio2": "Female",
+                "radio3": "Other"
+              },
+              {
+                "span": "It can contain 7 - 30 characters, numerics or special character from &, *, !"
+              },
+              {
+                "label": "Upload profile picture",
+                "span": ["Click here or drop here to upload", "CHOOSE FILE"],
+                "p": "(Upload file upto 5MB in PNG, JPEG, PDF format)"
+              },
+              {
+                "label": "Login ID",
+                "placeholder": "Enter login ID"
+              },
+              {
+                "label": "Title"
+              },
+              {
+                "label": "Preferred Language"
+              },
+              {
+                "label": "CIF",
+                "placeholder": "Enter CIF"
+              }
+            ],
+            "a": ["Next", "Login"],
+            "p": ["Already have an account?"],
+            "otp": ["Didn't get the OTP?", "Resend"]
+          },
+          {
+            "fields": [
+              {
+                "p": "Contact & ",
+                "br": "Personal details"
+              },
+              {
+                "p": "Address",
+                "br": "Details"
+              },
+              {
+                "p": "KYC",
+                "br": "Details"
+              },
+              {
+                "p": "Set",
+                "br": "PIN"
+              },
+              {
+                "label": "Address Line 1",
+                "placeholder": "Enter address"
+              },
+              {
+                "label": "Address Line 2",
+                "placeholder": "Enter address"
+              },
+              {
+                "label": "Country",
+                "option1": "Select country",
+                "option2": "Pakistan",
+                "option3": "England",
+                "option4": "Oman"
+              },
+              {
+                "label": "Postal Code",
+                "placeholder": "Enter Postal Code"
+              },
+              {
+                "label": "State",
+                "option1": "Select state",
+                "option2": "State A",
+                "option3": "State B",
+                "option4": "State C"
+              },
+              {
+                "label": "City",
+                "placeholder": "Select city",
+                "option1": "Select city",
+                "option2": "city A",
+                "option3": "city B",
+                "option4": "city C"
+              },
+              {
+                "h2": ["Get upto ", " on bill payments"],
+                "span": "30%cashback",
+                "p": "Automate your bill pay and get 30% cashback",
+                "b": "Pay now"
+              }
+            ],
+            "h": "Address Details",
+            "a": ["Skip", "Next"],
+            "num": ["1", "2", "3", "4"]
+          },
+          {
+            "h": "KYC Details",
+            "sh": ["Document 1", "Upload file", "Document 2", "Upload Documents"],
+            "fields": [
+              {
+                "label": "Document type",
+                "options": ["Select document", "Document One", "Document Two", "Document Three"]
+              },
+              {
+                "label": "ID number",
+                "placeholder": "Enter ID number"
+              },
+              {
+                "label": "Document holder name",
+                "options": ["Enter name", "Name One", "Name Two", "Name Three"]
+              },
+              {
+                "label": "Expiry date",
+                "placeholder": "Select date"
+              },
+              {
+                "label": "Front View",
+                "spans": ["Click here or drop here to upload", "CHOOSE FILE"]
+              },
+              {
+                "label": "Back View",
+                "spans": ["Click here or drop here to upload", "CHOOSE FILE"]
+              },
+              {
+                "h2": ["Get upto ", " on bill payments"],
+                "span": "30%cashback",
+                "p": "Automate your bill pay and get 30% cashback",
+                "b": "Pay now"
+              },
+              {
+                "label": "KYC Grace Period (Days)",
+                "placeholder": "Enter KYC Grace Period (Days)"
+              },
+              {
+                "label": "Country Issued In",
+                "placeholder": "Enter Country Issued In"
+              },
+              {
+                "label": "Date Issued On",
+                "placeholder": "KYC ID Date Issued On"
+              },
+              {
+                "label": "Valid From",
+                "placeholder": "KYC ID Valid From"
+              },
+              {
+                "label": "Valid Thru",
+                "placeholder": "KYC ID Valid Till"
+              },
+              {
+                "label": "Make this primary"
+              }
+            ],
+            "a": ["Add", "Next"],
+            "p": ["(Upload file upto 5MB in PNG, JPEG, PDF format)"]
+          },
+          {
+            "a": ["Next", "View"],
+            "h": "KYC Details",
+            "cards": [
+              {
+                "p": ["Document 1 - Passport", "Rahul Bose- H2004536"]
+              },
+              {
+                "p": ["Document 2 - PAN Card", "Rahul Bose- FXMPS6100Q"]
+              }
+            ]
+          },
+          {
+            "h": "Set PIN",
+            "fields": [
+              {
+                "label": "Security"
+              },
+              {
+                "label": "Authorisation"
+              },
+              {
+                "label": "Regulatory"
+              },
+              {
+                "label": "Marketing"
+              },
+              {
+                "label": "Enter PIN",
+                "placeholder": "Enter PIN"
+              },
+              {
+                "label": "Confirm PIN",
+                "placeholder": "Enter PIN"
+              }
+            ],
+            "a": ["Save & Register"]
+          }
+        ]
+      },
+      {
+        "h": ["Get upto ", "30%cashback", " on bill payments"],
+        "p": ["Automate your bill pay and get 30% cashback"],
+        "div": ["Pay now"]
+      }
+    ]
+  }
+}
