@@ -1,0 +1,317 @@
+{
+  "forgotPin": {
+    "title": "Restablecer PIN",
+    "tagline": "Introduce el número de móvil asociado a la cuenta",
+    "fields": [
+      {
+        "label": "Número de teléfono móvil",
+        "placeholder": "Introduce el número de móvil"
+      }
+    ],
+    "buttons": [
+      {
+        "title": "Proceder"
+      }
+    ]
+  },
+  "home": {
+    "Send": "Enviar",
+    "Money": "Dinero",
+    "Request": "Solicitud",
+    "Transfer": "Transferir",
+    "To_Bank": "al Banco",
+    "International": "Internacional",
+    "Mobile": "Móvil",
+    "Recharge": "Recargar",
+    "Postpaid": "pospago",
+    "Bill": "Factura",
+    "Electricity": "Electricidad",
+    "Broadband": "banda ancha",
+    "Landline": "Fijo",
+    "TV": "TELEVISOR",
+    "Water": "Agua",
+    "Gas": "Gas",
+    "Withdraw": "Retirar",
+    "Cash": "Dinero",
+    "Pay": "Pagar",
+    "Merchant": "Comerciante",
+    "View": "Vista",
+    "Less": "Menos",
+    "Pay_now": "Pagar ahora",
+    "About_MobiquityPay": "Acerca de MobiquityPay",
+    "About_MobiquityPay_Description": "Con la confianza de más de 27 millones de usuarios, MobiquityPay es una de las plataformas más populares para recargas en línea, pago de facturas y otros servicios financieros. El portal MobiquityPay ofrece una experiencia fácil, conveniente y segura y su interfaz fácil de usar permite a los usuarios realizar transacciones en poco tiempo y sin ningún problema.",
+    "Online_Recharge_Title": "Recarga en línea: móvil, DTH, etc.",
+    "Online_Recharge_Description": "Cuando se trata de recargas en línea, Mobiquitypay satisface todas sus necesidades y ofrece recompensas excepcionales y ofertas de reembolso.",
+    "Utility_Bill_Payments_Title": "Pagos de facturas de servicios públicos: pago de facturas de electricidad, gas y agua",
+    "Utility_Bill_Payments_Description": "Cuando se trata de pagos de facturas de servicios públicos, Mobiquitypay satisface todas sus necesidades y ofrece recompensas excepcionales y ofertas de reembolso.",
+    "Other_Financial_Services_Title": "Otros servicios financieros: enviar dinero, recibir dinero, pagar al comerciante",
+    "Other_Financial_Services_Description": "Cuando se trata de otros servicios financieros, Mobiquitypay satisface todas sus necesidades y brinda recompensas excepcionales y ofertas de reembolso."
+  },
+  "login": {
+    "title": "Iniciar sesión a través del número de móvil",
+    "tagline": "Introduce tu número de móvil y PIN para iniciar sesión.",
+    "label": ["Número de teléfono móvil", "PIN"],
+    "a": ["¿Olvidó el PIN?", "Registro"],
+    "b": ["ACCESO"],
+    "p": ["¿No tienes una cuenta?"]
+  },
+  "otp": {
+    "title": "Verificación del número de teléfono",
+    "headings": ["Verificación"],
+    "paragraphs": ["Ingrese OTP enviado a ", "Reenviar OTP en 00:", "Intentos restantes 4"],
+    "spans": ["+91 9872819277"],
+    "buttons": ["Verificar"]
+  },
+  "register": {
+    "cols": [
+      {
+        "fields": [
+          { "p": "Contacto &", "br": "Detalles personales" },
+          { "p": "Dirección", "br": "Detalles" },
+          { "p": "KYC", "br": "Detalles" },
+          { "p": "Colocar", "br": "PIN" }
+        ]
+      },
+      {
+        "parts": [
+          {
+            "h": "Detalles de contacto",
+            "sh": "Detalles personales",
+            "div": [
+              {
+                "label": "Número de teléfono móvil",
+                "placeholder": "Introduce el número de móvil"
+              },
+              {
+                "label": "identificación de correo",
+                "placeholder": "Ingrese la ID de correo electrónico (opcional)"
+              },
+              {
+                "label": "código de referencia",
+                "placeholder": "Entrar (Opcional)"
+              },
+              {
+                "label": "Nombre de pila",
+                "placeholder": "Ingrese el nombre"
+              },
+              {
+                "label": "Segundo nombre",
+                "placeholder": "Ingrese el segundo nombre (Opcional)"
+              },
+              {
+                "label": "Apellido",
+                "placeholder": "Introduzca el apellido"
+              },
+              {
+                "label": "Fecha de cumpleaños",
+                "placeholder": "Seleccionar fecha (Opcional)"
+              },
+              {
+                "label": "ID de pago",
+                "placeholder": "Ingrese el ID de pago (Opcional)"
+              },
+              {
+                "label": "Género",
+                "radio1": "Masculino",
+                "radio2": "Femenina",
+                "radio3": "Otro"
+              },
+              {
+                "span": "Puede contener de 7 a 30 caracteres, numéricos o caracteres especiales de &, *, !"
+              },
+              {
+                "label": "Subir foto de perfil",
+                "span": ["Haga clic aquí o suelte aquí para cargar", "ELIJA EL ARCHIVO"],
+                "p": "(Cargar archivo de hasta 5 MB en formato PNG, JPEG, PDF)"
+              },
+              {
+                "label": "Ingresar identificación",
+                "placeholder": "Ingrese la identificación de inicio de sesión"
+              },
+              {
+                "label": "Título"
+              },
+              {
+                "label": "Idioma preferido"
+              },
+              {
+                "label": "CIF",
+                "placeholder": "Ingrese CIF"
+              }
+            ],
+            "a": ["Siguiente", "Iniciar sesión"],
+            "p": ["¿Ya tienes una cuenta?"],
+            "otp": ["¿No obtuve el OTP? ", " Reenviar"]
+          },
+          {
+            "fields": [
+              {
+                "p": "Contacto &",
+                "br": "Detalles personales"
+              },
+              {
+                "p": "Dirección",
+                "br": "Detalles"
+              },
+              {
+                "p": "KYC",
+                "br": "Detalles"
+              },
+              {
+                "p": "Colocar",
+                "br": "PIN"
+              },
+              {
+                "label": "Dirección Línea 1",
+                "placeholder": "Ingresa la direccion"
+              },
+              {
+                "label": "Línea de dirección 2",
+                "placeholder": "Ingresa la direccion"
+              },
+              {
+                "label": "País",
+                "option1": "Seleccionar país",
+                "option2": "Pakistán",
+                "option3": "Inglaterra",
+                "option4": "Omán"
+              },
+              {
+                "label": "Código postal",
+                "placeholder": "Ingrese el código postal"
+              },
+              {
+                "label": "Expresar",
+                "option1": "Seleccione estado",
+                "option2": "Estado A",
+                "option3": "Estado B",
+                "option4": "Estado C"
+              },
+              {
+                "label": "Ciudad",
+                "placeholder": "Ciudad selecta",
+                "option1": "Ciudad selecta",
+                "option2": "Ciudad A",
+                "option3": "Ciudad B",
+                "option4": "Ciudad C"
+              },
+              {
+                "h2": ["Obtenga hasta ", " en los pagos de facturas"],
+                "span": "30% de reembolso",
+                "p": "Automatice el pago de sus facturas y obtenga un reembolso del 30 %",
+                "b": "Pagar ahora"
+              }
+            ],
+            "h": "detalles de dirección",
+            "a": ["Saltear", "Próximo"],
+            "num": ["1", "2", "3", "4"]
+          },
+          {
+            "h": "detalles de KYC",
+            "sh": ["Documento 1", "Subir archivo", "Documento 2", "subir documentos"],
+            "fields": [
+              {
+                "label": "Tipo de Documento",
+                "options": ["Seleccionar documento", "Documento uno", "Documento dos", "Documento tres"]
+              },
+              {
+                "label": "número ID",
+                "placeholder": "Ingrese el número de identificación"
+              },
+              {
+                "label": "Nombre del titular del documento",
+                "options": ["Ingrese el nombre", "Nombre uno", "Nombre dos", "Nombre tres"]
+              },
+              {
+                "label": "Fecha de caducidad",
+                "placeholder": "Seleccione fecha"
+              },
+              {
+                "label": "Vista frontal",
+                "spans": ["Haga clic aquí o suelte aquí para cargar", "ELIJA EL ARCHIVO"]
+              },
+              {
+                "label": "Vista trasera",
+                "spans": ["Haga clic aquí o suelte aquí para cargar", "ELIJA EL ARCHIVO"]
+              },
+              {
+                "h2": ["Obtenga hasta ", " en los pagos de facturas"],
+                "span": "30% de reembolso",
+                "p": "Automatice el pago de sus facturas y obtenga un reembolso del 30 %",
+                "b": "Pagar ahora"
+              },
+              {
+                "label": "Período de gracia KYC (días)",
+                "placeholder": "Ingrese el período de gracia de KYC (días)"
+              },
+              {
+                "label": "País Emitido en",
+                "placeholder": "Ingrese el país emitido en"
+              },
+              {
+                "label": "Fecha de emisión el",
+                "placeholder": "ID de KYC Fecha de emisión el"
+              },
+              {
+                "label": "Válido desde",
+                "placeholder": "ID de KYC válido desde"
+              },
+              {
+                "label": "Válido hasta",
+                "placeholder": "ID de KYC válido hasta"
+              },
+              {
+                "label": "Hacer esto primario"
+              }
+            ],
+            "a": ["Agregar", "Siguiente"],
+            "p": ["(Cargar archivo de hasta 5 MB en formato PNG, JPEG, PDF)"]
+          },
+          {
+            "a": ["Siguiente", "Ver"],
+            "h": "Detalles de KYC",
+            "cards": [
+              {
+                "p": ["Documento 1 - Pasaporte", "Rahul Bose- H2004536"]
+              },
+              {
+                "p": ["Documento 2 - Tarjeta PAN", "Rahul Bose- FXMPS6100Q"]
+              }
+            ]
+          },
+          {
+            "h": "Establecer PIN",
+            "fields": [
+              {
+                "label": "Seguridad"
+              },
+              {
+                "label": "Autorización"
+              },
+              {
+                "label": "Regulador"
+              },
+              {
+                "label": "Márketing"
+              },
+              {
+                "label": "Ingrese su PIN",
+                "placeholder": "Ingrese su PIN"
+              },
+              {
+                "label": "confirmar PIN",
+                "placeholder": "Ingrese su PIN"
+              }
+            ],
+            "a": ["Guardar y registrarse"]
+          }
+        ]
+      },
+      {
+        "h": ["Obtenga hasta ", "30% de reembolso", " en pagos de facturas"],
+        "p": ["Automatice el pago de sus facturas y obtenga un reembolso del 30 %"],
+        "div": ["Pagar ahora"]
+      }
+    ]
+  }
+}

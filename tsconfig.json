@@ -21,12 +21,17 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@mobiquity/utils": ["src/app/utilities/index.ts"],
+      "@mobiquity/api": ["src/app/data-access/index.ts"],
+      "@mobiquity/core": ["src/app/core/index.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
     "strictTemplates": true
-  }
+  },
 }
