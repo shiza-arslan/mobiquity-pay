@@ -13,6 +13,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { CustomSerializer } from '@mobiquity/utils';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CoreModule } from '@mobiquity/core';
 
 /**
  * AoT requires an exported function for factories
@@ -30,6 +31,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
+    CoreModule.forRoot(),
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
