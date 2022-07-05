@@ -11,7 +11,7 @@ export class EpConfig {
   }
 
   public static getMockUrl() {
-    return 'http://mobiquity-payconsumer.unosolindia.mockable.io/';
+    return 'http://mobiquityconsumer.unosolindia.mockable.io/';
   }
 
   public static getDemoServerUrl() {

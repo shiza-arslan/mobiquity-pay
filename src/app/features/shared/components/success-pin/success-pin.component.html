@@ -1,1 +1,38 @@
-<p>success-pin works!</p>
+<div class="modal-full">
+  <div class="min-h-screen w-full flex justify-center items-center">
+    <div style="width: 475px" class="rounded-[8px] bg-white p-3 mx-auto shadow-[17px_34px_114px_14px_rgba(0,0,0,0.1)]">
+      <div class="rounded-[8px] border border-pops-border mx-auto p-7 pb-2 bg-white">
+        <div class="flex justify-end pb-5 pt-1">
+          <div class="cursor-pointer" (click)="activeModal.dismiss()">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle
+                cx="11"
+                cy="11"
+                r="10"
+                stroke="#DBDBDB"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path d="M14 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M8 8L14 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </div>
+        </div>
+        <div class="flex flex-col items-center justify-center">
+          <img class="w-full" src="/src/assets/images/success.gif" style="width: 20%" />
+          <div class="mt-10 text-center">
+            <h2 class="text-xl font-bold text-success-color">{{ message }}</h2>
+          </div>
+          <div class="text-center w-full mt-10">
+            <button
+              (click)="login()"
+              class="bg-login-btn-custom px-14 font-medium text-sm text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
+              >Login</button
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div [formGroup]="form" class="form-group">
+  <label class="text-dropdown-custom font-medium text-xs mb-1 flex items-center" for="">{{ input?.label }}</label>
+  <div class="flex items-center mt-3">
+    <div class="flex items-center mr-4 mb-4" *ngFor="let opt of input.options; let i = index">
+      <label for="" class="flex items-center cursor-pointer text-xs font-medium text-custom-desc">
+        <input
+          [formControlName]="input?.key"
+          type="radio"
+          [checked]="i == 0"
+          name="radio"
+          [value]="opt.key"
+          class="w-4 h-4 inline-block mr-1 rounded-full border border-grey"
+        />
+
+        {{ opt.value }}</label
+      >
+    </div>
+    <!-- <div *ngIf="f[input.key].touched && f[ input.key].invalid" class="alert alert-danger">
+    <div *ngIf="f[input.key].errors && f[input.key].errors['required']">{{input.label}} is required.</div>
+
+
+  </div>-->
+  </div>
+</div>
