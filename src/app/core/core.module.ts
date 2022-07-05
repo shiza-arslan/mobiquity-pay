@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ErrorPopupComponent } from './components/error-popup/error-popup.component';
 import { SuccessPopupComponent } from './components/success-popup/success-popup.component';
 import { AppComponent } from './containers';
+
 export const COMPONENTS = [AppComponent, ErrorPopupComponent, SuccessPopupComponent];
 @NgModule({
   imports: [InitializerModule.forRoot(), InterceptorModule.forRoot(), CommonModule, RouterModule],

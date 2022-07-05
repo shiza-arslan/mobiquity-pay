@@ -18,6 +18,6 @@ export class UowService {
     public signupService: SignupService,
     public ipGeolocationService: IpGeolocationService,
     public authService: AuthService,
-    public transalationService: TranslationService,
+    public translateService: TranslationService,
   ) {}
 }
