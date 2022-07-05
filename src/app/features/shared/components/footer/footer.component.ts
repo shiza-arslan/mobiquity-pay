@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { UowService } from '../../../../data-acsess/uow.service';
 
 @Component({
-  selector: 'app-footer',
+  selector: 'mobiquity-pay-footer',
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+  styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent implements OnInit {
-  constructor() {}
+  translation: any;
+  constructor(private service: UowService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.service.translateService.language.subscribe((res: any) => {
+      this.service.translateService.get().subscribe((data: any) => {
+        this.translation = data.footer;
+      });
+    });
+  }
 }
