@@ -7,8 +7,20 @@ import { PreLoginComponent } from './components/pre-login/pre-login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { SharedModule } from '../shared/shared.module';
 import { SlickCarouselModule } from 'ngx-slick-carousel';
+import { OtpComponent } from './components/otp/otp.component';
+import { ForgetPinComponent } from './components/forget-pin/forget-pin.component';
+import { SuccessPinComponent } from './components/success-pin/success-pin.component';
+import { NgOtpInputModule } from 'ng-otp-input';
 @NgModule({
-  declarations: [AccessDeniedComponent, LoginComponent, SignupComponent, PreLoginComponent],
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, SlickCarouselModule],
+  declarations: [
+    AccessDeniedComponent,
+    LoginComponent,
+    SignupComponent,
+    PreLoginComponent,
+    OtpComponent,
+    ForgetPinComponent,
+    SuccessPinComponent,
+  ],
+  imports: [SharedModule, SlickCarouselModule, NgOtpInputModule],
 })
 export class PreAuthModule {}

@@ -6,7 +6,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 @Component({
   selector: 'mobiquity-pay-pre-login',
   templateUrl: './pre-login.component.html',
-  styleUrls: ['./pre-login.component.css'],
+  styleUrls: ['./pre-login.component.scss'],
 })
 export class PreLoginComponent implements OnInit {
   language: any;

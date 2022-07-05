@@ -9,7 +9,6 @@ export class TranslationService {
   public language = new BehaviorSubject<string>('en');
   selectedLanguage: any;
   constructor(private http: HttpClient) {
-    debugger;
     if (localStorage.getItem('language')) {
       this.selectedLanguage = localStorage.getItem('language');
       document.querySelector('html')?.setAttribute('lang', this.selectedLanguage);
@@ -24,7 +23,6 @@ export class TranslationService {
     });
   }
   get() {
-    debugger;
     return this.http.get(`assets/i18n/${this.language.value}.json`);
   }
 

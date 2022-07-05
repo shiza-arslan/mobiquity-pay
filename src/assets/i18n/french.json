@@ -47,6 +47,58 @@
     "Other_Financial_Services_Title": "Autres services financiers - envoyer de l'argent, recevoir de l'argent, payer le marchand",
     "Other_Financial_Services_Description": "En ce qui concerne les autres services financiers, Mobiquitypay répond à tous vos besoins et propose des récompenses et des offres de cashback exceptionnelles."
   },
+
+  "footer": [
+    {
+      "Popular_services": "Services populaires",
+      "Add_money": "Ajouter de l'argent",
+      "Send_money": "Envoyer de l'argent",
+      "Transfer_to_bank": "Virement bancaire"
+    },
+    {
+      "Other_sevices": "Autres services",
+      "Pay_merchant": "Payer le marchand",
+      "Recharge": "Recharger",
+      "Electricity_bill": "Facture d'électricité",
+      "Mobile_postpaid": "Mobile postpayé",
+      "Water_bill": "Facture d'eau",
+      "Withdraw_cash": "Retirer de l'argent",
+      "Request_money": "Demande de l'argent"
+    },
+    {
+      "Company": "Compagnie",
+      "About_us": "À propos de nous",
+      "Customer_support": "Service client",
+      "Buisness_Query": "Requête commerciale"
+    },
+    {
+      "Legal": "Juridique",
+      "Privacy_policy": "Politique de confidentialité",
+      "Terms_and_Conditions": "Termes et conditions",
+      "Cookie_policy": "Politique relative aux cookies"
+    },
+    {
+      "Locate_us": "Localisez-nous",
+      "Agent_Merchant_locator": "Localisateur d'agents/marchands"
+    },
+    {
+      "Download_our_app": "Téléchargez notre application"
+    },
+    {
+      "All_Rights_Reserved": "Paiement Mobiquity 2022. Tous les droits sont réservés."
+    }
+  ],
+  "header": {
+    "btn_register": "S'inscrire",
+    "btn_login": "Connexion",
+    "Welcome": "Bienvenu!",
+    "Guest": "Invité",
+    "View_Wallets": "Voir les portefeuilles",
+    "Pending_Transactions": "Transactions en attente",
+    "View_History": "Voir l'historique",
+    "Wallet_balance": "Solde du portefeuille"
+  },
+
   "login": {
     "title": "Connectez-vous via un numéro de téléphone portable",
     "tagline": "Entrez votre numéro de mobile et votre code PIN pour vous connecter.",

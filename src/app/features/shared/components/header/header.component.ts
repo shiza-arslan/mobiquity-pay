@@ -6,7 +6,7 @@ import { UowService } from '../../../../data-acsess/uow.service';
 @Component({
   selector: 'mobiquity-pay-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   selectedLanguage: any = 'en';
