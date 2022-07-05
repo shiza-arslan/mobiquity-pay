@@ -1,9 +1,17 @@
 import { isDevMode, ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
+
+import { RouterModule } from '@angular/router';
 import { InitializerModule } from './initializer/initializer.module';
 import { InterceptorModule } from './interceptors/interceptor.module';
-
+import { CommonModule } from '@angular/common';
+import { ErrorPopupComponent } from './components/error-popup/error-popup.component';
+import { SuccessPopupComponent } from './components/success-popup/success-popup.component';
+import { AppComponent } from './containers';
+export const COMPONENTS = [AppComponent, ErrorPopupComponent, SuccessPopupComponent];
 @NgModule({
-  imports: [InitializerModule.forRoot(), InterceptorModule.forRoot()],
+  imports: [InitializerModule.forRoot(), InterceptorModule.forRoot(), CommonModule, RouterModule],
+  declarations: [COMPONENTS],
+  exports: [AppComponent],
 })
 export class CoreModule {
   constructor(
