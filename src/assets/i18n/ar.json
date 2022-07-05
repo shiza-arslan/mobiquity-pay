@@ -47,6 +47,57 @@
     "Other_Financial_Services_Title": "الخدمات المالية الأخرى - إرسال الأموال وتلقي الأموال والدفع للتاجر",
     "Other_Financial_Services_Description": "عندما يتعلق الأمر بالخدمات المالية الأخرى ، فإن Mobiquitypay تفي بجميع احتياجاتك وتوفر مكافآت استثنائية وعروض استرداد نقدي."
   },
+  "footer": [
+    {
+      "Popular_services": "الخدمات الشعبية",
+      "Add_money": "إضافة المال",
+      "Send_money": "إرسال الأموال",
+      "Transfer_to_bank": "التحويل إلى البنك"
+    },
+    {
+      "Other_sevices": "خدمات أخرى",
+      "Pay_merchant": "دفع التاجر",
+      "Recharge": "تعبئة رصيد",
+      "Electricity_bill": "فاتورة الكهرباء",
+      "Mobile_postpaid": "موبايل الدفع الآجل",
+      "Water_bill": "فاتورة الماء",
+      "Withdraw_cash": "سحب النقود",
+      "Request_money": "طلب المال"
+    },
+    {
+      "Company": "شركة",
+      "About_us": "معلومات عنا",
+      "Customer_support": "دعم العملاء",
+      "Buisness_Query": "استعلام عمل"
+    },
+    {
+      "Legal": "قانوني",
+      "Privacy_policy": "سياسة الخصوصية",
+      "Terms_and_Conditions": "الأحكام والشروط",
+      "Cookie_policy": "سياسة ملفات الارتباط"
+    },
+    {
+      "Locate_us": "حدد موقعنا",
+      "Agent_Merchant_locator": "وكيل / تاجر محدد"
+    },
+    {
+      "Download_our_app": "قم بتنزيل تطبيقنا"
+    },
+    {
+      "All_Rights_Reserved": "2022 Mobiquity Pay. كل الحقوق محفوظة."
+    }
+  ],
+  "header": {
+    "btn_register": "يسجل",
+    "btn_login": "تسجيل الدخول",
+    "Welcome": "أهلا وسهلا!",
+    "Guest": "زائر",
+    "View_Wallets": "مشاهدة محافظ",
+    "Pending_Transactions": "المعاملات المعلقة",
+    "View_History": "عرض السجل",
+    "Wallet_balance": "رصيد المحفظة"
+  },
+
   "login": {
     "title": "تسجيل الدخول عبر رقم الهاتف المحمول",
     "tagline": "أدخل رقم هاتفك المحمول ورقم التعريف الشخصي لتسجيل الدخول.",

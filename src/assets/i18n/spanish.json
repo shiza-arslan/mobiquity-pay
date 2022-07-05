@@ -47,6 +47,57 @@
     "Other_Financial_Services_Title": "Otros servicios financieros: enviar dinero, recibir dinero, pagar al comerciante",
     "Other_Financial_Services_Description": "Cuando se trata de otros servicios financieros, Mobiquitypay satisface todas sus necesidades y brinda recompensas excepcionales y ofertas de reembolso."
   },
+  "footer": [
+    {
+      "Popular_services": "Servicios populares",
+      "Add_money": "Agregar dinero",
+      "Send_money": "Enviar dinero",
+      "Transfer_to_bank": "transferencia al banco"
+    },
+    {
+      "Other_sevices": "Otros servicios",
+      "Pay_merchant": "pagar al comerciante",
+      "Recharge": "Recargar",
+      "Electricity_bill": "Factura de electricidad",
+      "Mobile_postpaid": "pospago móvil",
+      "Water_bill": "Factura de agua",
+      "Withdraw_cash": "Retirar dinero",
+      "Request_money": "Pedir dinero"
+    },
+    {
+      "Company": "Compañía",
+      "About_us": "Sobre nosotros",
+      "Customer_support": "Atención al cliente",
+      "Buisness_Query": "Consulta comercial"
+    },
+    {
+      "Legal": "Legal",
+      "Privacy_policy": "Política de privacidad",
+      "Terms_and_Conditions": "Términos y condiciones",
+      "Cookie_policy": "Política de cookies"
+    },
+    {
+      "Locate_us": "Ubícanos",
+      "Agent_Merchant_locator": "Agente / Localizador de comerciantes"
+    },
+    {
+      "Download_our_app": "Descarga nuestra aplicación"
+    },
+    {
+      "All_Rights_Reserved": "2022 Mobiquity Pay. Reservados todos los derechos."
+    }
+  ],
+  "header": {
+    "btn_register": "Registro",
+    "btn_login": "Acceso",
+    "Welcome": "Bienvenidos!",
+    "Guest": "Invitado",
+    "View_Wallets": "Ver carteras",
+    "Pending_Transactions": "transacciones pendientes",
+    "View_History": "Ver historial",
+    "Wallet_balance": "Saldo de la billetera"
+  },
+
   "login": {
     "title": "Iniciar sesión a través del número de móvil",
     "tagline": "Introduce tu número de móvil y PIN para iniciar sesión.",
