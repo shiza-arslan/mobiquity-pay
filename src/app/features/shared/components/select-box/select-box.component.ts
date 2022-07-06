@@ -5,7 +5,7 @@ import { FormGroup } from '@angular/forms';
 @Component({
   selector: 'mobiquity-pay-select-box',
   templateUrl: './select-box.component.html',
-  styleUrls: ['./select-box.component.css'],
+  styleUrls: ['./select-box.component.scss'],
 })
 export class SelectBoxComponent implements OnInit {
   @Input() input: FormField<string> | any;
