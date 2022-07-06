@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from '../../../pre-auth/components/login/login.component';
 import { UowService } from '../../../../data-acsess/uow.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mobiquity-pay-header',
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
-  constructor(private modalSerivce: NgbModal, private service: UowService) {}
+  constructor(private modalSerivce: NgbModal, private service: UowService, private route: Router) {}
 
   ngOnInit(): void {
     localStorage.setItem('language', this.selectedLanguage);
@@ -70,6 +71,9 @@ export class HeaderComponent implements OnInit {
     this.service.translateService.setLang(lang);
     this.selectedLanguage = lang;
     localStorage.setItem('language', lang);
+  }
+  routeRegister() {
+    this.route.navigate(['/signup']);
   }
 
   openModal() {

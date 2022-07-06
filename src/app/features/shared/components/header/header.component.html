@@ -93,7 +93,7 @@
           </ul>
         </li>
         <li *ngIf="!isLoggedIn">
-          <a class="px-2 md:px-5 py-2 text-primary font-medium text-sm" routerLink="/signup">{{
+          <a class="px-2 md:px-5 py-2 text-primary font-medium text-sm" (click)="routeRegister()">{{
             translation?.btn_register
           }}</a>
         </li>

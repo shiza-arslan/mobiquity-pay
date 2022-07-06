@@ -12,6 +12,7 @@ import { ForgetPinComponent } from './components/forget-pin/forget-pin.component
 import { SuccessPinComponent } from './components/success-pin/success-pin.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { CustomerSupportComponent } from './components/customer-support/customer-support.component';
+
 @NgModule({
   declarations: [
     AccessDeniedComponent,
