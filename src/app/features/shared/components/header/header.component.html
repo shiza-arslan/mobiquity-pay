@@ -223,6 +223,7 @@
     </div>
     <div class="flex flex-wrap">
       <div
+        (click)="isUserLoggedIn()"
         class="cursor-pointer w-24 h-69px flex flex-col justify-center items-center text-center mx-2 px-6 border rounded-md border-custom-border"
       >
         <div>
@@ -238,6 +239,7 @@
         <p class="text-white pt-2 text-xs"> {{ translation?.View_Wallets }}</p>
       </div>
       <div
+        (click)="isUserLoggedIn()"
         class="cursor-pointer w-24 h-69px flex flex-col justify-center items-center text-center mx-2 px-6 border rounded-md border-custom-border"
       >
         <div>
@@ -246,6 +248,7 @@
         <p class="text-white pt-2 text-xs">{{ translation?.Pending_Transactions }}</p>
       </div>
       <div
+        (click)="isUserLoggedIn()"
         class="cursor-pointer w-24 h-69px flex flex-col justify-center items-center text-center mx-2 px-6 border rounded border-custom-border"
       >
         <div>
@@ -260,7 +263,7 @@
         </div>
         <p class="text-white pt-2 text-xs">{{ translation?.View_History }}</p>
       </div>
-      <div class="md:mt-0 mt-3">
+      <div class="md:mt-0 mt-3" (click)="isUserLoggedIn()">
         <div class="w-52 mx-2 h-69px flex justify-between items-center rounded-md p-4 bg-blue relative overflow-hidden">
           <div class="flex items-center">
             <svg width="19" height="17" viewBox="0 0 19 17" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -85,4 +85,11 @@ export class HeaderComponent implements OnInit {
     this.userData = null;
     this.BalanceInquiry = null;
   }
+  isUserLoggedIn() {
+    if (localStorage.getItem('isLoggedIn')) {
+      //to do
+    } else {
+      const modalRef = this.modalSerivce.open(LoginComponent);
+    }
+  }
 }
