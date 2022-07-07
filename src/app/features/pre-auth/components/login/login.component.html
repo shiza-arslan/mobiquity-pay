@@ -47,10 +47,14 @@
                     (click)="changeLanguage(language.lang)"
                     >{{ language.label }}</a
                   >
-                  <div>
-                    <span *ngIf="selectedLanguage === language.lang">
-                      <i class="fa-solid fa-check"></i>
-                    </span>
+                  <div *ngIf="selectedLanguage == language.lang">
+                    <svg width="13" height="10" viewBox="0 0 13 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M0.866211 5.06676L4.76621 8.96676L12.1329 1.6001"
+                        stroke="#1C2572"
+                        stroke-linecap="square"
+                      />
+                    </svg>
                   </div>
                 </li>
               </ul>
