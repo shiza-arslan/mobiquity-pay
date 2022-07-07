@@ -25,7 +25,7 @@ export class PreLoginComponent implements OnInit {
     infinite: true,
   };
 
-  translation: any;
+  translation: any = [];
   constructor(private service: UowService, private spinner: NgxSpinnerService, private modalSerivce: NgbModal) {}
   @ViewChild('slickModal') slickModal!: SlickCarouselComponent;
   @ViewChild('slickModal2') slickModal2!: SlickCarouselComponent;

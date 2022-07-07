@@ -12,7 +12,7 @@
         >
           1
         </div>
-        <p class="md:ml-2.5 text-xs font-bold" [innerHTML]="this.signupJsonData[0].label">
+        <p class="md:ml-2.5 text-xs font-bold" [innerHTML]="this.signupJsonData[0]?.label">
           <!-- Contact & <br />Personal details-->
         </p>
       </div>
@@ -28,7 +28,7 @@
         </div>
         <p
           class="md:ml-2.5 text-xs"
-          [innerHTML]="this.signupJsonData[1].label"
+          [innerHTML]="this.signupJsonData[1]?.label"
           [ngClass]="wizardFormObj.address ? 'font-bold' : 'text-gray-400'"
         >
           <!-- Address<br />Details-->
@@ -46,7 +46,7 @@
           3
         </div>
         <p
-          [innerHTML]="this.signupJsonData[2].label"
+          [innerHTML]="this.signupJsonData[2]?.label"
           class="md:ml-2.5 text-xs"
           [ngClass]="wizardFormObj.kyc ? 'font-bold' : 'text-gray-400'"
         >
@@ -65,7 +65,7 @@
           4
         </div>
         <p
-          [innerHTML]="this.signupJsonData[3].label"
+          [innerHTML]="this.signupJsonData[3]?.label"
           class="md:ml-2.5 text-xs"
           [ngClass]="wizardFormObj.pin ? 'font-bold' : 'text-gray-400'"
         >

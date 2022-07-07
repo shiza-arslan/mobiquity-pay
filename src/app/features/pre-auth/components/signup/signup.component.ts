@@ -27,7 +27,7 @@ export class SignUpComponent implements OnInit, OnChanges {
   get valid() {
     return this.registerForm.valid;
   }
-  signupJsonData: any;
+  signupJsonData: any = [];
   docTypeKYC = '';
   countryList: any = [];
   countriesList: any = [];

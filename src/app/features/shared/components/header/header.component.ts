@@ -14,7 +14,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: any = false;
   userData: any;
   BalanceInquiry: any;
-  translation: any;
+  translation: any = [];
   languages = [
     {
       label: 'English',
