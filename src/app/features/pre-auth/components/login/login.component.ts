@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UowService } from '../../../../data-acsess/uow.service';
 import { ElementRef } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { OtpComponent } from '../otp/otp.component';
 import { ChangePinComponent } from '../../../shared/components/change-pin/change-pin.component';
 import { ForgetPinComponent } from '../forget-pin/forget-pin.component';
@@ -46,8 +46,8 @@ export class LoginComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private el: ElementRef,
-    private modalSerivce: NgbModal,
-    public activeModal: NgbActiveModal,
+    private matDialog: MatDialog,
+    private dialogRef: MatDialogRef<LoginComponent>,
     private spinner: NgxSpinnerService,
     private service: UowService,
   ) {}
@@ -97,17 +97,23 @@ export class LoginComponent implements OnInit {
             this.service.loginService.generateBearer().subscribe((res: any) => {
               localStorage.setItem('access_token', res.access_token);
 
-              this.activeModal.dismiss();
+              // this.activeModal.dismiss();
+              this.closeModal();
               this.spinner.hide();
-              const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
-              modalRef.componentInstance.isNormalUser = true;
+
+              this.matDialog.open(OtpComponent, {
+                data: true,
+              });
+              // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
+              // modalRef.componentInstance.isNormalUser = true;
             });
             //this.router.navigate(['/otp']);
           } else if (res.status == 'SUCCEEDED') {
             localStorage.setItem('access_token', res.token.access_token);
             await this.service.loginService.loginSuccessfully();
             this.spinner.hide();
-            this.activeModal.dismiss();
+            // this.activeModal.dismiss();
+            this.closeModal();
             this.router.navigate(['/']);
           }
         },
@@ -117,23 +123,37 @@ export class LoginComponent implements OnInit {
             (error.error.status === 'FAILED' && error.error.errors[0].code === 'AUTH_06') ||
             error.error.errors[0].code === 'AUTH01'
           ) {
-            const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-            modalRef.componentInstance.errorMessage = error.error.errorUserMsg;
+            // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
+            // modalRef.componentInstance.errorMessage = error.error.errorUserMsg;
+            this.matDialog.open(ErrorPopupComponent, {
+              data: error.error.errorUserMsg,
+            });
           } else if (error.error.status === 'FAILED' && error.error.errors[0].code === 'FTL01') {
             this.service.loginService.generateBearer().subscribe((res: any) => {
               localStorage.setItem('access_token', res.access_token);
             });
-            this.activeModal.dismiss();
-            const modalRef = this.modalSerivce.open(ChangePinComponent, { animation: false, backdrop: false });
+            this.closeModal();
+            // this.activeModal.dismiss();
+            // const modalRef = this.modalSerivce.open(ChangePinComponent, { animation: false, backdrop: false });
+            this.matDialog.open(ChangePinComponent);
           } else {
-            const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-            modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+            // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
+            // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+            this.matDialog.open(ErrorPopupComponent, {
+              data: error.error.errors[0].message,
+            });
           }
         },
       );
   }
   forgetPIN() {
-    this.activeModal.dismiss();
-    const modalRef = this.modalSerivce.open(ForgetPinComponent, { animation: false, backdrop: false });
+    // this.activeModal.dismiss();
+    // const modalRef = this.modalSerivce.open(ForgetPinComponent, { animation: false, backdrop: false });
+    this.dialogRef.close();
+    this.matDialog.open(ForgetPinComponent);
+  }
+
+  closeModal() {
+    this.dialogRef.close();
   }
 }

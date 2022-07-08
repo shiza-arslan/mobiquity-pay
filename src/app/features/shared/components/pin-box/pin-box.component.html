@@ -1,0 +1,17 @@
+<div [formGroup]="form" class="form-group">
+  <label class="text-dropdown-custom font-medium text-xs mb-1" for=""
+    >{{ input?.label }}<span class="text-red-700" *ngIf="input?.isValidations">*</span></label
+  >
+  <input
+    class="text-xs pr-9 p-3 border rounded-md bg-input-custom outline-none w-full border-input-border"
+    [placeholder]="input?.placeholder"
+    [formControlName]="input?.key"
+    [id]="input?.key"
+    type="password"
+    [maxLength]="4"
+    [minlength]="4"
+  />
+  <!-- <div *ngIf="f[input.key].touched && f[ input.key].invalid" class="alert text-wrong-otp">
+    <div *ngIf="f[input.key].errors && f[input.key].errors['required']">{{input.label}} is required.</div>
+  </div>-->
+</div>

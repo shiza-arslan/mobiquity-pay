@@ -7,10 +7,11 @@ import { UowService } from '../../../../data-acsess/uow.service';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  translation: any;
+  translation: any = [];
   constructor(private service: UowService) {}
 
   ngOnInit(): void {
+    this.translation = [];
     this.service.translateService.language.subscribe((res: any) => {
       this.service.translateService.get().subscribe((data: any) => {
         this.translation = data.footer;

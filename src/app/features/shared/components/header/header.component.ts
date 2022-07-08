@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../../../pre-auth/components/login/login.component';
 import { UowService } from '../../../../data-acsess/uow.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mobiquity-pay-header',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn: any = false;
   userData: any;
   BalanceInquiry: any;
-  translation: any;
+  translation: any = [];
   languages = [
     {
       label: 'English',
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
-  constructor(private modalSerivce: NgbModal, private service: UowService) {}
+  constructor(private matDialog: MatDialog, private service: UowService, private route: Router) {}
 
   ngOnInit(): void {
     localStorage.setItem('language', this.selectedLanguage);
@@ -71,14 +72,24 @@ export class HeaderComponent implements OnInit {
     this.selectedLanguage = lang;
     localStorage.setItem('language', lang);
   }
+  routeRegister() {
+    this.route.navigate(['/signup']);
+  }
 
   openModal() {
-    const modalRef = this.modalSerivce.open(LoginComponent, { animation: false, backdrop: false });
+    this.matDialog.open(LoginComponent);
   }
   logOut() {
     localStorage.removeItem('isLoggedIn');
     this.isLoggedIn = false;
     this.userData = null;
     this.BalanceInquiry = null;
+  }
+  isUserLoggedIn() {
+    if (localStorage.getItem('isLoggedIn')) {
+      //to do
+    } else {
+      this.matDialog.open(LoginComponent);
+    }
   }
 }

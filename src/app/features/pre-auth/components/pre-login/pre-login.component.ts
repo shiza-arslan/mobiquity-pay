@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { UowService } from '../../../../data-acsess/uow.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { LoginComponent } from '../login/login.component';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'mobiquity-pay-pre-login',
@@ -23,8 +25,8 @@ export class PreLoginComponent implements OnInit {
     infinite: true,
   };
 
-  translation: any;
-  constructor(private service: UowService, private spinner: NgxSpinnerService) {}
+  translation: any = [];
+  constructor(private service: UowService, private spinner: NgxSpinnerService, private matDialog: MatDialog) {}
   @ViewChild('slickModal') slickModal!: SlickCarouselComponent;
   @ViewChild('slickModal2') slickModal2!: SlickCarouselComponent;
   ngOnInit(): void {
@@ -77,5 +79,13 @@ export class PreLoginComponent implements OnInit {
     // this.slickModal.initSlick();
     //this.slickModal.initialized = true;
     // this.slickModal2.initSlick();
+  }
+  isUserLoggedIn() {
+    if (localStorage.getItem('isLoggedIn')) {
+      //to do
+    } else {
+      // const modalRef = this.modalSerivce.open(LoginComponent);
+      this.matDialog.open(LoginComponent);
+    }
   }
 }
