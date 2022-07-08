@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UowService } from '../../../../data-acsess/uow.service';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ChangePinComponent } from '../../../shared/components/change-pin/change-pin.component';
 import { OtpComponent } from '../otp/otp.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorPopupComponent } from '../../../../core/components/error-popup/error-popup.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomerSupportComponent } from '../customer-support/customer-support.component';
+import { SuccessPinComponent } from '../../../shared/components/success-pin/success-pin.component';
 
 @Component({
   selector: 'mobiquity-pay-forget-pin',
@@ -22,9 +23,9 @@ export class ForgetPinComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    public activeModal: NgbActiveModal,
-    private modalSerivce: NgbModal,
+    private matDialog: MatDialog,
     private spinner: NgxSpinnerService,
+    private dialogRef: MatDialogRef<ForgetPinComponent>,
     private service: UowService,
   ) {}
 
@@ -57,10 +58,14 @@ export class ForgetPinComponent implements OnInit {
         if (res.status === 'PAUSED') {
           this.service.loginService.generateBearer().subscribe((res: any) => {
             localStorage.setItem('access_token', res.access_token);
-            this.activeModal.dismiss();
+            // this.activeModal.dismiss();
+            this.closeModal();
             this.spinner.hide();
-            const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
-            modalRef.componentInstance.isForgotPassword = true;
+            // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
+            // modalRef.componentInstance.isForgotPassword = true;
+            this.matDialog.open(OtpComponent, {
+              data: true,
+            });
           });
 
           /* const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop:false});
@@ -74,15 +79,25 @@ export class ForgetPinComponent implements OnInit {
         this.spinner.hide();
         console.log('error res', error);
         if (error.error.status === 'FAILED') {
-          this.activeModal.dismiss();
-          const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-          modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+          // this.activeModal.dismiss();
+          this.closeModal();
+          // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
+          // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+          this.matDialog.open(ErrorPopupComponent, {
+            data: error.error.errors[0].message,
+          });
         }
       },
     );
   }
   customerSupport() {
-    this.activeModal.dismiss();
-    const modalRef = this.modalSerivce.open(CustomerSupportComponent, { animation: false, backdrop: false });
+    // this.activeModal.dismiss();
+    this.closeModal();
+    // const modalRef = this.modalSerivce.open(CustomerSupportComponent, { animation: false, backdrop: false });
+    this.matDialog.open(CustomerSupportComponent);
+  }
+
+  closeModal() {
+    this.dialogRef.close();
   }
 }

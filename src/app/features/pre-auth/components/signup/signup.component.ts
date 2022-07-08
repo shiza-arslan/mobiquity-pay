@@ -1,16 +1,17 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Inject } from '@angular/core';
 import { UowService } from '../../../../data-acsess/uow.service';
 import { Observable } from 'rxjs';
 import { FormField } from '../../../../core/models/form-field';
 import { FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OtpComponent } from '../../../pre-auth/components/otp/otp.component';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../core/configs/constants/app.constant';
 import { ErrorPopupComponent } from '../../../../core/components/error-popup/error-popup.component';
 import { SuccessPopupComponent } from '../../../../core/components/success-popup/success-popup.component';
-
+import { SuccessPinComponent } from '../../../shared/components/success-pin/success-pin.component';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'mobiquity-pay-signup',
   templateUrl: './signup.component.html',
@@ -62,7 +63,7 @@ export class SignUpComponent implements OnInit, OnChanges {
     pin: false,
   };
   public payLoad: any;
-  constructor(private service: UowService, public spinner: NgxSpinnerService, private modalSerivce: NgbModal) {}
+  constructor(private service: UowService, public spinner: NgxSpinnerService, private matDialog: MatDialog) {}
 
   ngOnInit(): void {
     this.spinner.show();
@@ -254,14 +255,18 @@ export class SignUpComponent implements OnInit, OnChanges {
           this.isMobValUnique = true;
         } else {
           this.isMobValUnique = false;
-          //this.hasError = true;
-          // this.errorMessage = "Mobile already exist!"
-          const modalRef = this.modalSerivce.open(ErrorPopupComponent, {
-            animation: false,
-            backdrop: false,
-            keyboard: false,
+          this.hasError = true;
+          this.errorMessage = 'Mobile already exist!';
+          // const modalRef = this.modalSerivce.open(ErrorPopupComponent, {
+          //   animation: false,
+          //   backdrop: false,
+          //   keyboard: false,
+          // });
+          // modalRef.componentInstance.errorMessage = 'Account already registered! Please try with another number.';
+
+          this.matDialog.open(ErrorPopupComponent, {
+            data: 'Account already registered! Please try with another number.',
           });
-          modalRef.componentInstance.errorMessage = 'Account already registered! Please try with another number.';
           this.registerForm.controls['mobileNumber'].setValue('');
           this.mobile = '';
         }
@@ -273,11 +278,14 @@ export class SignUpComponent implements OnInit, OnChanges {
       this.service.loginService.generateOtp(this.mobile).subscribe(async (res: any) => {
         localStorage.setItem('serviceRequestId', res.serviceRequestId);
         localStorage.setItem('mobile', this.mobile);
-        const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
-        modalRef.componentInstance.isRegUser = true;
-        modalRef.result.then((result) => {
-          this.isMobValOTP = result;
+        // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
+        this.matDialog.open(OtpComponent, {
+          data: true,
         });
+        // modalRef.componentInstance.isRegUser = true;
+        // modalRef.result.then((result) => {
+        //   this.isMobValOTP = result;
+        // });
       });
     }
   }
@@ -295,8 +303,11 @@ export class SignUpComponent implements OnInit, OnChanges {
         this.spinner.hide();
       });
     } else {
-      const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-      modalRef.componentInstance.errorMessage = 'Please verify mobile number before moving forward.';
+      // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
+      // modalRef.componentInstance.errorMessage = 'Please verify mobile number before moving forward.';
+      this.matDialog.open(ErrorPopupComponent, {
+        data: 'Please verify mobile number before moving forward.',
+      });
     }
   }
   uploadKYCDoc(event: any) {
@@ -350,8 +361,12 @@ export class SignUpComponent implements OnInit, OnChanges {
         });
       }
     } else {
-      const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-      modalRef.componentInstance.errorMessage = 'Please verify mobile number before moving forward.';
+      // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
+      // modalRef.componentInstance.errorMessage = 'Please verify mobile number before moving forward.';
+      this.matDialog.open(ErrorPopupComponent, {
+        data: 'Please verify mobile number before moving forward.',
+      });
+      //this.matDialog.open(ErrorPopupComponent);
     }
   }
   validateReferralCode(refCode: any) {
@@ -431,15 +446,22 @@ export class SignUpComponent implements OnInit, OnChanges {
     this.service.signupService.RegisterUser(payload).subscribe(
       (resData: any) => {
         //this.activeModal.dismiss();
+
         this.spinner.hide();
-        const modalRef = this.modalSerivce.open(SuccessPopupComponent, { animation: false, backdrop: false });
-        modalRef.componentInstance.message = resData.message;
+        // const modalRef = this.modalSerivce.open(SuccessPopupComponent, { animation: false, backdrop: false });
+        // modalRef.componentInstance.message = resData.message;
+        this.matDialog.open(SuccessPopupComponent, {
+          data: resData.message,
+        });
         this.resetWizard();
       },
       (error: HttpErrorResponse) => {
         this.spinner.hide();
-        const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-        modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+        // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
+        // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+        this.matDialog.open(ErrorPopupComponent, {
+          data: error.error.errors[0].message,
+        });
       },
     );
   }
@@ -473,4 +495,5 @@ export class SignUpComponent implements OnInit, OnChanges {
   backStep(section: string) {
     this.activeForm = section;
   }
+  closeModal() {}
 }

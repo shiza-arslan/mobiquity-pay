@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
@@ -10,7 +10,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { CoreModule } from '@mobiquity/core';
 import { PreAuthModule } from './features/pre-auth/pre-auth.module';
 import { AppComponent } from './core/containers';
-
 /**
  * AoT requires an exported function for factories
  *
@@ -26,7 +25,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    NgbModule,
     AppRoutingModule,
     CoreModule.forRoot(),
     TranslateModule.forRoot({

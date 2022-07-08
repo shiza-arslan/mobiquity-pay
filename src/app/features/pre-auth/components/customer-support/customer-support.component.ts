@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'mobiquity-pay-customer-support',
@@ -7,9 +7,13 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./customer-support.component.scss'],
 })
 export class CustomerSupportComponent implements OnInit {
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(private dialogRef: MatDialogRef<CustomerSupportComponent>) {}
 
   ngOnInit(): void {
     //window.scrollTo(0, 0)
+  }
+
+  closeModal() {
+    this.dialogRef.close();
   }
 }

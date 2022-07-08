@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UowService } from '../../../../data-acsess/uow.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { LoginComponent } from '../../../pre-auth/components/login/login.component';
 import { SuccessPinComponent } from '../success-pin/success-pin.component';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -21,13 +21,14 @@ export class ChangePinComponent implements OnInit {
   mobile: any;
   type = 'password';
   resetForm!: FormGroup;
-  @Input() public isForgotPassword: any = false;
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
-    public activeModal: NgbActiveModal,
-    private modalSerivce: NgbModal,
+    private matDialog: MatDialog,
     private service: UowService,
+    private dialogRef: MatDialogRef<ChangePinComponent>,
+    @Inject(MAT_DIALOG_DATA) public isForgotPassword: boolean,
   ) {}
 
   ngOnInit(): void {
@@ -66,20 +67,25 @@ export class ChangePinComponent implements OnInit {
         localStorage.setItem('access_token', res.access_token);
         this.service.loginService.resetPIN({ ...this.resetForm.value, language: this.selectedLanguage }).subscribe(
           async (res: any) => {
-            this.activeModal.dismiss();
+            // this.activeModal.dismiss();
+            this.closeModal();
 
             if (res.status === 'SUCCEEDED') {
-              const modalRef = this.modalSerivce.open(SuccessPinComponent, { animation: false, backdrop: false });
-
+              // const modalRef = this.modalSerivce.open(SuccessPinComponent, { animation: false, backdrop: false });
+              this.matDialog.open(SuccessPinComponent);
               // this.router.navigate(['/login']);
               // redirect to  login after popup
             }
           },
           (error: HttpErrorResponse) => {
             if (error.error.status === 'FAILED') {
-              this.activeModal.dismiss();
-              const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-              modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+              // this.activeModal.dismiss();
+              this.closeModal();
+              // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
+              this.matDialog.open(ErrorPopupComponent, {
+                data: error.error.errors[0].message,
+              });
+              // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
             }
           },
         );
@@ -89,19 +95,24 @@ export class ChangePinComponent implements OnInit {
         .changePin({ ...this.resetForm.value, language: this.selectedLanguage, mobile: this.mobile })
         .subscribe(
           async (res: any) => {
-            this.activeModal.dismiss();
+            // this.activeModal.dismiss();
+            this.closeModal();
             if (res.status === 'SUCCEEDED') {
-              const modalRef = this.modalSerivce.open(SuccessPinComponent, { animation: false, backdrop: false });
-
+              // const modalRef = this.modalSerivce.open(SuccessPinComponent, { animation: false, backdrop: false });
+              this.matDialog.open(SuccessPinComponent);
               // this.router.navigate(['/login']);
               // redirect to  login after popup
             }
           },
           (error: HttpErrorResponse) => {
             if (error.error.status === 'FAILED') {
-              this.activeModal.dismiss();
-              const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-              modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+              // this.activeModal.dismiss();
+              this.closeModal();
+              // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
+              // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+              this.matDialog.open(ErrorPopupComponent, {
+                data: error.error.errors[0].message,
+              });
             }
           },
         );
@@ -113,5 +124,8 @@ export class ChangePinComponent implements OnInit {
     } else {
       this.type = 'text';
     }
+  }
+  closeModal() {
+    this.dialogRef.close();
   }
 }

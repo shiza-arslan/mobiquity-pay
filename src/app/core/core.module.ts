@@ -8,10 +8,18 @@ import { ErrorPopupComponent } from './components/error-popup/error-popup.compon
 import { SuccessPopupComponent } from './components/success-popup/success-popup.component';
 import { AppComponent } from './containers';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export const COMPONENTS = [AppComponent, ErrorPopupComponent, SuccessPopupComponent];
 @NgModule({
-  imports: [InitializerModule.forRoot(), InterceptorModule.forRoot(), CommonModule, RouterModule, NgxSpinnerModule],
+  imports: [
+    InitializerModule.forRoot(),
+    InterceptorModule.forRoot(),
+    CommonModule,
+    RouterModule,
+    NgxSpinnerModule,
+    MatDialogModule,
+  ],
   declarations: [COMPONENTS],
   exports: [AppComponent],
 })

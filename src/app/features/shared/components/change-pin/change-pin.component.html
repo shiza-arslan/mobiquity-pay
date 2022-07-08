@@ -1,134 +1,120 @@
-<div class="modal-full">
-  <div class="min-h-screen w-full flex justify-center items-center">
-    <div style="width: 475px" class="rounded-[8px] bg-white p-3 mx-auto shadow-[17px_34px_114px_14px_rgba(0,0,0,0.1)]">
-      <div class="rounded-[8px] border border-pops-border mx-auto p-7 pb-2 bg-white">
-        <form [formGroup]="resetForm">
-          <div class="border-b border-b-gray-200 flex items-center justify-between pb-5 pt-1">
-            <div>
-              <h3 class="font-bold text-base text-mobile-ver">{{ translation?.title }}</h3>
-            </div>
-            <div>
-              <a (click)="activeModal.dismiss()">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle
-                    cx="11"
-                    cy="11"
-                    r="10"
-                    stroke="#DBDBDB"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M14 8L8 14"
-                    stroke="#DBDBDB"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M8 8L14 14"
-                    stroke="#DBDBDB"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </a>
-            </div>
+<div class="w-full flex justify-center items-center">
+  <div style="width: 475px" class="rounded-[8px] bg-white p-3 mx-auto shadow-[17px_34px_114px_14px_rgba(0,0,0,0.1)]">
+    <div class="rounded-[8px] border border-pops-border mx-auto p-7 pb-2 bg-white">
+      <form [formGroup]="resetForm">
+        <div class="border-b border-b-gray-200 flex items-center justify-between pb-5 pt-1">
+          <div>
+            <h3 class="font-bold text-base text-mobile-ver">{{ translation?.title }}</h3>
           </div>
           <div>
-            <p class="text-earn-reward text-sm font-medium mt-4 mb-1">Set new PIN </p>
-            <div class="py-3 w-full relative">
-              <input
-                formControlName="pin"
-                maxlength="4"
-                (focusout)="onFocusOutEvent($event)"
-                class="text-sm p-3 pr-12 border rounded-md bg-input-custom outline-none w-full border-input-border"
-                type="{{ type }}"
-                placeholder="Enter new PIN"
-              />
-              <div class="absolute bottom-set right-3 cursor-pointer" (click)="showPassword()">
-                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M14.9048 7.01769C14.7696 6.83267 11.5782 2.4837 7.50005 2.4837C3.42192 2.4837 0.229162 6.82926 0.0953424 7.01769C0.0333905 7.1033 0 7.20659 0 7.31263C0 7.41867 0.0333905 7.52196 0.0953424 7.60757C0.230514 7.79259 3.42192 12.1416 7.50005 12.1416C11.5782 12.1416 14.7709 7.79259 14.9048 7.60757C14.9668 7.52201 15.0003 7.4187 15.0003 7.31263C15.0003 7.20656 14.9668 7.10326 14.9048 7.01769ZM7.50207 11.142C4.49856 11.142 1.8965 8.25548 1.1267 7.31195C1.89245 6.36774 4.48977 3.4839 7.50207 3.4839C10.5144 3.4839 13.107 6.36979 13.8774 7.314C13.1063 8.25753 10.5103 11.142 7.50207 11.142Z"
-                    fill="#BBBBBB"
-                  ></path>
-                  <path
-                    d="M7.50022 4.31543C6.9134 4.31543 6.33976 4.4912 5.85184 4.82054C5.36392 5.14987 4.98362 5.61796 4.75906 6.16562C4.53449 6.71329 4.47573 7.31592 4.59021 7.89732C4.7047 8.47871 4.98728 9.01275 5.40222 9.43191C5.81717 9.85107 6.34584 10.1365 6.92139 10.2522C7.49693 10.3678 8.0935 10.3085 8.63565 10.0816C9.1778 9.85478 9.64118 9.47062 9.96721 8.97774C10.2932 8.48486 10.4672 7.90539 10.4672 7.3126C10.4655 6.51826 10.1523 5.75696 9.59625 5.19527C9.04022 4.63358 8.28658 4.31723 7.50022 4.31543ZM7.50022 9.31094C7.10896 9.31094 6.72649 9.19373 6.40117 8.97415C6.07585 8.75457 5.8223 8.44247 5.67257 8.07732C5.52284 7.71218 5.48367 7.31038 5.56 6.92274C5.63633 6.5351 5.82474 6.17903 6.1014 5.89956C6.37806 5.62009 6.73055 5.42976 7.11429 5.35266C7.49803 5.27555 7.89579 5.31511 8.25726 5.46636C8.61874 5.61761 8.9277 5.87375 9.14507 6.20238C9.36244 6.531 9.47846 6.91737 9.47846 7.3126C9.47793 7.84243 9.26934 8.35039 8.89846 8.72504C8.52759 9.09968 8.02472 9.3104 7.50022 9.31094Z"
-                    fill="#BBBBBB"
-                  ></path>
-                  <path
-                    d="M13.3343 1.44815L12.8564 0.965393L1.38675 12.5517L1.86465 13.0344L13.3343 1.44815Z"
-                    fill="#BBBBBB"
-                  ></path>
-                  <path
-                    d="M13.8123 1.44813L12.8564 0.482605L0.908845 12.5516L1.86465 13.5171L13.8123 1.44813Z"
-                    stroke="white"
-                  ></path>
-                </svg>
-              </div>
-            </div>
-            <div class="py-3 w-full relative">
-              <input
-                formControlName="confirmPin"
-                maxlength="4"
-                mobiquityNumberOnly
-                [ngClass]="{ borderError: hasErrors }"
-                (focusout)="onFocusOutEvent($event)"
-                class="text-sm p-3 pr-14 border rounded-md bg-input-custom outline-none w-full"
-                type="{{ type }}"
-                placeholder="Confirm new PIN"
-              />
-              <div class="absolute bottom-set right-3 cursor-pointer" (click)="showPassword()">
-                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M14.9048 7.01769C14.7696 6.83267 11.5782 2.4837 7.50005 2.4837C3.42192 2.4837 0.229162 6.82926 0.0953424 7.01769C0.0333905 7.1033 0 7.20659 0 7.31263C0 7.41867 0.0333905 7.52196 0.0953424 7.60757C0.230514 7.79259 3.42192 12.1416 7.50005 12.1416C11.5782 12.1416 14.7709 7.79259 14.9048 7.60757C14.9668 7.52201 15.0003 7.4187 15.0003 7.31263C15.0003 7.20656 14.9668 7.10326 14.9048 7.01769ZM7.50207 11.142C4.49856 11.142 1.8965 8.25548 1.1267 7.31195C1.89245 6.36774 4.48977 3.4839 7.50207 3.4839C10.5144 3.4839 13.107 6.36979 13.8774 7.314C13.1063 8.25753 10.5103 11.142 7.50207 11.142Z"
-                    fill="#BBBBBB"
-                  ></path>
-                  <path
-                    d="M7.50022 4.31543C6.9134 4.31543 6.33976 4.4912 5.85184 4.82054C5.36392 5.14987 4.98362 5.61796 4.75906 6.16562C4.53449 6.71329 4.47573 7.31592 4.59021 7.89732C4.7047 8.47871 4.98728 9.01275 5.40222 9.43191C5.81717 9.85107 6.34584 10.1365 6.92139 10.2522C7.49693 10.3678 8.0935 10.3085 8.63565 10.0816C9.1778 9.85478 9.64118 9.47062 9.96721 8.97774C10.2932 8.48486 10.4672 7.90539 10.4672 7.3126C10.4655 6.51826 10.1523 5.75696 9.59625 5.19527C9.04022 4.63358 8.28658 4.31723 7.50022 4.31543ZM7.50022 9.31094C7.10896 9.31094 6.72649 9.19373 6.40117 8.97415C6.07585 8.75457 5.8223 8.44247 5.67257 8.07732C5.52284 7.71218 5.48367 7.31038 5.56 6.92274C5.63633 6.5351 5.82474 6.17903 6.1014 5.89956C6.37806 5.62009 6.73055 5.42976 7.11429 5.35266C7.49803 5.27555 7.89579 5.31511 8.25726 5.46636C8.61874 5.61761 8.9277 5.87375 9.14507 6.20238C9.36244 6.531 9.47846 6.91737 9.47846 7.3126C9.47793 7.84243 9.26934 8.35039 8.89846 8.72504C8.52759 9.09968 8.02472 9.3104 7.50022 9.31094Z"
-                    fill="#BBBBBB"
-                  ></path>
-                  <path
-                    d="M13.3343 1.44815L12.8564 0.965393L1.38675 12.5517L1.86465 13.0344L13.3343 1.44815Z"
-                    fill="#BBBBBB"
-                  ></path>
-                  <path
-                    d="M13.8123 1.44813L12.8564 0.482605L0.908845 12.5516L1.86465 13.5171L13.8123 1.44813Z"
-                    stroke="white"
-                  ></path>
-                </svg>
-              </div>
-              <div class="absolute right-[38px] top-[28px]">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 14 14"
-                  fill="none"
-                  *ngIf="hasErrors"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6.9671 0C3.1255 0 0 3.1402 0 7C0 10.8598 3.1402 14 7 14C10.8598 14 14 10.8598 14 7C14 3.1402 10.8451 0 6.9671 0ZM7 12.6C3.9123 12.6 1.4 10.0877 1.4 7C1.4 3.9123 3.8969 1.4 6.9671 1.4C10.0737 1.4 12.6 3.9123 12.6 7C12.6 10.0877 10.0877 12.6 7 12.6Z"
-                    fill="#E84A67"
-                  />
-                  <path d="M6.2998 3.5H7.6998V8.4H6.2998V3.5ZM6.2998 9.1H7.6998V10.5H6.2998V9.1Z" fill="#E84A67" />
-                </svg>
-              </div>
-            </div>
-            <p class="text-xs text-wrong-otp font-medium" *ngIf="hasErrors">{{ errorMessage }}</p>
-            <div class="text-center mt-6 mb-2">
-              <button
-                [disabled]="resetForm.invalid"
-                (click)="changePin()"
-                class="bg-login-btn-custom px-14 text-sm font-medium text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
-                >Submit</button
-              >
+            <a>
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle
+                  cx="11"
+                  cy="11"
+                  r="10"
+                  stroke="#DBDBDB"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path d="M14 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8 8L14 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <p class="text-earn-reward text-sm font-medium mt-4 mb-1">Set new PIN </p>
+          <div class="py-3 w-full relative">
+            <input
+              formControlName="pin"
+              maxlength="4"
+              (focusout)="onFocusOutEvent($event)"
+              class="text-sm p-3 pr-12 border rounded-md bg-input-custom outline-none w-full border-input-border"
+              type="{{ type }}"
+              placeholder="Enter new PIN"
+            />
+            <div class="absolute bottom-set right-3 cursor-pointer" (click)="showPassword()">
+              <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M14.9048 7.01769C14.7696 6.83267 11.5782 2.4837 7.50005 2.4837C3.42192 2.4837 0.229162 6.82926 0.0953424 7.01769C0.0333905 7.1033 0 7.20659 0 7.31263C0 7.41867 0.0333905 7.52196 0.0953424 7.60757C0.230514 7.79259 3.42192 12.1416 7.50005 12.1416C11.5782 12.1416 14.7709 7.79259 14.9048 7.60757C14.9668 7.52201 15.0003 7.4187 15.0003 7.31263C15.0003 7.20656 14.9668 7.10326 14.9048 7.01769ZM7.50207 11.142C4.49856 11.142 1.8965 8.25548 1.1267 7.31195C1.89245 6.36774 4.48977 3.4839 7.50207 3.4839C10.5144 3.4839 13.107 6.36979 13.8774 7.314C13.1063 8.25753 10.5103 11.142 7.50207 11.142Z"
+                  fill="#BBBBBB"
+                ></path>
+                <path
+                  d="M7.50022 4.31543C6.9134 4.31543 6.33976 4.4912 5.85184 4.82054C5.36392 5.14987 4.98362 5.61796 4.75906 6.16562C4.53449 6.71329 4.47573 7.31592 4.59021 7.89732C4.7047 8.47871 4.98728 9.01275 5.40222 9.43191C5.81717 9.85107 6.34584 10.1365 6.92139 10.2522C7.49693 10.3678 8.0935 10.3085 8.63565 10.0816C9.1778 9.85478 9.64118 9.47062 9.96721 8.97774C10.2932 8.48486 10.4672 7.90539 10.4672 7.3126C10.4655 6.51826 10.1523 5.75696 9.59625 5.19527C9.04022 4.63358 8.28658 4.31723 7.50022 4.31543ZM7.50022 9.31094C7.10896 9.31094 6.72649 9.19373 6.40117 8.97415C6.07585 8.75457 5.8223 8.44247 5.67257 8.07732C5.52284 7.71218 5.48367 7.31038 5.56 6.92274C5.63633 6.5351 5.82474 6.17903 6.1014 5.89956C6.37806 5.62009 6.73055 5.42976 7.11429 5.35266C7.49803 5.27555 7.89579 5.31511 8.25726 5.46636C8.61874 5.61761 8.9277 5.87375 9.14507 6.20238C9.36244 6.531 9.47846 6.91737 9.47846 7.3126C9.47793 7.84243 9.26934 8.35039 8.89846 8.72504C8.52759 9.09968 8.02472 9.3104 7.50022 9.31094Z"
+                  fill="#BBBBBB"
+                ></path>
+                <path
+                  d="M13.3343 1.44815L12.8564 0.965393L1.38675 12.5517L1.86465 13.0344L13.3343 1.44815Z"
+                  fill="#BBBBBB"
+                ></path>
+                <path
+                  d="M13.8123 1.44813L12.8564 0.482605L0.908845 12.5516L1.86465 13.5171L13.8123 1.44813Z"
+                  stroke="white"
+                ></path>
+              </svg>
             </div>
           </div>
-        </form>
-      </div>
+          <div class="py-3 w-full relative">
+            <input
+              formControlName="confirmPin"
+              maxlength="4"
+              mobiquityNumberOnly
+              [ngClass]="{ borderError: hasErrors }"
+              (focusout)="onFocusOutEvent($event)"
+              class="text-sm p-3 pr-14 border rounded-md bg-input-custom outline-none w-full"
+              type="{{ type }}"
+              placeholder="Confirm new PIN"
+            />
+            <div class="absolute bottom-set right-3 cursor-pointer" (click)="showPassword()">
+              <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M14.9048 7.01769C14.7696 6.83267 11.5782 2.4837 7.50005 2.4837C3.42192 2.4837 0.229162 6.82926 0.0953424 7.01769C0.0333905 7.1033 0 7.20659 0 7.31263C0 7.41867 0.0333905 7.52196 0.0953424 7.60757C0.230514 7.79259 3.42192 12.1416 7.50005 12.1416C11.5782 12.1416 14.7709 7.79259 14.9048 7.60757C14.9668 7.52201 15.0003 7.4187 15.0003 7.31263C15.0003 7.20656 14.9668 7.10326 14.9048 7.01769ZM7.50207 11.142C4.49856 11.142 1.8965 8.25548 1.1267 7.31195C1.89245 6.36774 4.48977 3.4839 7.50207 3.4839C10.5144 3.4839 13.107 6.36979 13.8774 7.314C13.1063 8.25753 10.5103 11.142 7.50207 11.142Z"
+                  fill="#BBBBBB"
+                ></path>
+                <path
+                  d="M7.50022 4.31543C6.9134 4.31543 6.33976 4.4912 5.85184 4.82054C5.36392 5.14987 4.98362 5.61796 4.75906 6.16562C4.53449 6.71329 4.47573 7.31592 4.59021 7.89732C4.7047 8.47871 4.98728 9.01275 5.40222 9.43191C5.81717 9.85107 6.34584 10.1365 6.92139 10.2522C7.49693 10.3678 8.0935 10.3085 8.63565 10.0816C9.1778 9.85478 9.64118 9.47062 9.96721 8.97774C10.2932 8.48486 10.4672 7.90539 10.4672 7.3126C10.4655 6.51826 10.1523 5.75696 9.59625 5.19527C9.04022 4.63358 8.28658 4.31723 7.50022 4.31543ZM7.50022 9.31094C7.10896 9.31094 6.72649 9.19373 6.40117 8.97415C6.07585 8.75457 5.8223 8.44247 5.67257 8.07732C5.52284 7.71218 5.48367 7.31038 5.56 6.92274C5.63633 6.5351 5.82474 6.17903 6.1014 5.89956C6.37806 5.62009 6.73055 5.42976 7.11429 5.35266C7.49803 5.27555 7.89579 5.31511 8.25726 5.46636C8.61874 5.61761 8.9277 5.87375 9.14507 6.20238C9.36244 6.531 9.47846 6.91737 9.47846 7.3126C9.47793 7.84243 9.26934 8.35039 8.89846 8.72504C8.52759 9.09968 8.02472 9.3104 7.50022 9.31094Z"
+                  fill="#BBBBBB"
+                ></path>
+                <path
+                  d="M13.3343 1.44815L12.8564 0.965393L1.38675 12.5517L1.86465 13.0344L13.3343 1.44815Z"
+                  fill="#BBBBBB"
+                ></path>
+                <path
+                  d="M13.8123 1.44813L12.8564 0.482605L0.908845 12.5516L1.86465 13.5171L13.8123 1.44813Z"
+                  stroke="white"
+                ></path>
+              </svg>
+            </div>
+            <div class="absolute right-[38px] top-[28px]">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                *ngIf="hasErrors"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.9671 0C3.1255 0 0 3.1402 0 7C0 10.8598 3.1402 14 7 14C10.8598 14 14 10.8598 14 7C14 3.1402 10.8451 0 6.9671 0ZM7 12.6C3.9123 12.6 1.4 10.0877 1.4 7C1.4 3.9123 3.8969 1.4 6.9671 1.4C10.0737 1.4 12.6 3.9123 12.6 7C12.6 10.0877 10.0877 12.6 7 12.6Z"
+                  fill="#E84A67"
+                />
+                <path d="M6.2998 3.5H7.6998V8.4H6.2998V3.5ZM6.2998 9.1H7.6998V10.5H6.2998V9.1Z" fill="#E84A67" />
+              </svg>
+            </div>
+          </div>
+          <p class="text-xs text-wrong-otp font-medium" *ngIf="hasErrors">{{ errorMessage }}</p>
+          <div class="text-center mt-6 mb-2">
+            <button
+              [disabled]="resetForm.invalid"
+              (click)="changePin()"
+              class="bg-login-btn-custom px-14 text-sm font-medium text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
+              >Submit</button
+            >
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

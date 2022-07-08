@@ -1,16 +1,19 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'app-error-popup',
   templateUrl: './error-popup.component.html',
   styleUrls: ['./error-popup.component.scss'],
 })
 export class ErrorPopupComponent implements OnInit {
-  @Input() public errorMessage: any = '';
-  constructor(public activeModal: NgbActiveModal, private modalSerivce: NgbModal) {}
-
+  constructor(
+    private matDialog: MatDialog,
+    private dialogRef: MatDialogRef<ErrorPopupComponent>,
+    @Inject(MAT_DIALOG_DATA) public errorMsg: any,
+  ) {}
   ngOnInit(): void {}
-  close() {
-    this.activeModal.dismiss();
+  closeModal() {
+    // this.activeModal.dismiss();
+    this.dialogRef.close();
   }
 }

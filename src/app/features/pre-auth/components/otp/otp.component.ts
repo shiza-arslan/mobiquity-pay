@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Inject } from '@angular/core';
 import { UowService } from '../../../../data-acsess/uow.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChangePinComponent } from '../../../shared/components/change-pin/change-pin.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorPopupComponent } from '../../../../core/components/error-popup/error-popup.component';
@@ -22,17 +22,19 @@ export class OtpComponent implements OnInit {
   timeLeft: number = 59;
   interval: any;
   //  isForgotPassword = false;
-  @Input() public isForgotPassword: any = false;
-  @Input() public isNormalUser: any = false;
-  @Input() public isRegUser: any = false;
+  // @Input() public isForgotPassword: any = false;
+
+  // @Input() public isRegUser: any = false;
 
   constructor(
     private service: UowService,
-    public activeModal: NgbActiveModal,
-    private modalSerivce: NgbModal,
+    private matDialog: MatDialog,
     private spinner: NgxSpinnerService,
     private router: Router,
     private route: ActivatedRoute,
+    @Inject(MAT_DIALOG_DATA) public isForgotPassword: boolean,
+    @Inject(MAT_DIALOG_DATA) public isNormalUser: boolean,
+    @Inject(MAT_DIALOG_DATA) public isRegUser: boolean,
   ) {}
 
   ngOnInit(): void {
@@ -62,12 +64,15 @@ export class OtpComponent implements OnInit {
       this.service.loginService.validateOTPVIAFP(validationObj).subscribe(
         async (res: any) => {
           if (res.status === 'PAUSED') {
-            this.activeModal.dismiss();
-
+            // this.activeModal.dismiss();
+            this.closeModal();
             this.spinner.hide();
             localStorage.setItem('serviceRequestId', res.serviceRequestId);
-            const modalRef = this.modalSerivce.open(ChangePinComponent, { animation: false, backdrop: false });
-            modalRef.componentInstance.isForgotPassword = true;
+            // const modalRef = this.modalSerivce.open(ChangePinComponent, { animation: false, backdrop: false });
+            // modalRef.componentInstance.isForgotPassword = true;
+            this.matDialog.open(ChangePinComponent, {
+              data: true,
+            });
           }
         },
         (error: HttpErrorResponse) => {
@@ -75,6 +80,7 @@ export class OtpComponent implements OnInit {
           if (error.error.status === 'FAILED') {
             this.hasErrors = true;
             //const modalRef = this.modalSerivce.open(ErrorComponent, { animation: false, backdrop:false});
+
             this.errorMessage = error.error.errors[0].message;
           }
         },
@@ -88,8 +94,8 @@ export class OtpComponent implements OnInit {
       this.service.loginService.loginConfirm(confirmObj).subscribe(
         async (res: any) => {
           if (res.status === 'SUCCEEDED') {
-            this.activeModal.dismiss();
-
+            // this.activeModal.dismiss();
+            this.closeModal();
             localStorage.setItem('access_token', res.token.access_token);
             await this.service.loginService.loginSuccessfully();
             this.spinner.hide();
@@ -115,9 +121,9 @@ export class OtpComponent implements OnInit {
           if (res.status === 'SUCCEEDED') {
             this.spinner.hide();
             if (this.isRegUser) {
-              this.activeModal.close(true);
+              // this.activeModal.close(true);
             } else {
-              this.activeModal.dismiss();
+              // this.activeModal.dismiss();
               this.service.loginService.generateBearer().subscribe(async (res: any) => {
                 localStorage.setItem('access_token', res.access_token);
                 await this.service.loginService.loginSuccessfully();
@@ -181,4 +187,6 @@ export class OtpComponent implements OnInit {
       }
     }, 1000);
   }
+
+  closeModal() {}
 }

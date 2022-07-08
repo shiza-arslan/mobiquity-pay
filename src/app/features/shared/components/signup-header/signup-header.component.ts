@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../../../pre-auth/components/login/login.component';
 import { UowService } from '../../../../data-acsess/uow.service';
 @Component({
@@ -27,7 +27,7 @@ export class SignupHeaderComponent implements OnInit {
       lang: 'spanish',
     },
   ];
-  constructor(private modalSerivce: NgbModal, private service: UowService) {}
+  constructor(private matDialog: MatDialog, private service: UowService) {}
 
   ngOnInit(): void {
     if (localStorage.getItem('language')) {
@@ -36,7 +36,7 @@ export class SignupHeaderComponent implements OnInit {
   }
 
   openModal() {
-    const modalRef = this.modalSerivce.open(LoginComponent, { animation: false, backdrop: false });
+    this.matDialog.open(LoginComponent);
   }
   changeLanguage(lang: string) {
     this.service.translateService.setLang(lang);
