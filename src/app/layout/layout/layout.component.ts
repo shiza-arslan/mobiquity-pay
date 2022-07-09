@@ -34,6 +34,12 @@ export class LayoutComponent implements OnInit {
           this.showWelcomeHeader = false;
           this.showNavigation = false;
           this.showFooter = false;
+        } else if (this.currentRoute == '/access-denied') {
+          this.showSignupHeader = false;
+          this.showLogoHeader = false;
+          this.showWelcomeHeader = false;
+          this.showNavigation = false;
+          this.showFooter = false;
         }
       });
     });
