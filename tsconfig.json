@@ -25,7 +25,7 @@
     "paths": {
       "@mobiquity/utils": ["src/app/utilities/index.ts"],
       "@mobiquity/api": ["src/app/data-access/index.ts"],
-      "@mobiquity/core": ["src/app/core/index.ts"]
+      "@mobiquity/core": ["src/app/common/index.ts"]
     }
   },
   "angularCompilerOptions": {
