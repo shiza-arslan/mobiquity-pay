@@ -1,9 +1,9 @@
 import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AccessDeniedComponent } from './features/pre-auth/components/access-denied/access-denied.component';
-import { PreLoginComponent } from './features/pre-auth/components/pre-login/pre-login.component';
-import { IpGeolocationBlockerGuard } from './features/shared/guard/ip-geolocation-blocker.guard';
-import { SignUpComponent } from './features/pre-auth/components/signup/signup.component';
+import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { PreLoginComponent } from './pages/pre-login/pre-login.component';
+import { IpGeolocationBlockerGuard } from './common/guards/ip-geolocation-blocker.guard';
+import { SignUpComponent } from './pages/signup/signup.component';
 const routes: Routes = [
   {
     path: '',

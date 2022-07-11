@@ -1,0 +1,20 @@
+<ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<div *ngIf="showLogoHeader">
+  <mobiquity-pay-logo-header></mobiquity-pay-logo-header>
+</div>
+
+<div *ngIf="showWelcomeHeader">
+  <mobiquity-pay-welcome-header></mobiquity-pay-welcome-header>
+</div>
+
+<div *ngIf="showSignupHeader">
+  <mobiquity-pay-signup-header></mobiquity-pay-signup-header>
+</div>
+<div *ngIf="showNavigation">
+  <mobiquity-pay-navigation></mobiquity-pay-navigation>
+</div>
+
+<router-outlet></router-outlet>
+<div *ngIf="showFooter">
+  <mobiquity-pay-footer></mobiquity-pay-footer>
+</div>

@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { AppRoutingModule } from './app-routing.module';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CustomSerializer } from '@mobiquity/utils';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { CoreModule } from '@mobiquity/core';
-import { PreAuthModule } from './features/pre-auth/pre-auth.module';
-import { AppComponent } from './core/containers';
+import { AppComponent } from '../app/app.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { LayoutModule } from './layout/layout.module';
+import { PagesModule } from '../app/pages/pages.module';
+
 /**
  * AoT requires an exported function for factories
  *
@@ -20,13 +20,14 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 @NgModule({
-  declarations: [],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    LayoutModule,
+    PagesModule,
     AppRoutingModule,
-    CoreModule.forRoot(),
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
@@ -35,7 +36,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient],
       },
     }),
-    PreAuthModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
