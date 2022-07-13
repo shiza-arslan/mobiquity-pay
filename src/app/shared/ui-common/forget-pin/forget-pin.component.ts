@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UowService } from '../../../services/uow.service';
+import { UowService } from '@mobiquity/services';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { ChangePinComponent } from '../change-pin/change-pin.component';
 import { OtpComponent } from '../otp/otp.component';

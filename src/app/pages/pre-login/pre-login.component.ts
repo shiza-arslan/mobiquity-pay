@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
-import { UowService } from '../../services/uow.service';
+import { UowService } from '@mobiquity/services';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LoginComponent } from '../login/login.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';

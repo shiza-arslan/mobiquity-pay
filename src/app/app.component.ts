@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UowService } from './services/uow.service';
+import { UowService } from '@mobiquity/services';
 
 @Component({
   selector: 'app-root',

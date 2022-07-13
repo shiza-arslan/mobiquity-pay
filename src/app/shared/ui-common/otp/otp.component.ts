@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Inject } from '@angular/core';
-import { UowService } from '../../../services/uow.service';
+import { UowService } from '@mobiquity/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChangePinComponent } from '../change-pin/change-pin.component';
