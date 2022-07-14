@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { UowService } from '../../services/uow.service';
+import { UowService } from '@mobiquity/services';
 import { Observable } from 'rxjs';
 import { Config } from '../index';
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UowService } from '../../services/uow.service';
+import { UowService } from '@mobiquity/services';
 
 @Component({
   selector: 'mobiquity-pay-footer',

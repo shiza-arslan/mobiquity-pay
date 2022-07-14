@@ -159,7 +159,7 @@ export class LoginService {
             };
 
             this.http
-              .post(this.baseUrl + `/mobiquity-pay/ums/v1/user/wallet/balance`, balanceObj, httpOptions)
+              .post(this.baseUrl + `mobiquity-pay/ums/v1/user/wallet/balance`, balanceObj, httpOptions)
               .subscribe((res: any) => {
                 console.log('balance res');
                 console.log(res);

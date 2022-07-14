@@ -25,13 +25,14 @@
     "paths": {
       "@mobiquity/utils": ["src/app/utilities/index.ts"],
       "@mobiquity/api": ["src/app/data-access/index.ts"],
-      "@mobiquity/core": ["src/app/common/index.ts"]
+      "@mobiquity/common": ["src/app/common/index.ts"],
+      "@mobiquity/services":["src/app/services/index.ts"]
     }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": false
   },
 }
