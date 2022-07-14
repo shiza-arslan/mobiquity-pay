@@ -5,7 +5,9 @@ import { of } from 'rxjs';
 import { FormField } from '../../models/form-field';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { environment } from '../../common/configs/constants/app.constant';
-
+import {apiEndPoints} from '../../common/configs/constants/url.constants';
+import  {Api}  from  '../api';
+import {ApiUrlService} from "../api-url.service";
 @Injectable({
   providedIn: 'root',
 })
@@ -14,7 +16,7 @@ export class SignupService {
   appUrl = EpConfig.getServerUrl();
   formFields: any;
   formG: FormGroup | any;
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient , private Api : Api , private  service : ApiUrlService) {}
   getsignupformData(lang: string) {
     const httpOptions = {
       headers: new HttpHeaders({
@@ -22,7 +24,7 @@ export class SignupService {
         Accept: '*/*',
       }),
     };
-    return this.http.get(this.baseUrl + 'categoryProfile/' + lang, httpOptions);
+    return this.http.get(this.baseUrl + apiEndPoints.Signup.getsignupformData + lang, httpOptions);
   }
 
   toFormGroup(inputs: any[]): FormGroup {
@@ -37,18 +39,18 @@ export class SignupService {
 
   getSelfRegistration(lang: string) {
     const token = localStorage.getItem('access_token');
-    let httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Accept: '*/*',
         Authorization: `Bearer ${token}`,
       }),
     };
-    return this.http.get(this.appUrl + 'mobiquitypay/self-registration/data/' + lang, httpOptions);
+    return this.http.get(this.appUrl +apiEndPoints.Signup.selfRegistration + lang, httpOptions);
   }
   isUnique(type: any, val: any) {
     const token = localStorage.getItem('access_token');
-    let httpOptions = {
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Accept: '*/*',
@@ -56,10 +58,11 @@ export class SignupService {
       }),
     };
     return this.http.get(
-      this.appUrl +
-        `/mobiquitypay/v1/user-management/validate/uniqueness?uniqueIdType=${type}&uniqunessValue=${val}&workspaceId=SUBSCRIBER\\`,
+      this.appUrl + this.service.isEmailExist(type , val),
       httpOptions,
     );
+      // `/mobiquitypay/v1/user-management/validate/uniqueness?uniqueIdType=${type}&uniqunessValue=${val}&workspaceId=SUBSCRIBER\\`
+
   }
 
   generateBearer() {
@@ -71,12 +74,12 @@ export class SignupService {
     };
     const formData = new FormData();
     formData.append('grant_type', 'client_credentials');
-    return this.http.post(this.appUrl + 'mobiquitypay/oauth/token', formData, httpOptions);
+    return this.http.post(this.appUrl + apiEndPoints.Signup.generateBearer, formData, httpOptions);
   }
 
   getFormControls(inputs: any) {
-    var $this = this;
-    let promise = new Promise(function (resolve, reject) {
+    const $this = this;
+    const promise = new Promise(function (resolve, reject) {
       resolve($this.createControls(inputs));
     });
     return promise;
@@ -84,9 +87,9 @@ export class SignupService {
   createControls(schema: any) {
     const inputs: FormField<string>[] = [];
     schema.forEach((step: any) => {
-      let sections = step.sections;
+      const sections = step.sections;
       sections.forEach((section: any) => {
-        let fields = section.fields;
+        const fields = section.fields;
         fields.forEach((field: any) => {
           let isValidations = false;
           let validations: any = '';
@@ -123,66 +126,31 @@ export class SignupService {
     return of(inputs);
   }
   validateReferralCode(refCode: any) {
-    let postData = {
+    const postData = {
       workspaceId: environment.constants.workspaceId,
       referralCode: refCode,
     };
-    const token = localStorage.getItem('access_token');
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    //this.httpOptions.headers.append('Authorization',`Bearer ${token}`)
-    return this.http.post(this.appUrl + `/mobiquitypay/v1/referral/referrer-user`, postData, httpOptions);
+
+
+    return this.Api.post(this.appUrl + apiEndPoints.Signup.validateReferralCode, postData,);
   }
   uploadFile(file: any, mobile: any, type: any) {
-    let body = new FormData();
+    const body = new FormData();
     body.append('file', file, file.name);
-    const token = localStorage.getItem('access_token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-
-    return this.http.post(
-      this.appUrl + `mobiquitypay/dms/v3/doc?uploadedBy=${mobile}&documentType=${type}`,
-      body,
-      httpOptions,
-    );
+    return this.Api.post(
+      this.appUrl +this.service.uploadFile(mobile ,type), body,);
   }
 
   uploadFileKYC(file: any, mobile: any, type: any, docType: any) {
-    let body = new FormData();
+    const body = new FormData();
     body.append('file', file, file.name);
-    const token = localStorage.getItem('access_token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-
-    return this.http.post(
-      this.appUrl + `mobiquitypay/dms/v3/doc?uploadedBy=${mobile}&documentType=${type}&documentName=${docType}`,
+    return this.Api.post(
+      this.appUrl + this.service.uploadFileKYC(mobile ,type ,docType),
       body,
-      httpOptions,
     );
   }
   RegisterUser(payLoad: any) {
-    const token = localStorage.getItem('access_token');
-    // console.log('token',token)
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    return this.http.post(this.appUrl + `mobiquitypay/v1/ums/user/self`, payLoad, httpOptions);
+
+    return this.Api.post(this.appUrl +apiEndPoints.Signup.registerUser, payLoad, );
   }
 }

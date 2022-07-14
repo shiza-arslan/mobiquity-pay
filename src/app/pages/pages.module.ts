@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
-import { PreLoginComponent } from './pre-login/pre-login.component';
-import { SignUpComponent } from './signup/signup.component';
+import { PreloginModule } from './prelogin/prelogin.module';
+import { SignupModule } from './signup/signup.module';
 import { CommonModule } from '@angular/common';
 import { UICommonModule } from '../shared/ui-common/ui-common.module';
 import { LoginComponent } from './login/login.component';
-import { SlickCarouselModule } from 'ngx-slick-carousel';
 @NgModule({
-  declarations: [PreLoginComponent, SignUpComponent, LoginComponent],
-  imports: [CommonModule, UICommonModule, SlickCarouselModule],
+  declarations: [LoginComponent],
+  imports: [CommonModule, UICommonModule, SignupModule, PreloginModule],
 })
 export class PagesModule {}

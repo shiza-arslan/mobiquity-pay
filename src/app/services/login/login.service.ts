@@ -5,7 +5,9 @@ import { environment } from '../../common/configs/constants/app.constant';
 import { BehaviorSubject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
-
+import {apiEndPoints} from '../../common/configs/constants/url.constants';
+import { Api} from '../api';
+import {ApiUrlService} from "../api-url.service";
 @Injectable({
   providedIn: 'root',
 })
@@ -24,9 +26,9 @@ export class LoginService {
   private authorizationProfile = new BehaviorSubject<any>(null);
   private securityProfile = new BehaviorSubject<any>(null);
   private walletBalance = new BehaviorSubject<any>(null);
-  constructor(private http: HttpClient, private deviceService: DeviceDetectorService) {}
+  constructor(private http: HttpClient, private deviceService: DeviceDetectorService , private Api : Api , private seriveUrl : ApiUrlService) {}
   login(data: any) {
-    let body = environment.constants;
+    const body = environment.constants;
     body.identifierValue = data.mobile;
     body.authenticationValue = data.pin;
     body.deviceInfo.browser = this.deviceService.browser;
@@ -41,109 +43,65 @@ export class LoginService {
       this.baseUrl + 'subscriberLogin',
       body
     );*/
-    return this.http.post(this.baseUrl + 'mobiquity-pay/ums/v3/user/auth/web/login', body);
+    // return this.http.post(this.baseUrl + 'mobiquity-pay/ums/v3/user/auth/web/login', body);
+    return this.http.post(this.baseUrl + apiEndPoints.login.loginUrl, body);
   }
   verifyOTP(body: any) {
-    const token = localStorage.getItem('access_token');
-    console.log('token', token);
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-
-    return this.http.post(
-      this.baseUrl + `mobiquity-pay/v1/otp/validate`,
-      //this.baseUrl + `mobiquity-pay/v2/ums/user/auth/self-set-auth/validate-otp`,
-      body,
-      httpOptions,
-    );
+    return this.Api.post(
+      this.baseUrl + apiEndPoints.login.verifyOTPUrl, body,);
   }
   //OTP Validation for Forget PIN
   validateOTPVIAFP(body: any) {
-    const token = localStorage.getItem('access_token');
-    console.log('token', token);
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-
-    return this.http.post(
-      //this.baseUrl + `mobiquity-pay/v1/otp/validate`,
-      this.baseUrl + `mobiquity-pay/v2/ums/user/auth/self-set-auth/validate-otp`,
+    return this.Api.post(
+      this.baseUrl + apiEndPoints.login.validateOTPVIAFPUrl,
       body,
-      httpOptions,
+
     );
   }
   loginConfirm(body: any) {
-    const token = localStorage.getItem('access_token');
-    console.log('token', token);
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    return this.http.post(
-      this.baseUrl + `mobiquity-pay/ums/v3/user/auth/web/login-confirm`,
-      //this.baseUrl + `mobiquity-pay/v2/ums/user/auth/self-set-auth/validate-otp`,
-      body,
-      httpOptions,
-    );
+
+    return this.Api.post(
+      this.baseUrl + apiEndPoints.login.loginConfirmUrl, body,);
   }
   generateOtp(phone: any) {
-    let body = {
+    const body = {
       identifierType: environment.constants.identifierType,
       otpServiceCode: environment.constants.otpServiceCode,
       identifierValue: phone,
     };
-    const token = localStorage.getItem('access_token');
-    //  console.log('token',token)
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    return this.http.post(this.baseUrl + 'mobiquity-pay/v2/otp/generate', body, httpOptions);
+
+    return this.Api.post(this.baseUrl + apiEndPoints.login.generateOtp, body);
   }
   loginSuccessfully() {
-    let access_token = localStorage.getItem('access_token');
-    let httpOptions = {
+    const access_token = localStorage.getItem('access_token');
+    const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Accept: '*/*',
         Authorization: `Bearer ${access_token}`,
       }),
     };
-    this.http.get(this.baseUrl + 'mobiquity-pay/v1/authorization-profile', httpOptions).subscribe((res: any) => {
+    this.http.get(this.baseUrl + apiEndPoints.login.authorizationProfileUrl, httpOptions).subscribe((res: any) => {
       this.authorizationProfile.next(res);
-      let mobile = localStorage.getItem('mobile');
+      const mobile = localStorage.getItem('mobile');
 
       this.http
         .get(
           this.baseUrl +
-            `mobiquity-pay/v1/security-profile?workspace=${environment.constants.workspaceId}&identifierValue=${mobile}&identifierType=${environment.constants.identifierType}`,
+          `mobiquity-pay/v1/security-profile?workspace=${environment.constants.workspaceId}&identifierValue=${mobile}&identifierType=${environment.constants.identifierType}`,
           httpOptions,
         )
         .subscribe((res: any) => {
           this.securityProfile.next(res.securityProfile);
 
-          this.http.get(this.baseUrl + 'mobiquity-pay/v1/user/self/account', httpOptions).subscribe((res: any) => {
+          this.http.get(this.baseUrl + apiEndPoints.login.selfAccountUrl, httpOptions).subscribe((res: any) => {
             this.user.next(res);
             console.log('auth profile', this.user);
             console.log(res);
 
             this.isLoggedIn.next(true);
             //post obj for balance inquiry
-            let balanceObj = {
+            const balanceObj = {
               bearerCode: 'MOBILE',
               currency: '',
               initiator: 'transactor',
@@ -159,7 +117,7 @@ export class LoginService {
             };
 
             this.http
-              .post(this.baseUrl + `mobiquity-pay/ums/v1/user/wallet/balance`, balanceObj, httpOptions)
+              .post(this.baseUrl + apiEndPoints.login.walletBallanceUrl, balanceObj, httpOptions)
               .subscribe((res: any) => {
                 console.log('balance res');
                 console.log(res);
@@ -171,8 +129,11 @@ export class LoginService {
         });
     });
   }
+
+
+
   changePin(data: any) {
-    let postData = {
+    const postData = {
       confirmedAuthenticationValue: data.confirmPin,
       identifierType: environment.constants.identifierType,
       identifierValue: data.mobile,
@@ -182,39 +143,23 @@ export class LoginService {
       requestedBy: environment.constants.requestedBy,
       workspaceId: environment.constants.workspaceId,
     };
-    const token = localStorage.getItem('access_token');
-    // console.log('token',token)
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    //this.httpOptions.headers.append('Authorization',`Bearer ${token}`)
-    return this.http.post(this.baseUrl + `mobiquity-pay/ums/v2/user/auth/change-credential`, postData, httpOptions);
+
+
+    return this.Api.post(this.baseUrl + apiEndPoints.login.changePinUrl, postData,);
   }
   resetPIN(data: any) {
-    let postData = {
+    const postData = {
       confirmedAuthenticationValue: data.confirmPin,
       resumeServiceRequestId: localStorage.getItem('serviceRequestId'),
       language: data.language,
       newAuthenticationValue: data.pin,
     };
-    const token = localStorage.getItem('access_token');
-    // console.log('token',token)
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    //this.httpOptions.headers.append('Authorization',`Bearer ${token}`)
-    return this.http.post(this.baseUrl + `mobiquity-pay/v2/ums/user/auth/self-set-auth/confirm`, postData, httpOptions);
+
+
+    return this.Api.post(this.baseUrl + apiEndPoints.login.resetPinUrl, postData);
   }
   forgetPin(data: any) {
-    let reqData = {
+    const reqData = {
       bearerCode: environment.constants.bearerCode,
       //otpServiceCode: environment.constants.otpServiceCode,
       identifierValue: data.mobile,
@@ -222,17 +167,9 @@ export class LoginService {
       workspaceId: environment.constants.workspaceId,
       language: data.language,
     };
-    const token = localStorage.getItem('access_token');
 
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
 
-    return this.http.post(this.baseUrl + `mobiquity-pay/v2/ums/user/auth/self-set-auth/initiate`, reqData, httpOptions);
+    return this.Api.post(this.baseUrl + apiEndPoints.login.forgotPinUrl, reqData,);
   }
   getAuthorizationProfile() {
     return this.authorizationProfile.asObservable();
@@ -246,7 +183,7 @@ export class LoginService {
     };
     const formData = new FormData();
     formData.append('grant_type', 'client_credentials');
-    return this.http.post(this.baseUrl + 'mobiquity-pay/oauth/token', formData, httpOptions);
+    return this.http.post(this.baseUrl + apiEndPoints.login.generateBearerUrl, formData, httpOptions);
   }
 
   getSecurityProfile() {
@@ -260,17 +197,10 @@ export class LoginService {
     return this.isLoggedIn.asObservable();
   }
   resendOTP() {
-    let body = {
+    const body = {
       resumeServiceRequestId: localStorage.getItem('serviceRequestId'),
     };
-    const token = localStorage.getItem('access_token');
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    return this.http.post(this.baseUrl + 'mobiquity-pay/v1/otp/resend', body, httpOptions);
+
+    return this.Api.post(this.baseUrl + apiEndPoints.login.resendOTPUrl, body );
   }
 }
