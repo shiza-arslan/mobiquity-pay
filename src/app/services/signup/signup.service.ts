@@ -5,9 +5,8 @@ import { of } from 'rxjs';
 import { FormField } from '../../models/form-field';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { environment } from '../../common/configs/constants/app.constant';
-import {apiEndPoints} from '../../common/configs/constants/url.constants';
-import  {Api}  from  '../api';
-import {ApiUrlService} from "../api-url.service";
+import { apiEndPoints } from '../../common/configs/constants/url.constants';
+import { UowService } from '@mobiquity/services';
 @Injectable({
   providedIn: 'root',
 })
@@ -16,15 +15,9 @@ export class SignupService {
   appUrl = EpConfig.getServerUrl();
   formFields: any;
   formG: FormGroup | any;
-  constructor(private http: HttpClient , private Api : Api , private  service : ApiUrlService) {}
+  constructor(private http: HttpClient, private service: UowService) {}
   getsignupformData(lang: string) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-      }),
-    };
-    return this.http.get(this.baseUrl + apiEndPoints.Signup.getsignupformData + lang, httpOptions);
+    return this.service.api.get(this.baseUrl + apiEndPoints.Signup.getsignupformData + lang);
   }
 
   toFormGroup(inputs: any[]): FormGroup {
@@ -38,31 +31,11 @@ export class SignupService {
   }
 
   getSelfRegistration(lang: string) {
-    const token = localStorage.getItem('access_token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    return this.http.get(this.appUrl +apiEndPoints.Signup.selfRegistration + lang, httpOptions);
+    return this.service.api.get(this.appUrl + apiEndPoints.Signup.selfRegistration + lang);
   }
   isUnique(type: any, val: any) {
-    const token = localStorage.getItem('access_token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    return this.http.get(
-      this.appUrl + this.service.isEmailExist(type , val),
-      httpOptions,
-    );
-      // `/mobiquitypay/v1/user-management/validate/uniqueness?uniqueIdType=${type}&uniqunessValue=${val}&workspaceId=SUBSCRIBER\\`
-
+    return this.service.api.get(this.appUrl + this.service.apiUrlService.isEmailExist(type, val));
+    // `/mobiquitypay/v1/user-management/validate/uniqueness?uniqueIdType=${type}&uniqunessValue=${val}&workspaceId=SUBSCRIBER\\`
   }
 
   generateBearer() {
@@ -74,7 +47,7 @@ export class SignupService {
     };
     const formData = new FormData();
     formData.append('grant_type', 'client_credentials');
-    return this.http.post(this.appUrl + apiEndPoints.Signup.generateBearer, formData, httpOptions);
+    return this.service.api.post(this.appUrl + apiEndPoints.Signup.generateBearer, formData, httpOptions);
   }
 
   getFormControls(inputs: any) {
@@ -131,26 +104,20 @@ export class SignupService {
       referralCode: refCode,
     };
 
-
-    return this.Api.post(this.appUrl + apiEndPoints.Signup.validateReferralCode, postData,);
+    return this.service.api.post(this.appUrl + apiEndPoints.Signup.validateReferralCode, postData);
   }
   uploadFile(file: any, mobile: any, type: any) {
     const body = new FormData();
     body.append('file', file, file.name);
-    return this.Api.post(
-      this.appUrl +this.service.uploadFile(mobile ,type), body,);
+    return this.service.api.post(this.appUrl + this.service.apiUrlService.uploadFile(mobile, type), body);
   }
 
   uploadFileKYC(file: any, mobile: any, type: any, docType: any) {
     const body = new FormData();
     body.append('file', file, file.name);
-    return this.Api.post(
-      this.appUrl + this.service.uploadFileKYC(mobile ,type ,docType),
-      body,
-    );
+    return this.service.api.post(this.appUrl + this.service.apiUrlService.uploadFileKYC(mobile, type, docType), body);
   }
   RegisterUser(payLoad: any) {
-
-    return this.Api.post(this.appUrl +apiEndPoints.Signup.registerUser, payLoad, );
+    return this.service.api.post(this.appUrl + apiEndPoints.Signup.registerUser, payLoad);
   }
 }

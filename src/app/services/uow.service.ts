@@ -6,6 +6,8 @@ import { IpGeolocationService } from './auth/ip-geolocation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { TranslationService } from './transalation.service';
+import { Api } from './api';
+import { ApiUrlService } from './api-url.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,5 +21,7 @@ export class UowService {
     public ipGeolocationService: IpGeolocationService,
     public authService: AuthService,
     public translateService: TranslationService,
+    public api: Api,
+    public apiUrlService: ApiUrlService,
   ) {}
 }
