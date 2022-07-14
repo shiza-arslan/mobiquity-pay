@@ -12,6 +12,7 @@ export class Api {
   }
 
   get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
+
     return this.http.get(`${path}`, { params }).pipe(catchError(this.formatErrors));
   }
 
@@ -20,14 +21,17 @@ export class Api {
   }
 
   post(path: string, body: Object = {}): Observable<any> {
+    const token = localStorage.getItem('access_token');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         Accept: '*/*',
+        Authorization: `Bearer ${token}`,
       }),
     };
     return this.http.post(`${path}`, JSON.stringify(body), httpOptions).pipe(catchError(this.formatErrors));
   }
+
 
   delete(path: any): Observable<any> {
     return this.http.delete(`${path}`).pipe(catchError(this.formatErrors));

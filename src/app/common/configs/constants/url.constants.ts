@@ -21,5 +21,12 @@ export const apiEndPoints = {
     preLoginUrl: '/preLogin/',
   },
   //Signup
-  Signup: {},
+  Signup: {
+    getsignupformData :'categoryProfile/',
+    selfRegistration   : 'mobiquitypay/self-registration/data/',
+    generateBearer:'mobiquitypay/oauth/token',
+    validateReferralCode:`/mobiquitypay/v1/referral/referrer-user`,
+    registerUser: `mobiquitypay/v1/ums/user/self`
+
+  },
 };
