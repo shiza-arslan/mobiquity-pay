@@ -11,29 +11,23 @@ export class Api {
     return throwError(error.error);
   }
 
-  get(path: string, params: HttpParams = new HttpParams()): Observable<any> {
-
-    return this.http.get(`${path}`, { params }).pipe(catchError(this.formatErrors));
+  get(path: string, options: any = null): Observable<any> {
+    return this.http.get(`${path}`, options ?? new HttpHeaders()).pipe(catchError(this.formatErrors));
   }
 
-  put(path: string, body: Object = {}): Observable<any> {
-    return this.http.put(`${path}`, JSON.stringify(body)).pipe(catchError(this.formatErrors));
+  put(path: string, body: Object = {}, options: any = null): Observable<any> {
+    return this.http
+      .put(`${path}`, JSON.stringify(body), options ?? new HttpHeaders())
+      .pipe(catchError(this.formatErrors));
   }
 
-  post(path: string, body: Object = {}): Observable<any> {
-    const token = localStorage.getItem('access_token');
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        Accept: '*/*',
-        Authorization: `Bearer ${token}`,
-      }),
-    };
-    return this.http.post(`${path}`, JSON.stringify(body), httpOptions).pipe(catchError(this.formatErrors));
+  post(path: string, body: Object = {}, options: any = null): Observable<any> {
+    return this.http
+      .post(`${path}`, JSON.stringify(body), options ?? new HttpHeaders())
+      .pipe(catchError(this.formatErrors));
   }
 
-
-  delete(path: any): Observable<any> {
-    return this.http.delete(`${path}`).pipe(catchError(this.formatErrors));
+  delete(path: any, options: any = null): Observable<any> {
+    return this.http.delete(`${path}`, options ?? new HttpHeaders()).pipe(catchError(this.formatErrors));
   }
 }
