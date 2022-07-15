@@ -6,26 +6,25 @@ import { BehaviorSubject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
 import { apiEndPoints } from '../../common/configs/constants/url.constants';
-import { UowService } from '@mobiquity/services';
+import { Api } from '../api';
+import { ApiUrlService } from '../api-url.service';
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
   baseUrl = EpConfig.getServerUrl();
   appURL = EpConfig.getMockUrl();
-  // appURL= EpConfig.getDemoServerUrl();
-  // httpOptions = {
-  //   headers: new HttpHeaders({
-  //     'Content-Type': 'application/json',
-  //     Accept: '*/*',
-  //   }),
-  // };
   private isLoggedIn = new BehaviorSubject<boolean>(false);
   private user = new BehaviorSubject<any>(null);
   private authorizationProfile = new BehaviorSubject<any>(null);
   private securityProfile = new BehaviorSubject<any>(null);
   private walletBalance = new BehaviorSubject<any>(null);
-  constructor(private http: HttpClient, private deviceService: DeviceDetectorService, private service: UowService) {}
+  constructor(
+    private http: HttpClient,
+    private deviceService: DeviceDetectorService,
+    private api: Api,
+    private apiUrlService: ApiUrlService,
+  ) {}
   login(data: any) {
     const body = environment.constants;
     body.identifierValue = data.mobile;
@@ -33,17 +32,17 @@ export class LoginService {
     body.deviceInfo.browser = this.deviceService.browser;
     body.deviceInfo.model = this.deviceService.browser;
     body.deviceInfo.os = this.deviceService.os;
-    return this.service.api.post(this.baseUrl + apiEndPoints.login.loginUrl, body);
+    return this.api.post(this.baseUrl + apiEndPoints.login.loginUrl, body);
   }
   verifyOTP(body: any) {
-    return this.service.api.post(this.baseUrl + apiEndPoints.login.verifyOTPUrl, body);
+    return this.api.post(this.baseUrl + apiEndPoints.login.verifyOTPUrl, body);
   }
   //OTP Validation for Forget PIN
   validateOTPVIAFP(body: any) {
-    return this.service.api.post(this.baseUrl + apiEndPoints.login.validateOTPVIAFPUrl, body);
+    return this.api.post(this.baseUrl + apiEndPoints.login.validateOTPVIAFPUrl, body);
   }
   loginConfirm(body: any) {
-    return this.service.api.post(this.baseUrl + apiEndPoints.login.loginConfirmUrl, body);
+    return this.api.post(this.baseUrl + apiEndPoints.login.loginConfirmUrl, body);
   }
   generateOtp(phone: any) {
     const body = {
@@ -52,14 +51,14 @@ export class LoginService {
       identifierValue: phone,
     };
 
-    return this.service.api.post(this.baseUrl + apiEndPoints.login.generateOtp, body);
+    return this.api.post(this.baseUrl + apiEndPoints.login.generateOtp, body);
   }
   loginSuccessfully() {
-    this.service.api.get(this.baseUrl + apiEndPoints.login.authorizationProfileUrl).subscribe((res: any) => {
+    this.api.get(this.baseUrl + apiEndPoints.login.authorizationProfileUrl).subscribe((res: any) => {
       this.authorizationProfile.next(res);
       const mobile = localStorage.getItem('mobile');
 
-      this.service.api
+      this.api
         .get(
           this.baseUrl +
             `mobiquity-pay/v1/security-profile?workspace=${environment.constants.workspaceId}&identifierValue=${mobile}&identifierType=${environment.constants.identifierType}`,
@@ -67,7 +66,7 @@ export class LoginService {
         .subscribe((res: any) => {
           this.securityProfile.next(res.securityProfile);
 
-          this.service.api.get(this.baseUrl + apiEndPoints.login.selfAccountUrl).subscribe((res: any) => {
+          this.api.get(this.baseUrl + apiEndPoints.login.selfAccountUrl).subscribe((res: any) => {
             this.user.next(res);
             console.log('auth profile', this.user);
             console.log(res);
@@ -89,13 +88,11 @@ export class LoginService {
               },
             };
 
-            this.service.api
-              .post(this.baseUrl + apiEndPoints.login.walletBallanceUrl, balanceObj)
-              .subscribe((res: any) => {
-                console.log('balance res');
-                console.log(res);
-                this.walletBalance.next(res);
-              });
+            this.api.post(this.baseUrl + apiEndPoints.login.walletBallanceUrl, balanceObj).subscribe((res: any) => {
+              console.log('balance res');
+              console.log(res);
+              this.walletBalance.next(res);
+            });
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('userObj', res);
           });
@@ -115,7 +112,7 @@ export class LoginService {
       workspaceId: environment.constants.workspaceId,
     };
 
-    return this.service.api.post(this.baseUrl + apiEndPoints.login.changePinUrl, postData);
+    return this.api.post(this.baseUrl + apiEndPoints.login.changePinUrl, postData);
   }
   resetPIN(data: any) {
     const postData = {
@@ -125,7 +122,7 @@ export class LoginService {
       newAuthenticationValue: data.pin,
     };
 
-    return this.service.api.post(this.baseUrl + apiEndPoints.login.resetPinUrl, postData);
+    return this.api.post(this.baseUrl + apiEndPoints.login.resetPinUrl, postData);
   }
   forgetPin(data: any) {
     const reqData = {
@@ -137,7 +134,7 @@ export class LoginService {
       language: data.language,
     };
 
-    return this.service.api.post(this.baseUrl + apiEndPoints.login.forgotPinUrl, reqData);
+    return this.api.post(this.baseUrl + apiEndPoints.login.forgotPinUrl, reqData);
   }
   getAuthorizationProfile() {
     return this.authorizationProfile.asObservable();
@@ -145,7 +142,7 @@ export class LoginService {
   generateBearer() {
     const formData = new FormData();
     formData.append('grant_type', 'client_credentials');
-    return this.service.api.post(this.baseUrl + apiEndPoints.login.generateBearerUrl, formData);
+    return this.api.post(this.baseUrl + apiEndPoints.login.generateBearerUrl, formData);
   }
 
   getSecurityProfile() {
@@ -163,6 +160,6 @@ export class LoginService {
       resumeServiceRequestId: localStorage.getItem('serviceRequestId'),
     };
 
-    return this.service.api.post(this.baseUrl + apiEndPoints.login.resendOTPUrl, body);
+    return this.api.post(this.baseUrl + apiEndPoints.login.resendOTPUrl, body);
   }
 }

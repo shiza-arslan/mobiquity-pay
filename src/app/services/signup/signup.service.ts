@@ -6,7 +6,8 @@ import { FormField } from '../../models/form-field';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { environment } from '../../common/configs/constants/app.constant';
 import { apiEndPoints } from '../../common/configs/constants/url.constants';
-import { UowService } from '@mobiquity/services';
+import { Api } from '../api';
+import { ApiUrlService } from '../api-url.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,9 +16,9 @@ export class SignupService {
   appUrl = EpConfig.getServerUrl();
   formFields: any;
   formG: FormGroup | any;
-  constructor(private http: HttpClient, private service: UowService) {}
+  constructor(private http: HttpClient, private api: Api, private apiUrlService: ApiUrlService) {}
   getsignupformData(lang: string) {
-    return this.service.api.get(this.baseUrl + apiEndPoints.Signup.getsignupformData + lang);
+    return this.api.get(this.baseUrl + apiEndPoints.Signup.getsignupformData + lang);
   }
 
   toFormGroup(inputs: any[]): FormGroup {
@@ -31,10 +32,10 @@ export class SignupService {
   }
 
   getSelfRegistration(lang: string) {
-    return this.service.api.get(this.appUrl + apiEndPoints.Signup.selfRegistration + lang);
+    return this.api.get(this.appUrl + apiEndPoints.Signup.selfRegistration + lang);
   }
   isUnique(type: any, val: any) {
-    return this.service.api.get(this.appUrl + this.service.apiUrlService.isEmailExist(type, val));
+    return this.api.get(this.appUrl + this.apiUrlService.isEmailExist(type, val));
     // `/mobiquitypay/v1/user-management/validate/uniqueness?uniqueIdType=${type}&uniqunessValue=${val}&workspaceId=SUBSCRIBER\\`
   }
 
@@ -47,7 +48,7 @@ export class SignupService {
     };
     const formData = new FormData();
     formData.append('grant_type', 'client_credentials');
-    return this.service.api.post(this.appUrl + apiEndPoints.Signup.generateBearer, formData, httpOptions);
+    return this.api.post(this.appUrl + apiEndPoints.Signup.generateBearer, formData, httpOptions);
   }
 
   getFormControls(inputs: any) {
@@ -104,20 +105,20 @@ export class SignupService {
       referralCode: refCode,
     };
 
-    return this.service.api.post(this.appUrl + apiEndPoints.Signup.validateReferralCode, postData);
+    return this.api.post(this.appUrl + apiEndPoints.Signup.validateReferralCode, postData);
   }
   uploadFile(file: any, mobile: any, type: any) {
     const body = new FormData();
     body.append('file', file, file.name);
-    return this.service.api.post(this.appUrl + this.service.apiUrlService.uploadFile(mobile, type), body);
+    return this.api.post(this.appUrl + this.apiUrlService.uploadFile(mobile, type), body);
   }
 
   uploadFileKYC(file: any, mobile: any, type: any, docType: any) {
     const body = new FormData();
     body.append('file', file, file.name);
-    return this.service.api.post(this.appUrl + this.service.apiUrlService.uploadFileKYC(mobile, type, docType), body);
+    return this.api.post(this.appUrl + this.apiUrlService.uploadFileKYC(mobile, type, docType), body);
   }
   RegisterUser(payLoad: any) {
-    return this.service.api.post(this.appUrl + apiEndPoints.Signup.registerUser, payLoad);
+    return this.api.post(this.appUrl + apiEndPoints.Signup.registerUser, payLoad);
   }
 }
