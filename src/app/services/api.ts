@@ -3,7 +3,9 @@ import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class Api {
   constructor(private http: HttpClient) {}
 
