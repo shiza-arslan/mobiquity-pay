@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormField } from '../../../../models/form-field';
+import { FormField } from '../../../../util/utils/models/form-field';
 @Component({
   selector: 'mobiquity-pay-input-box',
   templateUrl: './input-box.component.html',

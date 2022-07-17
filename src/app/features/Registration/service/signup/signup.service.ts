@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
 import { EpConfig } from '../../../../util/utils/ep-config';
 import { of } from 'rxjs';
-import { FormField } from '../../../../models/form-field';
+import { FormField } from '../../../../util/utils/models/form-field';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { environment } from '../../../../util/constants/app.constant';
 import { apiEndPoints } from '../../../../util/constants/url.constants';

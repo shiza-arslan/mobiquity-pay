@@ -1,5 +1,5 @@
-import { WebConfig } from '../../models/web-config.model';
-import { NavigationConfig } from '../../models/navigation-config.model';
+import { WebConfig } from '../utils/models/web-config.model';
+import { NavigationConfig } from '../utils/models/navigation-config.model';
 
 export const getWebConfig = (): WebConfig => {
   return window['config' as any] as unknown as WebConfig;

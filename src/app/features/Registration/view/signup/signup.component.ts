@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Inject } from '@angular/core';
 import { UowService } from '../../../../services/uow.service';
 import { Observable } from 'rxjs';
-import { FormField } from '../../../../models/form-field';
+import { FormField } from '../../../../util/utils/models/form-field';
 import { FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { OtpComponent } from '../../../../shared/components/ui-common/otp/otp.component';
