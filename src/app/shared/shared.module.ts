@@ -8,6 +8,7 @@ import { NavigationComponent } from './components/navigation/navigation.componen
 import { RouterModule } from '@angular/router';
 import { LayoutComponent } from './view/layout/layout.component';
 import { SignupHeaderComponent } from './components/signup-header/signup-header.component';
+import { AccessDeniedComponent } from './components/access-denied/access-denied.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { PipeModule } from '@mobiquity/PipeModule';
 const exportcomponents = [
@@ -17,6 +18,7 @@ const exportcomponents = [
   NavigationComponent,
   LayoutComponent,
   SignupHeaderComponent,
+  AccessDeniedComponent,
 ];
 const ExportModules = [
   FormsModule,
@@ -27,6 +29,7 @@ const ExportModules = [
   NavigationComponent,
   LayoutComponent,
   SignupHeaderComponent,
+  AccessDeniedComponent,
 ];
 @NgModule({
   declarations: exportcomponents,

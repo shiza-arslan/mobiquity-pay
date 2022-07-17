@@ -11,6 +11,7 @@ import { RadioButtonGroupComponent } from '../ui-common/radio-button-group/radio
 import { SelectBoxComponent } from '../ui-common/select-box/select-box.component';
 import { OtpComponent } from '../ui-common/otp/otp.component';
 import { ForgetPinComponent } from '../ui-common/forget-pin/forget-pin.component';
+import { CustomerSupportComponent } from './customer-support/customer-support.component';
 import { NgOtpInputModule } from 'ng-otp-input';
 import { NgxSpinnerModule } from 'ngx-spinner';
 const exportcomponents = [
@@ -24,6 +25,7 @@ const exportcomponents = [
   SelectBoxComponent,
   ForgetPinComponent,
   OtpComponent,
+  CustomerSupportComponent,
 ];
 const ExportModules = [
   ChangePinComponent,
@@ -35,6 +37,7 @@ const ExportModules = [
   RadioButtonGroupComponent,
   SelectBoxComponent,
   ForgetPinComponent,
+  CustomerSupportComponent,
   OtpComponent,
   FormsModule,
   ReactiveFormsModule,

@@ -8,7 +8,7 @@ import { OtpComponent } from '../otp/otp.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorPopupComponent } from '../error-popup/error-popup.component';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { CustomerSupportComponent } from '../../../../pages/customer-support/customer-support.component';
+import { CustomerSupportComponent } from '../customer-support/customer-support.component';
 import { SuccessPinComponent } from '../success-pin/success-pin.component';
 
 @Component({

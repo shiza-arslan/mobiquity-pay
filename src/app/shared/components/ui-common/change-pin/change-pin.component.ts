@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { UowService } from '@mobiquity/services';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { LoginComponent } from '../../../../pages/login/login.component';
+import { LoginComponent } from '../../../../home/components/login/login.component';
 import { SuccessPinComponent } from '../success-pin/success-pin.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorPopupComponent } from '../error-popup/error-popup.component';
