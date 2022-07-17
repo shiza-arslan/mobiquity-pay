@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { FormField } from '../../../models/form-field';
 import { FormGroup } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { OtpComponent } from '../../../shared/ui-common/otp/otp.component';
+import { OtpComponent } from '../../../shared/components/ui-common/otp/otp.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
-import { environment } from '../../../common/configs/constants/app.constant';
-import { ErrorPopupComponent } from '../../../shared/ui-common/error-popup/error-popup.component';
-import { SuccessPopupComponent } from '../../../shared/ui-common/success-popup/success-popup.component';
-import { SuccessPinComponent } from '../../../shared/ui-common/success-pin/success-pin.component';
+import { environment } from '../../../util/constants/app.constant';
+import { ErrorPopupComponent } from '../../../shared/components/ui-common/error-popup/error-popup.component';
+import { SuccessPopupComponent } from '../../../shared/components/ui-common/success-popup/success-popup.component';
+import { SuccessPinComponent } from '../../../shared/components/ui-common/success-pin/success-pin.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'mobiquity-pay-signup',

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
-import { EpConfig } from '../../common/configs/ep-config';
-import { environment } from '../../common/configs/constants/app.constant';
+import { EpConfig } from '../../util/utils/ep-config';
+import { environment } from '../../util/constants/app.constant';
 import { BehaviorSubject } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Router } from '@angular/router';
-import { apiEndPoints } from '../../common/configs/constants/url.constants';
+import { apiEndPoints } from '../../util/constants/url.constants';
 import { Api } from '../api';
 import { ApiUrlService } from '../api-url.service';
 @Injectable({

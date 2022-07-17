@@ -1,6 +1,6 @@
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EpConfig } from '../../common/configs/ep-config';
+import { EpConfig } from '../../util/utils/ep-config';
 @Injectable({
   providedIn: 'root',
 })

@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { UowService } from '../../services/uow.service';
 import { ElementRef } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { OtpComponent } from '../../shared/ui-common/otp/otp.component';
-import { ChangePinComponent } from '../../shared/ui-common/change-pin/change-pin.component';
-import { ForgetPinComponent } from '../../shared/ui-common/forget-pin/forget-pin.component';
-import { SuccessPinComponent } from '../../shared/ui-common/success-pin/success-pin.component';
+import { OtpComponent } from '../../shared/components/ui-common/otp/otp.component';
+import { ChangePinComponent } from '../../shared/components/ui-common/change-pin/change-pin.component';
+import { ForgetPinComponent } from '../../shared/components/ui-common/forget-pin/forget-pin.component';
+import { SuccessPinComponent } from '../../shared/components/ui-common/success-pin/success-pin.component';
 import { map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorPopupComponent } from '../../shared/ui-common/error-popup/error-popup.component';
+import { ErrorPopupComponent } from '../../shared/components/ui-common/error-popup/error-popup.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({

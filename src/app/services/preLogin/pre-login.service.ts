@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
-import { EpConfig } from '../../common/configs/ep-config';
-import { apiEndPoints } from '@mobiquity/common';
+import { EpConfig } from '../../util/utils/ep-config';
+import { apiEndPoints } from '@mobiquity/utils';
 import { Api } from '../api';
 @Injectable({
   providedIn: 'root',

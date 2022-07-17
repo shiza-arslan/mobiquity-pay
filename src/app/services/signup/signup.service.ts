@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpParams } from '@angular/common/http';
-import { EpConfig } from '../../common/configs/ep-config';
+import { EpConfig } from '../../util/utils/ep-config';
 import { of } from 'rxjs';
 import { FormField } from '../../models/form-field';
 import { FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { environment } from '../../common/configs/constants/app.constant';
-import { apiEndPoints } from '../../common/configs/constants/url.constants';
+import { environment } from '../../util/constants/app.constant';
+import { apiEndPoints } from '../../util/constants/url.constants';
 import { Api } from '../api';
 import { ApiUrlService } from '../api-url.service';
 @Injectable({

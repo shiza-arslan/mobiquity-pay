@@ -7,9 +7,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppComponent } from '../app/app.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { LayoutModule } from './layout/layout.module';
 import { PagesModule } from '../app/pages/pages.module';
 import { InterceptorModule } from './common/interceptors/interceptor.module';
+import { SharedModule } from './shared/shared.module';
 /**
  * AoT requires an exported function for factories
  *
@@ -26,7 +26,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserAnimationsModule,
     HttpClientModule,
     InterceptorModule,
-    LayoutModule,
+    SharedModule,
     PagesModule,
     AppRoutingModule,
     TranslateModule.forRoot({
