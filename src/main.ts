@@ -8,6 +8,11 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+fetch('/assets/navigation.json')
+  .then((resp) => resp.json())
+  .then((navigationConfig) => {
+    window['navigationConfig' as any] = navigationConfig;
+    platformBrowserDynamic()
+      .bootstrapModule(AppModule)
+      .catch((err) => console.error(err));
+  });

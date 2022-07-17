@@ -4,7 +4,8 @@ import { UowService } from '@mobiquity/services';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LoginComponent } from '../../pages/login/login.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
-
+import { getNavigationConfig } from '@mobiquity/navigationConfig';
+import { retry } from 'rxjs';
 @Component({
   selector: 'mobiquity-pay-navigation',
   templateUrl: './navigation.component.html',
@@ -13,8 +14,10 @@ import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 export class NavigationComponent implements OnInit {
   language: any;
   translation: any = [];
-  constructor(private service: UowService, private matDialog: MatDialog) {}
+  navigation: any = [];
+  config = getNavigationConfig();
 
+  constructor(private service: UowService, private matDialog: MatDialog) {}
   ngOnInit(): void {
     this.language = 'en';
     if (localStorage.getItem('language')) {
@@ -25,6 +28,7 @@ export class NavigationComponent implements OnInit {
         this.language = lang;
         this.service.translateService.get().subscribe((data: any) => {
           this.translation = data.home;
+          this.navigation = this.config.Navigation;
         });
         console.log('active lang', lang);
       });
