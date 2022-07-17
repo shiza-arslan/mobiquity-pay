@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
-import { LoginComponent } from '../../../../pages/login/login.component';
+import { LoginComponent } from '../../../home/components/login/login.component';
 import { UowService } from '@mobiquity/services';
 @Component({
   selector: 'mobiquity-pay-signup-header',

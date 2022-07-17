@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { UowService } from '@mobiquity/services';
@@ -26,6 +26,13 @@ export class PreLoginSliderComponent implements OnInit {
   @ViewChild('slickModal') slickModal!: SlickCarouselComponent;
   @ViewChild('slickModal2') slickModal2!: SlickCarouselComponent;
   ngOnInit(): void {
+    this.language = 'en';
+    this.service.translateService.language.subscribe((res: any) => {
+      this.service.translateService.getLang().subscribe((lang: any) => {
+        this.language = lang;
+        console.log('active lang', lang);
+      });
+    });
     this.getPreLoginData();
   }
   ngOnChange() {

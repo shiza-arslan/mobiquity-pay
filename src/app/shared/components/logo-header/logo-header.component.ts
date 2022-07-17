@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginComponent } from '../../../../pages/login/login.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
+import { LoginComponent } from '../../../home/components/login/login.component';
 import { UowService } from '@mobiquity/services';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'mobiquity-pay-welcome-header',
-  templateUrl: './welcome-header.component.html',
-  styleUrls: ['./welcome-header.component.scss'],
+  selector: 'mobiquity-pay-logo-header',
+  templateUrl: './logo-header.component.html',
+  styleUrls: ['./logo-header.component.scss'],
 })
-export class WelcomeHeaderComponent implements OnInit {
+export class LogoHeaderComponent implements OnInit {
   selectedLanguage: any = 'en';
   isLoggedIn: any = false;
   userData: any;
@@ -33,6 +33,7 @@ export class WelcomeHeaderComponent implements OnInit {
       lang: 'spanish',
     },
   ];
+
   constructor(private matDialog: MatDialog, private service: UowService, private route: Router) {}
 
   ngOnInit(): void {
@@ -66,15 +67,24 @@ export class WelcomeHeaderComponent implements OnInit {
       });
     }
   }
-  ngOnChange() {
-    this.service.translateService.language.subscribe((res: any) => {
-      this.service.translateService.getLang().subscribe((lang: any) => {
-        this.selectedLanguage = lang;
-        console.log('active lang pre login', lang);
-      });
-    });
+  changeLanguage(lang: string) {
+    this.service.translateService.setLang(lang);
+    this.selectedLanguage = lang;
+    localStorage.setItem('language', lang);
+  }
+  routeRegister() {
+    this.route.navigate(['/signup']);
   }
 
+  openModal() {
+    this.matDialog.open(LoginComponent);
+  }
+  logOut() {
+    localStorage.removeItem('isLoggedIn');
+    this.isLoggedIn = false;
+    this.userData = null;
+    this.BalanceInquiry = null;
+  }
   isUserLoggedIn() {
     if (localStorage.getItem('isLoggedIn')) {
       //to do

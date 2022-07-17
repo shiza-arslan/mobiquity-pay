@@ -7,7 +7,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { AppComponent } from '../app/app.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { PagesModule } from '../app/pages/pages.module';
+import { FeatureModule } from '../app/features/feature.module';
 import { InterceptorModule } from './common/interceptors/interceptor.module';
 import { SharedModule } from './shared/shared.module';
 /**
@@ -27,7 +27,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HttpClientModule,
     InterceptorModule,
     SharedModule,
-    PagesModule,
+    FeatureModule,
     AppRoutingModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',

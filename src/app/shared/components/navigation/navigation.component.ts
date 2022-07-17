@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { SlickCarouselComponent } from 'ngx-slick-carousel';
 import { UowService } from '@mobiquity/services';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { LoginComponent } from '../../../../pages/login/login.component';
+import { LoginComponent } from '../../../home/components/login/login.component';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { getNavigationConfig } from '@mobiquity/navigationConfig';
 import { retry } from 'rxjs';
