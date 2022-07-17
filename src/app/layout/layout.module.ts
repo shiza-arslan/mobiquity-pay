@@ -7,8 +7,8 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RouterModule } from '@angular/router';
 import { LayoutComponent } from './layout/layout.component';
 import { SignupHeaderComponent } from './signup-header/signup-header.component';
-
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { PipeModule } from '@mobiquity/PipeModule';
 const exportcomponents = [
   FooterComponent,
   LogoHeaderComponent,
@@ -19,7 +19,7 @@ const exportcomponents = [
 ];
 @NgModule({
   declarations: exportcomponents,
-  imports: [CommonModule, RouterModule, NgxSpinnerModule],
+  imports: [CommonModule, RouterModule, NgxSpinnerModule, PipeModule],
   exports: exportcomponents,
 })
 export class LayoutModule {}
