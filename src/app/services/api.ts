@@ -7,6 +7,12 @@ import { catchError } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class Api {
+   httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      Accept: '*/*'
+    }),
+  };
   constructor(private http: HttpClient) {}
 
   private formatErrors(error: any) {
@@ -14,7 +20,10 @@ export class Api {
   }
 
   get(path: string, options: any = null): Observable<any> {
-    return this.http.get(`${path}`, options ?? new HttpHeaders()).pipe(catchError(this.formatErrors));
+    if (options===null){
+      options = this.httpOptions;
+    }
+    return this.http.get(`${path}`, options).pipe(catchError(this.formatErrors));
   }
 
   put(path: string, body: Object = {}, options: any = null): Observable<any> {
@@ -24,8 +33,11 @@ export class Api {
   }
 
   post(path: string, body: Object = {}, options: any = null): Observable<any> {
+    if (options===null){
+      options = this.httpOptions;
+    }
     return this.http
-      .post(`${path}`, JSON.stringify(body), options ?? new HttpHeaders())
+      .post(`${path}`, JSON.stringify(body), options)
       .pipe(catchError(this.formatErrors));
   }
 

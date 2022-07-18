@@ -117,18 +117,20 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['/']);
           }
         },
-        (error: HttpErrorResponse) => {
+        (error: any) => {
           this.spinner.hide();
+          console.log(error, 'errors');
+
           if (
-            (error.error.status === 'FAILED' && error.error.errors[0].code === 'AUTH_06') ||
-            error.error.errors[0].code === 'AUTH01'
+            (error.status === 'FAILED' && error.errors[0].code === 'AUTH_06') ||
+            error.errors[0].code === 'AUTH01'
           ) {
             // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
             // modalRef.componentInstance.errorMessage = error.error.errorUserMsg;
             this.matDialog.open(ErrorPopupComponent, {
-              data: error.error.errorUserMsg,
+              data: error.errorUserMsg,
             });
-          } else if (error.error.status === 'FAILED' && error.error.errors[0].code === 'FTL01') {
+          } else if (error.status === 'FAILED' && error.errors[0].code === 'FTL01') {
             this.service.loginService.generateBearer().subscribe((res: any) => {
               localStorage.setItem('access_token', res.access_token);
             });
@@ -140,7 +142,7 @@ export class LoginComponent implements OnInit {
             // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
             // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
             this.matDialog.open(ErrorPopupComponent, {
-              data: error.error.errors[0].message,
+              data: error.errors[0].message,
             });
           }
         },

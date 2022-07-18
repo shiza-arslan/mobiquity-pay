@@ -29,8 +29,9 @@ export class AuthInterceptor implements HttpInterceptor {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const accessToken = localStorage.getItem('mobiquity.pay.access_token'); // replace the string with injectables.
-
+    const accessToken = localStorage.getItem('access_token'); // replace the string with injectables.
+    console.log(accessToken, 'intecpe');
+  debugger;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let authorizedRequest: HttpRequest<any>;
     if (accessToken) {

@@ -6,7 +6,7 @@ export class EpConfig {
     return this.getServerUrl() + '/api';
   }
   public static getServerUrl() {
-    return 'http://125.16.139.20:8076/';
+    return 'http://125.16.139.20:8023/';
     //return  'http://mobiquity-payconsumer.unosolindia.mockable.io/';
   }
 
