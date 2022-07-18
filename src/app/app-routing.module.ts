@@ -8,7 +8,10 @@ const routes: Routes = [
     component: AccessDeniedComponent,
   },
   { path: 'signup', loadChildren: () => import('./features/Registration/signup.module').then((m) => m.SignupModule) },
-  { path: 'pre-login', loadChildren: () => import('./home/prelogin.module').then((m) => m.PreloginModule) },
+  {
+    path: 'pre-login',
+    loadChildren: () => import('./features/PreLogin/prelogin.module').then((m) => m.PreloginModule),
+  },
 ];
 
 @NgModule({

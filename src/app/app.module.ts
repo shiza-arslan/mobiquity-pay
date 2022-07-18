@@ -9,7 +9,7 @@ import { AppComponent } from '../app/app.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FeatureModule } from '../app/features/feature.module';
 import { InterceptorModule } from './common/interceptors/interceptor.module';
-import { SharedModule } from './shared/shared.module';
+import { HomeModule } from './home/home.module';
 /**
  * AoT requires an exported function for factories
  *
@@ -25,7 +25,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserModule,
     BrowserAnimationsModule,
     InterceptorModule,
-    SharedModule,
+    HomeModule,
     FeatureModule,
     AppRoutingModule,
     TranslateModule.forRoot({

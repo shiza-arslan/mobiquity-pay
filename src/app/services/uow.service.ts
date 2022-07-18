@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { LoginService } from '../home/service/login/login.service';
-import { PreloginService } from '../home/service/preLogin/pre-login.service';
+import { LoginService } from '../features/PreLogin/service/login/login.service';
+import { PreloginService } from '../features/PreLogin/service/preLogin/pre-login.service';
 import { SignupService } from '../features/Registration/service/signup/signup.service';
 import { IpGeolocationService } from './auth/ip-geolocation.service';
 import { ActivatedRoute, Router } from '@angular/router';
