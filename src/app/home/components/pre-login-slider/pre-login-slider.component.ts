@@ -30,7 +30,8 @@ export class PreLoginSliderComponent implements OnInit {
     this.service.translateService.language.subscribe((res: any) => {
       this.service.translateService.getLang().subscribe((lang: any) => {
         this.language = lang;
-        console.log('active lang', lang);
+        this.getPreLoginData();
+        console.log('active lang slider', lang);
       });
     });
     this.getPreLoginData();

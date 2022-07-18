@@ -19,7 +19,7 @@ export class PreLoginContentComponent implements OnInit {
           this.translation = data.home;
         });
 
-        console.log('active lang', lang);
+        console.log('active lang content', lang);
       });
     });
   }
