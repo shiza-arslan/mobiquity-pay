@@ -75,16 +75,16 @@ export class ForgetPinComponent implements OnInit {
           });*/
         }
       },
-      (error: HttpErrorResponse) => {
+      (error: any) => {
         this.spinner.hide();
         console.log('error res', error);
-        if (error.error.status === 'FAILED') {
+        if (error.status === 'FAILED') {
           // this.activeModal.dismiss();
           this.closeModal();
           // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
           // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
           this.matDialog.open(ErrorPopupComponent, {
-            data: error.error.errors[0].message,
+            data: error.errors[0].message,
           });
         }
       },

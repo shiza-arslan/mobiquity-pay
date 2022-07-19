@@ -108,15 +108,43 @@ export class SignupService {
     return this.api.post(this.appUrl + apiEndPoints.Signup.validateReferralCode, postData);
   }
   uploadFile(file: any, mobile: any, type: any) {
-    const body = new FormData();
+    // const body = new FormData();
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     'Content-Type':
+    //       'multipart/x-www-form-urlencoded;boundary=----WebKitFormBoundary5ei6dMazusTAvZNB',
+    //   }),
+    // };
+    // body.append('file', file, file.name);
+    // return this.api.post(this.appUrl + this.apiUrlService.uploadFile(mobile, type), httpOptions);
+
+    let body = new FormData();
     body.append('file', file, file.name);
-    return this.api.post(this.appUrl + this.apiUrlService.uploadFile(mobile, type), body);
+    const token = localStorage.getItem('access_token');
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Accept: '*/*',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+
+    return this.http.post(
+      this.appUrl + `mobiquitypay/dms/v3/doc?uploadedBy=${mobile}&documentType=${type}`,
+      body,
+      httpOptions,
+    );
   }
 
   uploadFileKYC(file: any, mobile: any, type: any, docType: any) {
     const body = new FormData();
+    const httpOptions = {
+      headers: new HttpHeaders({
+        Accept: '*/*',
+        'Content-Type': 'multipart/form-data',
+      }),
+    };
     body.append('file', file, file.name);
-    return this.api.post(this.appUrl + this.apiUrlService.uploadFileKYC(mobile, type, docType), body);
+    return this.api.post(this.appUrl + this.apiUrlService.uploadFileKYC(mobile, type, docType), body, httpOptions);
   }
   RegisterUser(payLoad: any) {
     return this.api.post(this.appUrl + apiEndPoints.Signup.registerUser, payLoad);

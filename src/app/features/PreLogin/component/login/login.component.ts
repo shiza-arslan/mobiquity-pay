@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit {
               this.spinner.hide();
 
               this.matDialog.open(OtpComponent, {
-                data: true,
+                data: { isNormalUser: false },
               });
               // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
               // modalRef.componentInstance.isNormalUser = true;

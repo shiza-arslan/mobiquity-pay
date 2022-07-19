@@ -77,13 +77,13 @@ export class ChangePinComponent implements OnInit {
               // redirect to  login after popup
             }
           },
-          (error: HttpErrorResponse) => {
-            if (error.error.status === 'FAILED') {
+          (error: any) => {
+            if (error.status === 'FAILED') {
               // this.activeModal.dismiss();
               this.closeModal();
               // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
               this.matDialog.open(ErrorPopupComponent, {
-                data: error.error.errors[0].message,
+                data: error.errors[0].message,
               });
               // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
             }
@@ -104,14 +104,14 @@ export class ChangePinComponent implements OnInit {
               // redirect to  login after popup
             }
           },
-          (error: HttpErrorResponse) => {
-            if (error.error.status === 'FAILED') {
+          (error: any) => {
+            if (error.status === 'FAILED') {
               // this.activeModal.dismiss();
               this.closeModal();
               // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
               // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
               this.matDialog.open(ErrorPopupComponent, {
-                data: error.error.errors[0].message,
+                data: error.errors[0].message,
               });
             }
           },

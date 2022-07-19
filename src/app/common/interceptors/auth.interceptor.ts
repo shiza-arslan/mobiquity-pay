@@ -37,7 +37,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // }
     const accessToken = localStorage.getItem('access_token'); // replace the string with injectables.
     console.log(accessToken, 'intecpe');
-    debugger;
+
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let authorizedRequest: HttpRequest<any>;
     if (accessToken) {

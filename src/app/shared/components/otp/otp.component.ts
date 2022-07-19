@@ -19,6 +19,10 @@ export class OtpComponent implements OnInit {
   errorMessage = '';
   timeLeft: number = 59;
   interval: any;
+  isForgotPassword = false;
+  isNormalUser = false;
+  isRegUser = false;
+
   //  isForgotPassword = false;
   // @Input() public isForgotPassword: any = false;
 
@@ -29,13 +33,19 @@ export class OtpComponent implements OnInit {
     private matDialog: MatDialog,
     private spinner: NgxSpinnerService,
     private router: Router,
+    private dialogRef: MatDialogRef<OtpComponent>,
     private route: ActivatedRoute,
-    @Inject(MAT_DIALOG_DATA) public isForgotPassword: boolean,
-    @Inject(MAT_DIALOG_DATA) public isNormalUser: boolean,
-    @Inject(MAT_DIALOG_DATA) public isRegUser: boolean,
-  ) {}
+    //@Inject(MAT_DIALOG_DATA) public isforgotPassword: boolean,
+    //@Inject(MAT_DIALOG_DATA) public isnormalUser: boolean,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+  ) {
+    this.isRegUser = data.isRegUser;
+    this.isForgotPassword = data.isForgotPassword;
+    this.isNormalUser = data.isNormalUser;
+  }
 
   ngOnInit(): void {
+    console.log('normalUser', this.isRegUser);
     this.selectedLanguage = 'en';
     this.mobile = localStorage.getItem('mobile');
     if (localStorage.getItem('language')) {
@@ -73,13 +83,13 @@ export class OtpComponent implements OnInit {
             });
           }
         },
-        (error: HttpErrorResponse) => {
+        (error: any) => {
           this.spinner.hide();
-          if (error.error.status === 'FAILED') {
+          if (error.status === 'FAILED') {
             this.hasErrors = true;
             //const modalRef = this.modalSerivce.open(ErrorComponent, { animation: false, backdrop:false});
 
-            this.errorMessage = error.error.errors[0].message;
+            this.errorMessage = error.errors[0].message;
           }
         },
       );
@@ -100,12 +110,12 @@ export class OtpComponent implements OnInit {
             this.router.navigate(['/']);
           }
         },
-        (error: HttpErrorResponse) => {
+        (error: any) => {
           this.spinner.hide();
-          if (error.error.status === 'FAILED') {
+          if (error.status === 'FAILED') {
             this.hasErrors = true;
             //const modalRef = this.modalSerivce.open(ErrorComponent, { animation: false, backdrop:false});
-            this.errorMessage = error.error.errors[0].message;
+            this.errorMessage = error.errors[0].message;
           }
         },
       );
@@ -119,6 +129,7 @@ export class OtpComponent implements OnInit {
           if (res.status === 'SUCCEEDED') {
             this.spinner.hide();
             if (this.isRegUser) {
+              this.dialogRef.close(true);
               // this.activeModal.close(true);
             } else {
               // this.activeModal.dismiss();
@@ -131,11 +142,11 @@ export class OtpComponent implements OnInit {
             }
           }
         },
-        (error: HttpErrorResponse) => {
+        (error: any) => {
           this.spinner.hide();
-          if (error.error.status === 'FAILED') {
+          if (error.status === 'FAILED') {
             this.hasErrors = true;
-            this.errorMessage = error.error.errors[0].message;
+            this.errorMessage = error.errors[0].message;
           }
         },
       );
@@ -168,7 +179,7 @@ export class OtpComponent implements OnInit {
           this.timeLeft = 59;
           this.startTimer();
         },
-        (error: HttpErrorResponse) => {
+        (error: any) => {
           this.hasErrors = true;
           this.errorMessage = 'Something went wrong, please try again';
         },
@@ -186,5 +197,7 @@ export class OtpComponent implements OnInit {
     }, 1000);
   }
 
-  closeModal() {}
+  closeModal() {
+    this.dialogRef.close();
+  }
 }

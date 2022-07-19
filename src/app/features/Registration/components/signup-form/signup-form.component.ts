@@ -99,7 +99,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
         console.log('formFields', this.formField);
 
         this.service.loginService.generateBearer().subscribe((res: any) => {
-          localStorage.setItem('access_token', res.access_token);
+          // localStorage.setItem('access_token', res.access_token);
 
           this.service.signupService.getSelfRegistration(this.language).subscribe((regData: any) => {
             this.countriesList = regData.countryList;
@@ -282,8 +282,12 @@ export class SignupFormComponent implements OnInit, OnChanges {
         localStorage.setItem('serviceRequestId', res.serviceRequestId);
         localStorage.setItem('mobile', this.mobile);
         // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
-        this.matDialog.open(OtpComponent, {
-          data: true,
+        const dialogRef = this.matDialog.open(OtpComponent, {
+          data: { isRegUser: true },
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+          console.log(`Dialog result: ${result}`); // Pizza!
+          this.isMobValOTP = result;
         });
         // modalRef.componentInstance.isRegUser = true;
         // modalRef.result.then((result) => {
@@ -294,7 +298,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
   }
   fileUrlChange(event: any) {
     //this.resetProfile();
-
+    this.mobile = '232323232323';
     if (event.target.files.length > 0 && this.mobile) {
       this.spinner.show();
       let fileUrl = event.target.files[0];
@@ -305,6 +309,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
         this.profilePhotoURI = res.payload.documentId;
         this.spinner.hide();
       });
+      this.spinner.hide();
     } else {
       // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
       // modalRef.componentInstance.errorMessage = 'Please verify mobile number before moving forward.';
@@ -382,10 +387,10 @@ export class SignupFormComponent implements OnInit, OnChanges {
             this.isrefCode = true;
           }
         },
-        (error: HttpErrorResponse) => {
+        (error: any) => {
           this.isrefCode = false;
           this.hasErrorCode = true;
-          this.errorMessage = error.error.errors[0].message;
+          this.errorMessage = error.errors[0].message;
         },
       );
     }
@@ -458,12 +463,12 @@ export class SignupFormComponent implements OnInit, OnChanges {
         });
         this.resetWizard();
       },
-      (error: HttpErrorResponse) => {
+      (error: any) => {
         this.spinner.hide();
         // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
         // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
         this.matDialog.open(ErrorPopupComponent, {
-          data: error.error.errors[0].message,
+          data: error.errors[0].message,
         });
       },
     );
