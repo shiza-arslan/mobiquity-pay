@@ -46,6 +46,10 @@ $mobiquity-pay-theme: mat.define-light-theme(
   position: relative !important;
   top: 7vh !important;
 }
+.carousel-up .slick-dots {
+  position: relative !important;
+  top: 3vh !important;
+}
 a {
   cursor: pointer;
 }

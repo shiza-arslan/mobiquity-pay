@@ -119,7 +119,6 @@ export class LoginComponent implements OnInit {
         },
         (error: any) => {
           this.spinner.hide();
-          console.log(error, 'errors');
 
           if ((error.status === 'FAILED' && error.errors[0].code === 'AUTH_06') || error.errors[0].code === 'AUTH01') {
             // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });

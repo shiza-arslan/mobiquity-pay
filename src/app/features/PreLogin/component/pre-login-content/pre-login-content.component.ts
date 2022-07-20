@@ -18,8 +18,6 @@ export class PreLoginContentComponent implements OnInit {
         this.service.translateService.get().subscribe((data: any) => {
           this.translation = data.home;
         });
-
-        console.log('active lang content', lang);
       });
     });
   }

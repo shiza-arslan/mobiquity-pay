@@ -35,20 +35,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
     //   return next.handle(updateReq);
     // }
-    const accessToken = localStorage.getItem('access_token'); // replace the string with injectables.
-    console.log(accessToken, 'intecpe');
+    const accessToken = sessionStorage.getItem('access_token'); // replace the string with injectables.
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    // debugger;
+
     let authorizedRequest: HttpRequest<any>;
     if (accessToken) {
       authorizedRequest = req.clone({ headers: req.headers.set('Authorization', `Bearer ${accessToken}`) });
     } else {
       authorizedRequest = req;
     }
-    // if (req.headers.has('content-type')) {
-    //   req = req.clone({ headers: req.headers.delete('Content-Type', 'application/json') });
-    // }
 
     return next.handle(authorizedRequest).pipe(
       catchError((errorResponse: HttpErrorResponse) => {
