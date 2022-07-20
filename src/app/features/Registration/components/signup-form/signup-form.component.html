@@ -571,7 +571,7 @@
             </div>
             <div class="text-center w-full my-6">
               <button
-                [disabled]="false"
+                [disabled]="isAddKYC()"
                 (click)="displayNextSection('kyc-done')"
                 class="bg-login-btn-custom px-14 font-medium text-sm text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
                 >Add</button
