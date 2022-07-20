@@ -68,9 +68,13 @@ export class SignupFormComponent implements OnInit, OnChanges {
   constructor(private service: UowService, public spinner: NgxSpinnerService, private matDialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.language = 'en';
+    this.service.signupService.getSelfRegistration('en').subscribe((res: any) => {
+      console.log('country', res);
+    });
+
     this.spinner.show();
 
-    this.language = 'en';
     if (localStorage.getItem('language')) {
       this.language = localStorage.getItem('language');
     }
@@ -98,22 +102,22 @@ export class SignupFormComponent implements OnInit, OnChanges {
         // this.formField[8].value = 'GEN_MAL';
         console.log('formFields', this.formField);
 
-        this.service.loginService.generateBearer().subscribe((res: any) => {
-          // localStorage.setItem('access_token', res.access_token);
+        // this.service.loginService.generateBearer().subscribe((res: any) => {
+        // localStorage.setItem('access_token', res.access_token);
 
-          this.service.signupService.getSelfRegistration(this.language).subscribe((regData: any) => {
-            this.countriesList = regData.countryList;
+        this.service.signupService.getSelfRegistration(this.language).subscribe((regData: any) => {
+          this.countriesList = regData.countryList;
 
-            regData.countryList.forEach((item: any) => {
-              let country = {
-                key: item.id,
-                value: item.displayName,
-              };
-              this.countryList.push(country);
-            });
-            this.formField[12].options = this.countryList;
+          regData.countryList.forEach((item: any) => {
+            let country = {
+              key: item.id,
+              value: item.displayName,
+            };
+            this.countryList.push(country);
           });
+          this.formField[12].options = this.countryList;
         });
+        // });
         this.spinner.hide();
       });
     });
@@ -154,6 +158,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
       this.wizardFormObj.address = true;
     }
     if (section == 'kyc-done') {
+      this.activeForm = section;
       this.KYCData = [];
       this.KYCData.push({
         action: 'ADD',
@@ -201,7 +206,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
     this.formField[index].options = cities;
   }
   isStepOne() {
-    // return false;
+    return false;
     if (
       this.registerForm.controls['mobileNumber'].valid &&
       this.registerForm.controls['emailId'].valid &&
@@ -221,7 +226,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
     }
   }
   isStepTwo() {
-    //return false;
+    return false;
     if (
       this.registerForm.controls['address1'].valid &&
       this.registerForm.controls['address2'].valid &&
@@ -298,7 +303,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
   }
   fileUrlChange(event: any) {
     //this.resetProfile();
-    this.mobile = '232323232323';
+    //this.mobile = '232323232323';
     if (event.target.files.length > 0 && this.mobile) {
       this.spinner.show();
       let fileUrl = event.target.files[0];
@@ -319,6 +324,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
     }
   }
   uploadKYCDoc(event: any) {
+    this.mobile = '232323232323';
     this.spinner.show();
     if (event.target.files.length > 0 && this.mobile && this.docTypeKYC) {
       let fileUrl = event.target.files[0];
@@ -458,7 +464,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
         this.spinner.hide();
         // const modalRef = this.modalSerivce.open(SuccessPopupComponent, { animation: false, backdrop: false });
         // modalRef.componentInstance.message = resData.message;
-        this.matDialog.open(SuccessPopupComponent, {
+        this.matDialog.open(SuccessPinComponent, {
           data: resData.message,
         });
         this.resetWizard();

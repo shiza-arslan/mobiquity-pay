@@ -56,17 +56,17 @@ export class ForgetPinComponent implements OnInit {
       (res: any) => {
         localStorage.setItem('serviceRequestId', res.serviceRequestId);
         if (res.status === 'PAUSED') {
-          this.service.loginService.generateBearer().subscribe((res: any) => {
-            localStorage.setItem('access_token', res.access_token);
-            // this.activeModal.dismiss();
-            this.closeModal();
-            this.spinner.hide();
-            // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
-            // modalRef.componentInstance.isForgotPassword = true;
-            this.matDialog.open(OtpComponent, {
-              data: true,
-            });
+          // this.service.loginService.generateBearer().subscribe((res: any) => {
+          // localStorage.setItem('access_token', res.access_token);
+          // this.activeModal.dismiss();
+          this.closeModal();
+          this.spinner.hide();
+          // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
+          // modalRef.componentInstance.isForgotPassword = true;
+          this.matDialog.open(OtpComponent, {
+            data: { isForgotPassword: true },
           });
+          //  });
 
           /* const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop:false});
           modalRef.componentInstance.isForgotPassword = true;*/

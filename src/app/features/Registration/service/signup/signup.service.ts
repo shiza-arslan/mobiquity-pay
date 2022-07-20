@@ -111,19 +111,18 @@ export class SignupService {
     // const body = new FormData();
     // const httpOptions = {
     //   headers: new HttpHeaders({
-    //     'Content-Type':
-    //       'multipart/x-www-form-urlencoded;boundary=----WebKitFormBoundary5ei6dMazusTAvZNB',
+    //     Accept: '*/*',
     //   }),
     // };
     // body.append('file', file, file.name);
     // return this.api.post(this.appUrl + this.apiUrlService.uploadFile(mobile, type), httpOptions);
-
     let body = new FormData();
-    body.append('file', file, file.name);
+    body.append('file', file);
     const token = localStorage.getItem('access_token');
     const httpOptions = {
       headers: new HttpHeaders({
         Accept: '*/*',
+        // 'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryPr0IbOJDCwRgjHMq',
         Authorization: `Bearer ${token}`,
       }),
     };
@@ -136,17 +135,46 @@ export class SignupService {
   }
 
   uploadFileKYC(file: any, mobile: any, type: any, docType: any) {
-    const body = new FormData();
+    // const body = new FormData();
+    // const token = localStorage.getItem('access_token');
+    // const httpOptions = {
+    //   headers: new HttpHeaders({
+    //     Accept: '*/*',
+    //     Authorization: `Bearer ${token}`,
+    //   }),
+    // };
+    // body.append('file', file, file.name);
+    // return this.api.post(
+    //   this.appUrl + `mobiquitypay/dms/v3/doc?uploadedBy=${mobile}&documentType=${type}&documentName=${docType}`,
+    //   body,
+    //   httpOptions,
+    // );
+    let body = new FormData();
+    body.append('file', file, file.name);
+    const token = localStorage.getItem('access_token');
     const httpOptions = {
       headers: new HttpHeaders({
         Accept: '*/*',
-        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${token}`,
       }),
     };
-    body.append('file', file, file.name);
-    return this.api.post(this.appUrl + this.apiUrlService.uploadFileKYC(mobile, type, docType), body, httpOptions);
+
+    return this.http.post(
+      this.appUrl + `mobiquitypay/dms/v3/doc?uploadedBy=${mobile}&documentType=${type}&documentName=${docType}`,
+      body,
+      httpOptions,
+    );
   }
   RegisterUser(payLoad: any) {
-    return this.api.post(this.appUrl + apiEndPoints.Signup.registerUser, payLoad);
+    const token = localStorage.getItem('access_token');
+    // console.log('token',token)
+    let httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        Accept: '*/*',
+        Authorization: `Bearer ${token}`,
+      }),
+    };
+    return this.http.post(this.appUrl + `mobiquitypay/v1/ums/user/self`, payLoad, httpOptions);
   }
 }

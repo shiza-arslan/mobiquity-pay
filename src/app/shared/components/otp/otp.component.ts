@@ -133,12 +133,12 @@ export class OtpComponent implements OnInit {
               // this.activeModal.close(true);
             } else {
               // this.activeModal.dismiss();
-              this.service.loginService.generateBearer().subscribe(async (res: any) => {
-                localStorage.setItem('access_token', res.access_token);
-                await this.service.loginService.loginSuccessfully();
+              // this.service.loginService.generateBearer().subscribe(async (res: any) => {
+              // localStorage.setItem('access_token', res.access_token);
+              await this.service.loginService.loginSuccessfully();
 
-                this.router.navigate(['/']);
-              });
+              this.router.navigate(['/']);
+              // });
             }
           }
         },
@@ -169,22 +169,22 @@ export class OtpComponent implements OnInit {
   }
   reSendOTP() {
     this.hasErrors = false;
-    this.service.loginService.generateBearer().subscribe(async (res: any) => {
-      localStorage.setItem('access_token', res.access_token);
-      this.service.loginService.resendOTP().subscribe(
-        async (data: any) => {
-          console.log('res resend', data);
-          this.hasErrors = true;
-          this.errorMessage = data.message;
-          this.timeLeft = 59;
-          this.startTimer();
-        },
-        (error: any) => {
-          this.hasErrors = true;
-          this.errorMessage = 'Something went wrong, please try again';
-        },
-      );
-    });
+    // this.service.loginService.generateBearer().subscribe(async (res: any) => {
+    //  localStorage.setItem('access_token', res.access_token);
+    this.service.loginService.resendOTP().subscribe(
+      async (data: any) => {
+        console.log('res resend', data);
+        this.hasErrors = true;
+        this.errorMessage = data.message;
+        this.timeLeft = 59;
+        this.startTimer();
+      },
+      (error: any) => {
+        this.hasErrors = true;
+        this.errorMessage = 'Something went wrong, please try again';
+      },
+    );
+    // });
   }
 
   startTimer() {

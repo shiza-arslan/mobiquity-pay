@@ -6,6 +6,7 @@
       <div
         (click)="displayNextSection('contacts')"
         class="register-progress flex flex-col flex-1 md:flex-row items-center text-center md:text-left cursor-pointer"
+        style="width: 145px"
       >
         <div
           class="rounded-full w-6 h-6 text-xs md:text-sm md:w-10 md:h-10 bg-progress flex justify-center text-white items-center"
@@ -77,7 +78,7 @@
   <!-- Left Section Ends  -->
 
   <!-- Center Content Starts  -->
-  <div class="md:w-10/12 border rounded-md shadow-sm shadow-gray-200 p-5 mx-2 mb-12">
+  <div class="md:w-10/12 border rounded-md shadow-sm shadow-gray-200 p-5 mx-2 mb-12" style="width: 48rem">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div *ngIf="activeForm === 'contacts'">
         <div class="p-3">
@@ -570,7 +571,7 @@
             </div>
             <div class="text-center w-full my-6">
               <button
-                [disabled]="isAddKYC()"
+                [disabled]="false"
                 (click)="displayNextSection('kyc-done')"
                 class="bg-login-btn-custom px-14 font-medium text-sm text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
                 >Add</button
@@ -687,7 +688,7 @@
                   ></path>
                 </svg>
               </div>
-              <div class="absolute top-[70px]">
+              <div class="absolute top-[70px]" style="position: absolute; top: 73px">
                 <p
                   class="text-xs text-wrong-otp font-medium my-2"
                   *ngIf="fc[formField[21].key].touched && fc[formField[21].key].invalid"
@@ -733,7 +734,7 @@
                   ></path>
                 </svg>
               </div>-->
-              <div class="absolute top-[70px]">
+              <div class="absolute top-[70px]" style="position: absolute; top: 73px">
                 <p
                   class="text-xs text-wrong-otp font-medium my-2"
                   *ngIf="fc[formField[22].key].touched && fc[formField[22].key].invalid"
