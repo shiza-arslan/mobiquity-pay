@@ -31,7 +31,7 @@ export class PreLoginSliderComponent implements OnInit {
       this.service.translateService.getLang().subscribe((lang: any) => {
         this.language = lang;
         this.getPreLoginData();
-        console.log('active lang slider', lang);
+        // console.log('active lang slider', lang);
       });
     });
     this.getPreLoginData();
@@ -40,7 +40,7 @@ export class PreLoginSliderComponent implements OnInit {
     this.service.translateService.language.subscribe((res: any) => {
       this.service.translateService.getLang().subscribe((lang: any) => {
         this.language = lang;
-        console.log('active lang pre login', lang);
+        // console.log('active lang pre login', lang);
         this.spinner.show();
         this.getPreLoginData();
       });
@@ -55,8 +55,8 @@ export class PreLoginSliderComponent implements OnInit {
 
       this.first_slider = this.preLoginData.bannersfirst.en;
       this.second_slider = this.preLoginData.bannerssecond.en;
-      console.log(this.first_slider);
-      console.log(this.second_slider);
+      // console.log(this.first_slider);
+      // console.log(this.second_slider);
       // this.slickModal.unslick();
       // this.slickModal2.unslick();
 

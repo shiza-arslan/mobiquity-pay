@@ -70,7 +70,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.language = 'en';
     this.service.signupService.getSelfRegistration('en').subscribe((res: any) => {
-      console.log('country', res);
+      // console.log('country', res);
     });
 
     this.spinner.show();
@@ -84,7 +84,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
         this.service.translateService.get().subscribe((data: any) => {
           this.translation = data.register;
         });
-        console.log('active lang', lang);
+
         this.getSignupJson();
       });
     });
@@ -93,14 +93,11 @@ export class SignupFormComponent implements OnInit, OnChanges {
   getSignupJson() {
     this.service.signupService.getsignupformData(this.language).subscribe((data: any) => {
       this.signupJsonData = data.payload.schema;
-      console.log('json', this.signupJsonData);
 
       this.service.signupService.getFormControls(this.signupJsonData).then((res: any) => {
-        // console.log(this.signupJsonData[0].label);
         this.formField = this.service.signupService.formFields;
         this.registerForm = this.service.signupService.formG;
         // this.formField[8].value = 'GEN_MAL';
-        console.log('formFields', this.formField);
 
         // this.service.loginService.generateBearer().subscribe((res: any) => {
         // localStorage.setItem('access_token', res.access_token);
@@ -124,7 +121,6 @@ export class SignupFormComponent implements OnInit, OnChanges {
   }
   ngOnChanges(changes: SimpleChanges): void {
     this.formFields = this.service.signupService.formFields;
-    console.log('formFields', this.formFields);
   }
 
   displayNextSection(section: string) {
@@ -181,7 +177,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
   }
   getStateByCountry(id: any, index: any) {
     this.countrySelected = this.countriesList.filter((item: { id: any }) => item.id == id);
-    console.log(this.countrySelected);
+
     let states: any = [];
     this.countrySelected[0].stateList.forEach((item: any) => {
       let state = {
@@ -206,7 +202,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
     this.formField[index].options = cities;
   }
   isStepOne() {
-    return false;
+    //return false;
     if (
       this.registerForm.controls['mobileNumber'].valid &&
       this.registerForm.controls['emailId'].valid &&
@@ -226,7 +222,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
     }
   }
   isStepTwo() {
-    return false;
+    //return false;
     if (
       this.registerForm.controls['address1'].valid &&
       this.registerForm.controls['address2'].valid &&
@@ -253,7 +249,6 @@ export class SignupFormComponent implements OnInit, OnChanges {
     }
   }
   isMobileAlreadyExist(mobile: any) {
-    // console.log(this.registerForm.controls['mobileNumber'].invalid , 'constroles');
     if (mobile) {
       this.hasError = false;
       this.errorMessage = '';
@@ -291,7 +286,6 @@ export class SignupFormComponent implements OnInit, OnChanges {
           data: { isRegUser: true },
         });
         dialogRef.afterClosed().subscribe((result) => {
-          console.log(`Dialog result: ${result}`); // Pizza!
           this.isMobValOTP = result;
         });
         // modalRef.componentInstance.isRegUser = true;
@@ -310,7 +304,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
       this.service.signupService.uploadFile(fileUrl, this.mobile, 'PROFILEPIC').subscribe((res: any) => {
         this.isProfile = true;
         this.registerForm.value.profilePhotoURI = res.payload.documentId;
-        console.log('profile', res.payload.documentId);
+
         this.profilePhotoURI = res.payload.documentId;
         this.spinner.hide();
       });
@@ -333,7 +327,6 @@ export class SignupFormComponent implements OnInit, OnChanges {
         this.registerForm.value.kycImageUrl = res.payload.documentId;
         this.kycImageUrl = res.payload.documentId;
         this.spinner.hide();
-        console.log('dowcument KYC', res.payload.documentId);
       });
     }
   }
@@ -347,7 +340,6 @@ export class SignupFormComponent implements OnInit, OnChanges {
         this.kycImageUrl = res.payload.documentId;
         // debugger;
         this.spinner.hide();
-        console.log('dowcument KYC', res.payload.documentId);
       });
     }
   }
@@ -413,8 +405,6 @@ export class SignupFormComponent implements OnInit, OnChanges {
     }
   }
   CreateProfile() {
-    console.log(this.registerForm.getRawValue());
-
     let payload = {
       payload: {
         profileDetails: environment.constants.profileDetails,

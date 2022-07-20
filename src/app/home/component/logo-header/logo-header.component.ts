@@ -62,7 +62,6 @@ export class LogoHeaderComponent implements OnInit {
       this.service.translateService.language.subscribe((res: any) => {
         this.service.translateService.get().subscribe((data: any) => {
           this.translation = data.header;
-          console.log(this.translation, 'translation');
         });
       });
     }

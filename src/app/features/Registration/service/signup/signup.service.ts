@@ -53,7 +53,7 @@ export class SignupService {
 
   getFormControls(inputs: any) {
     const $this = this;
-    const promise = new Promise(function (resolve, reject) {
+    const promise = new Promise(function (resolve, _reject) {
       resolve($this.createControls(inputs));
     });
     return promise;
@@ -167,7 +167,7 @@ export class SignupService {
   }
   RegisterUser(payLoad: any) {
     const token = localStorage.getItem('access_token');
-    // console.log('token',token)
+
     let httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

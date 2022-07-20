@@ -10,6 +10,17 @@ import { FormGroup } from '@angular/forms';
 export class RadioButtonGroupComponent implements OnInit {
   @Input() input: FormField<string> | any;
   @Input() form: FormGroup | any;
+  options = [
+    {
+      value: 'Male',
+    },
+    {
+      value: 'Female',
+    },
+    {
+      value: 'Other',
+    },
+  ];
   get f() {
     return this.form.controls;
   }

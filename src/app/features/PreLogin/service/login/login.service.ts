@@ -68,8 +68,8 @@ export class LoginService {
 
           this.api.get(this.baseUrl + apiEndPoints.login.selfAccountUrl).subscribe((res: any) => {
             this.user.next(res);
-            console.log('auth profile', this.user);
-            console.log(res);
+            // console.log('auth profile', this.user);
+            // console.log(res);
 
             this.isLoggedIn.next(true);
             //post obj for balance inquiry
@@ -89,8 +89,8 @@ export class LoginService {
             };
 
             this.api.post(this.baseUrl + apiEndPoints.login.walletBallanceUrl, balanceObj).subscribe((res: any) => {
-              console.log('balance res');
-              console.log(res);
+              // console.log('balance res');
+              // console.log(res);
               this.walletBalance.next(res);
             });
             localStorage.setItem('isLoggedIn', 'true');

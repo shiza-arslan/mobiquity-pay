@@ -30,7 +30,6 @@ export class NavigationComponent implements OnInit {
           this.translation = data.home;
           this.navigation = this.config.Navigation;
         });
-        console.log('active lang', lang);
       });
     });
   }

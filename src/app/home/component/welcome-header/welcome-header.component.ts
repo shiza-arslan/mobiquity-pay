@@ -61,7 +61,6 @@ export class WelcomeHeaderComponent implements OnInit {
       this.service.translateService.language.subscribe((res: any) => {
         this.service.translateService.get().subscribe((data: any) => {
           this.translation = data.header;
-          console.log(this.translation, 'translation');
         });
       });
     }
@@ -70,7 +69,6 @@ export class WelcomeHeaderComponent implements OnInit {
     this.service.translateService.language.subscribe((res: any) => {
       this.service.translateService.getLang().subscribe((lang: any) => {
         this.selectedLanguage = lang;
-        console.log('active lang pre login', lang);
       });
     });
   }
