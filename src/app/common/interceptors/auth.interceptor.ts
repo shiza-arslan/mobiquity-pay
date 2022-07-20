@@ -29,15 +29,26 @@ export class AuthInterceptor implements HttpInterceptor {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const accessToken = localStorage.getItem('mobiquity.pay.access_token'); // replace the string with injectables.
+    //   const updateReq = req.clone({
+    //     headers: req.headers.append('interceptor-header', 'intercepted'),
+    //   });
+
+    //   return next.handle(updateReq);
+    // }
+    const accessToken = localStorage.getItem('access_token'); // replace the string with injectables.
+    console.log(accessToken, 'intecpe');
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // debugger;
     let authorizedRequest: HttpRequest<any>;
     if (accessToken) {
       authorizedRequest = req.clone({ headers: req.headers.set('Authorization', `Bearer ${accessToken}`) });
     } else {
       authorizedRequest = req;
     }
+    // if (req.headers.has('content-type')) {
+    //   req = req.clone({ headers: req.headers.delete('Content-Type', 'application/json') });
+    // }
 
     return next.handle(authorizedRequest).pipe(
       catchError((errorResponse: HttpErrorResponse) => {
