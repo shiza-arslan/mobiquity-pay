@@ -37,17 +37,17 @@ export class LogoHeaderComponent implements OnInit {
   constructor(private matDialog: MatDialog, private service: UowService, private route: Router) {}
 
   ngOnInit(): void {
-    localStorage.setItem('language', this.selectedLanguage);
-    if (localStorage.getItem('language')) {
-      this.selectedLanguage = localStorage.getItem('language');
+    sessionStorage.setItem('language', this.selectedLanguage);
+    if (sessionStorage.getItem('language')) {
+      this.selectedLanguage = sessionStorage.getItem('language');
     }
 
     this.service.translateService.getLang().subscribe((lang: any) => {
       this.selectedLanguage = lang;
     });
 
-    if (localStorage.getItem('isLoggedIn')) {
-      this.isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (sessionStorage.getItem('isLoggedIn')) {
+      this.isLoggedIn = sessionStorage.getItem('isLoggedIn');
     } else {
       this.service.loginService.getIsLoggedIn().subscribe((data: any) => {
         this.isLoggedIn = data;
@@ -69,7 +69,7 @@ export class LogoHeaderComponent implements OnInit {
   changeLanguage(lang: string) {
     this.service.translateService.setLang(lang);
     this.selectedLanguage = lang;
-    localStorage.setItem('language', lang);
+    sessionStorage.setItem('language', lang);
   }
   routeRegister() {
     this.route.navigate(['/signup']);
@@ -79,13 +79,13 @@ export class LogoHeaderComponent implements OnInit {
     this.matDialog.open(LoginComponent);
   }
   logOut() {
-    localStorage.removeItem('isLoggedIn');
+    sessionStorage.removeItem('isLoggedIn');
     this.isLoggedIn = false;
     this.userData = null;
     this.BalanceInquiry = null;
   }
   isUserLoggedIn() {
-    if (localStorage.getItem('isLoggedIn')) {
+    if (sessionStorage.getItem('isLoggedIn')) {
       //to do
     } else {
       this.matDialog.open(LoginComponent);

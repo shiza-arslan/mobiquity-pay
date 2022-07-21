@@ -20,8 +20,8 @@ export class NavigationComponent implements OnInit {
   constructor(private service: UowService, private matDialog: MatDialog) {}
   ngOnInit(): void {
     this.language = 'en';
-    if (localStorage.getItem('language')) {
-      this.language = localStorage.getItem('language');
+    if (sessionStorage.getItem('language')) {
+      this.language = sessionStorage.getItem('language');
     }
     this.service.translateService.language.subscribe((res: any) => {
       this.service.translateService.getLang().subscribe((lang: any) => {
@@ -34,7 +34,7 @@ export class NavigationComponent implements OnInit {
     });
   }
   isUserLoggedIn() {
-    if (localStorage.getItem('isLoggedIn')) {
+    if (sessionStorage.getItem('isLoggedIn')) {
       //to do
     } else {
       // const modalRef = this.modalSerivce.open(LoginComponent);

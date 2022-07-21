@@ -33,9 +33,9 @@ export class ChangePinComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedLanguage = 'en';
-    this.mobile = localStorage.getItem('mobile');
-    if (localStorage.getItem('language')) {
-      this.selectedLanguage = localStorage.getItem('language');
+    this.mobile = sessionStorage.getItem('mobile');
+    if (sessionStorage.getItem('language')) {
+      this.selectedLanguage = sessionStorage.getItem('language');
     }
     this.service.translateService.language.subscribe((res: any) => {
       this.service.translateService.get().subscribe((data: any) => {
@@ -64,7 +64,7 @@ export class ChangePinComponent implements OnInit {
     if (this.resetForm.invalid || this.hasErrors) return;
     if (this.isForgotPassword) {
       this.service.loginService.generateBearer().subscribe(async (res: any) => {
-        localStorage.setItem('access_token', res.access_token);
+        sessionStorage.setItem('access_token', res.access_token);
         this.service.loginService.resetPIN({ ...this.resetForm.value, language: this.selectedLanguage }).subscribe(
           async (res: any) => {
             // this.activeModal.dismiss();

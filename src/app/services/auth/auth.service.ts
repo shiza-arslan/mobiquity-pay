@@ -14,8 +14,22 @@ export class AuthService {
         Authorization: 'Basic Q29yZVdlYjphZGF5ZmNTV2NJ',
       }),
     };
-    const formData = new FormData();
-    formData.append('grant_type', 'client_credentials');
-    return this.http.post(this.baseUrl + 'mobiquitypay/oauth/token', formData, httpOptions);
+    const promise = new Promise<void>((resolve, reject) => {
+      const formData = new FormData();
+      formData.append('grant_type', 'client_credentials');
+      this.http.post(this.baseUrl + 'mobiquitypay/oauth/token', formData, httpOptions).subscribe({
+        next: (res: any) => {
+          sessionStorage.setItem('access_token', res.access_token);
+          resolve();
+        },
+        error: (err: any) => {
+          reject(err);
+        },
+        complete: () => {
+          console.log('complete');
+        },
+      });
+    });
+    return promise;
   }
 }

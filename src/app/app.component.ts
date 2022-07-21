@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { UowService } from '@mobiquity/services';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,27 @@ import { UowService } from '@mobiquity/services';
 export class AppComponent {
   selectedLanguage: any = 'en';
   textDir = 'ltr';
-  constructor(private Service: UowService) {}
+  userActvity: any;
+  userInactive: Subject<any> = new Subject();
+
+  constructor(private Service: UowService) {
+    this.setTimeout();
+    this.userInactive.subscribe(() => {
+      sessionStorage.removeItem('access_token');
+      alert('your access_token is remove from session');
+    });
+  }
+  setTimeout() {
+    this.userActvity = setTimeout(() => this.userInactive.next(undefined), 6000);
+  }
+
+  @HostListener('window :mousemove') refreshUserState() {
+    clearTimeout(this.userActvity);
+    this.setTimeout();
+  }
 
   ngOnInit() {
-    this.selectedLanguage = localStorage.getItem('language');
+    this.selectedLanguage = sessionStorage.getItem('language');
     this.Service.translateService.getLang().subscribe((lang: any) => {
       this.selectedLanguage = lang;
       if (this.selectedLanguage === 'ar') {

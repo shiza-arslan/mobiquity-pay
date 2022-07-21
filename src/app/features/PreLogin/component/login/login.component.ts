@@ -55,8 +55,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     this.selectedLanguage = 'en';
 
-    if (localStorage.getItem('language')) {
-      this.selectedLanguage = localStorage.getItem('language');
+    if (sessionStorage.getItem('language')) {
+      this.selectedLanguage = sessionStorage.getItem('language');
     }
     this.service.translateService.language.subscribe((res: any) => {
       this.service.translateService.get().subscribe((data: any) => {
@@ -81,21 +81,21 @@ export class LoginComponent implements OnInit {
   changeLanguage(lang: string) {
     this.service.translateService.setLang(lang);
     this.selectedLanguage = lang;
-    localStorage.setItem('language', lang);
+    sessionStorage.setItem('language', lang);
   }
   login() {
     this.spinner.show();
-    localStorage.setItem('mobile', this.loginForm.value.mobile);
-    localStorage.setItem('mpin', this.loginForm.value.pin);
+    sessionStorage.setItem('mobile', this.loginForm.value.mobile);
+    sessionStorage.setItem('mpin', this.loginForm.value.pin);
     this.service.loginService
       .login({ ...this.loginForm.value, language: this.selectedLanguage })
       .pipe(map((res1: any) => res1))
       .subscribe(
         async (res: any) => {
           if (res.status == 'PAUSED') {
-            localStorage.setItem('serviceRequestId', res.serviceRequestId);
+            sessionStorage.setItem('serviceRequestId', res.serviceRequestId);
             this.service.loginService.generateBearer().subscribe((res: any) => {
-              localStorage.setItem('access_token', res.access_token);
+              sessionStorage.setItem('access_token', res.access_token);
 
               // this.activeModal.dismiss();
               this.closeModal();
@@ -109,7 +109,7 @@ export class LoginComponent implements OnInit {
             });
             //this.router.navigate(['/otp']);
           } else if (res.status == 'SUCCEEDED') {
-            localStorage.setItem('access_token', res.token.access_token);
+            sessionStorage.setItem('access_token', res.token.access_token);
             await this.service.loginService.loginSuccessfully();
             this.spinner.hide();
             // this.activeModal.dismiss();
@@ -128,7 +128,7 @@ export class LoginComponent implements OnInit {
             });
           } else if (error.status === 'FAILED' && error.errors[0].code === 'FTL01') {
             this.service.loginService.generateBearer().subscribe((res: any) => {
-              localStorage.setItem('access_token', res.access_token);
+              sessionStorage.setItem('access_token', res.access_token);
             });
             this.closeModal();
             // this.activeModal.dismiss();

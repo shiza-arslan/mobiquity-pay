@@ -56,7 +56,7 @@ export class LoginService {
   loginSuccessfully() {
     this.api.get(this.baseUrl + apiEndPoints.login.authorizationProfileUrl).subscribe((res: any) => {
       this.authorizationProfile.next(res);
-      const mobile = localStorage.getItem('mobile');
+      const mobile = sessionStorage.getItem('mobile');
 
       this.api
         .get(
@@ -77,12 +77,12 @@ export class LoginService {
               bearerCode: 'MOBILE',
               currency: '',
               initiator: 'transactor',
-              language: localStorage.getItem('language'),
+              language: sessionStorage.getItem('language'),
               openingBalanceReq: res.userDetails.userStatus,
               transactor: {
                 idType: 'mobileNumber',
                 idValue: res.userDetails.mobileNumber,
-                mpin: localStorage.getItem('mpin'),
+                mpin: sessionStorage.getItem('mpin'),
                 pin: '',
                 productId: '',
               },
@@ -93,8 +93,8 @@ export class LoginService {
               // console.log(res);
               this.walletBalance.next(res);
             });
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('userObj', res);
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('userObj', res);
           });
         });
     });
@@ -117,7 +117,7 @@ export class LoginService {
   resetPIN(data: any) {
     const postData = {
       confirmedAuthenticationValue: data.confirmPin,
-      resumeServiceRequestId: localStorage.getItem('serviceRequestId'),
+      resumeServiceRequestId: sessionStorage.getItem('serviceRequestId'),
       language: data.language,
       newAuthenticationValue: data.pin,
     };
@@ -157,7 +157,7 @@ export class LoginService {
   }
   resendOTP() {
     const body = {
-      resumeServiceRequestId: localStorage.getItem('serviceRequestId'),
+      resumeServiceRequestId: sessionStorage.getItem('serviceRequestId'),
     };
 
     return this.api.post(this.baseUrl + apiEndPoints.login.resendOTPUrl, body);

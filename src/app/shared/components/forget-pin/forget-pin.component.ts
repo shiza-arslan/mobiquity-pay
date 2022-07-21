@@ -31,8 +31,8 @@ export class ForgetPinComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedLanguage = 'en';
-    if (localStorage.getItem('language')) {
-      this.selectedLanguage = localStorage.getItem('language');
+    if (sessionStorage.getItem('language')) {
+      this.selectedLanguage = sessionStorage.getItem('language');
     }
     this.service.translateService.language.subscribe((res: any) => {
       this.service.translateService.get().subscribe((data: any) => {
@@ -51,13 +51,13 @@ export class ForgetPinComponent implements OnInit {
     this.spinner.show();
     console.log(this.FGPin.value.mobile);
     if (this.FGPin.invalid) return;
-    localStorage.setItem('mobile', this.FGPin.value.mobile);
+    sessionStorage.setItem('mobile', this.FGPin.value.mobile);
     this.service.loginService.forgetPin({ mobile: this.FGPin.value.mobile, language: this.selectedLanguage }).subscribe(
       (res: any) => {
-        localStorage.setItem('serviceRequestId', res.serviceRequestId);
+        sessionStorage.setItem('serviceRequestId', res.serviceRequestId);
         if (res.status === 'PAUSED') {
           // this.service.loginService.generateBearer().subscribe((res: any) => {
-          // localStorage.setItem('access_token', res.access_token);
+          // sessionStorage.setItem('access_token', res.access_token);
           // this.activeModal.dismiss();
           this.closeModal();
           this.spinner.hide();
