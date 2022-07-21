@@ -10,8 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FeatureModule } from '../app/features/feature.module';
 import { InterceptorModule } from './common/interceptors/interceptor.module';
 import { HomeModule } from './home/home.module';
-import { MomentModule } from 'angular2-moment';
-import { NgIdleKeepaliveModule } from '@ng-idle/keepalive';
+
 /**
  * AoT requires an exported function for factories
  *
@@ -30,8 +29,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HomeModule,
     FeatureModule,
     AppRoutingModule,
-    NgIdleKeepaliveModule.forRoot(),
-    MomentModule,
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
