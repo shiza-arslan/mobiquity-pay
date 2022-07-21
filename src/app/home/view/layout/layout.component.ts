@@ -3,6 +3,7 @@ import { async } from '@angular/core/testing';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { UowService } from '@mobiquity/services';
+import { getWebConfig } from '@mobiquity/webConfig';
 @Component({
   selector: 'mobiquity-pay-layout',
   templateUrl: './layout.component.html',
@@ -17,6 +18,9 @@ export class LayoutComponent implements OnInit {
   showFooter: boolean | undefined;
   showNavigation: boolean | undefined;
   isTokenRefresh: boolean = false;
+  tokenExpiryTime: number | undefined;
+  refreshTokenTime: number | undefined;
+  config = getWebConfig();
   constructor(private router: Router, private services: UowService) {
     this.getCurrentRoute();
   }
@@ -47,13 +51,14 @@ export class LayoutComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    this.services.authService.generateBearer().then(() => {
+    this.services.authService.getJWTBearerToken().then(() => {
+      this.tokenExpiryTime = Number(sessionStorage.getItem('token_expiry_time'));
+      this.refreshTokenTime = this.tokenExpiryTime - this.config.screenSettings.AuthConfig.refreshTokenBrforeExpiry;
       sessionStorage.setItem('isTokenRefresh', this.isTokenRefresh == false ? 'false' : 'true');
       setTimeout(() => {
         this.isTokenRefresh = true;
-        this.services.authService.generateBearer();
-        alert('your token is generated');
-      }, 12000);
+        this.services.authService.getJWTBearerToken();
+      }, this.refreshTokenTime * 1000);
     });
   }
   ngOnChange() {}

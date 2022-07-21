@@ -28,7 +28,7 @@ export class NavigationComponent implements OnInit {
         this.language = lang;
         this.service.translateService.get().subscribe((data: any) => {
           this.translation = data.home;
-          this.navigation = this.config.screenSettings.Navigation;
+          this.navigation = this.config.screenSettings.NavigationConfig.Navigation;
         });
       });
     });
