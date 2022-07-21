@@ -8,10 +8,10 @@ if (environment.production) {
   enableProdMode();
 }
 
-fetch('/assets/navigation.json')
+fetch('/assets/web.config.json')
   .then((resp) => resp.json())
-  .then((navigationConfig) => {
-    window['navigationConfig' as any] = navigationConfig;
+  .then((config) => {
+    window['config' as any] = config;
     platformBrowserDynamic()
       .bootstrapModule(AppModule)
       .catch((err) => console.error(err));
