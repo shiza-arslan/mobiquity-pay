@@ -1,0 +1,17 @@
+<div [formGroup]="form" class="form-group">
+  <label class="text-dropdown-custom text-xs font-medium mb-2" for="">{{ input?.label }}</label>
+  <select
+    name="Country"
+    id=""
+    class="p-3 text-xs border rounded-md bg-input-custom outline-none w-full"
+    [formControlName]="input?.key"
+    [id]="input?.key"
+  >
+    <option [value]="opt.key" *ngFor="let opt of input.options; let i = index"> {{ opt.value }}</option>
+  </select>
+  <!-- <div *ngIf="f[input.key].touched && f[ input.key].invalid" class="alert alert-danger">
+    <div *ngIf="f[input.key].errors && f[input.key].errors['required']">{{input.label}} is required.</div>
+
+
+  </div>-->
+</div>

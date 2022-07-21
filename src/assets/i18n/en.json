@@ -1,6 +1,6 @@
 {
   "forgotPin": {
-    "title": "Pin Reset",
+    "title": "PIN Reset",
     "tagline": "Enter the mobile number associated with the account",
     "fields": [
       {
@@ -46,6 +46,56 @@
     "Utility_Bill_Payments_Description": "When it comes to utility bill payments, mobiquitypay serves all your needs and provides exceptional rewards and cashback offers.",
     "Other_Financial_Services_Title": "Other Financial Services- Send Money, Recieve Money, Pay Merchant",
     "Other_Financial_Services_Description": "When it comes to other financial services, mobiquitypay serves all your needs and provides exceptional rewards and cashback offers."
+  },
+  "footer": [
+    {
+      "Popular_services": "Popular services",
+      "Add_money": "Add money",
+      "Send_money": "Send money",
+      "Transfer_to_bank": "Transfer to bank"
+    },
+    {
+      "Other_sevices": "Other sevices",
+      "Pay_merchant": "Pay merchant",
+      "Recharge": "Recharge",
+      "Electricity_bill": "Electricity bill",
+      "Mobile_postpaid": "Mobile postpaid",
+      "Water_bill": "Water bill",
+      "Withdraw_cash": "Withdraw cash",
+      "Request_money": "Request money"
+    },
+    {
+      "Company": "Company",
+      "About_us": "About us",
+      "Customer_support": "Customer support",
+      "Buisness_Query": "Buisness Query"
+    },
+    {
+      "Legal": "Legal",
+      "Privacy_policy": "Privacy policy",
+      "Terms_and_Conditions": "Terms and Conditions",
+      "Cookie_policy": "Cookie policy"
+    },
+    {
+      "Locate_us": "Locate us",
+      "Agent_Merchant_locator": "Agent/Merchant locator"
+    },
+    {
+      "Download_our_app": "Download our app"
+    },
+    {
+      "All_Rights_Reserved": "2022 Mobiquity Pay. All Rights Reserved."
+    }
+  ],
+  "header": {
+    "btn_register": "Register",
+    "btn_login": "Login",
+    "Welcome": "Welcome!",
+    "Guest": "Guest",
+    "View_Wallets": "View Wallets",
+    "Pending_Transactions": "Pending Transactions",
+    "View_History": "View History",
+    "Wallet_balance": "Wallet balance"
   },
   "login": {
     "title": "Login via mobile number",

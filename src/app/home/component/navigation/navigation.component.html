@@ -1,0 +1,21 @@
+<div class="container px-3 md:px-0 mx-auto my-6">
+  <div class="flex flex-wrap">
+    <div
+      *ngFor="let button of navigation"
+      (click)="isUserLoggedIn()"
+      class="w-1/4 md:w-36 md:h-12 border-0 md:border border-custom-border-gray rounded-md flex justify-center md:justify-start flex-col md:flex-row items-center px-4 md:mr-4 mb-4 cursor-pointer hover:border-custom-desc hover:text-custom-desc do-many"
+    >
+      <div
+        [innerHTML]="button.icon | safeHtml"
+        class="md:border-0 border border-custom-border-gray p-4 md:p-0 rounded flex-none"
+      >
+      </div>
+      <div class="grow">
+        <h6 class="text-center md:text-left mt-3 md:mt-0 text-xs md:ml-3 text-tag-custom font-medium">
+          {{this.translation?.[button.label1]}}<br />
+          {{this.translation?.[button.label2]}}
+        </h6>
+      </div>
+    </div>
+  </div>
+</div>

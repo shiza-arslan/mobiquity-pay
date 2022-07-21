@@ -23,15 +23,18 @@
       "dom"
     ],
     "paths": {
-      "@mobiquity/utils": ["src/app/utilities/index.ts"],
+      "@mobiquity/utils": ["src/app/util/index.ts"],
       "@mobiquity/api": ["src/app/data-access/index.ts"],
-      "@mobiquity/core": ["src/app/core/index.ts"]
+      "@mobiquity/common": ["src/app/common/index.ts"],
+      "@mobiquity/services":["src/app/services/index.ts"],
+      "@mobiquity/webConfig":["src/app/util/index"],
+      "@mobiquity/PipeModule":["src/app/common/index"],
     }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": true
+    "strictTemplates": false
   },
 }

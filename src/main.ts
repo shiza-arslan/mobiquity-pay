@@ -8,6 +8,11 @@ if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch((err) => console.error(err));
+fetch('/assets/web.config.json')
+  .then((resp) => resp.json())
+  .then((config) => {
+    window['config' as any] = config;
+    platformBrowserDynamic()
+      .bootstrapModule(AppModule)
+      .catch((err) => console.error(err));
+  });

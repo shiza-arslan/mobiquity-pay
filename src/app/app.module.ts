@@ -2,19 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { StoreModule } from '@ngrx/store';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
-import { routerReducer, StoreRouterConnectingModule } from '@ngrx/router-store';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { CustomSerializer } from '@mobiquity/utils';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CoreModule } from '@mobiquity/core';
-
+import { AppComponent } from '../app/app.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { FeatureModule } from '../app/features/feature.module';
+import { InterceptorModule } from './common/interceptors/interceptor.module';
+import { HomeModule } from './home/home.module';
 /**
  * AoT requires an exported function for factories
  *
@@ -29,9 +24,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpClientModule,
+    InterceptorModule,
+    HomeModule,
+    FeatureModule,
     AppRoutingModule,
-    CoreModule.forRoot(),
     TranslateModule.forRoot({
       defaultLanguage: 'en',
       loader: {
@@ -40,37 +36,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
         deps: [HttpClient],
       },
     }),
-    StoreModule.forRoot(
-      {
-        router: routerReducer,
-      },
-      {
-        metaReducers: !environment.production ? [] : [],
-        runtimeChecks: {
-          strictStateSerializability: true,
-          strictActionSerializability: true,
-          strictActionWithinNgZone: true,
-          strictActionTypeUniqueness: true,
-        },
-      },
-    ),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
-    EffectsModule.forRoot([]),
-    StoreRouterConnectingModule.forRoot({
-      serializer: CustomSerializer,
-    }),
-    NgbModule,
+    MatDialogModule,
   ],
-  providers: [
-    {
-      provide: 'API_BASE_URL',
-      useValue: environment.apiUrl,
-    },
-    {
-      provide: 'STORAGE_PREFIX',
-      useValue: 'mobiquity.pay',
-    },
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

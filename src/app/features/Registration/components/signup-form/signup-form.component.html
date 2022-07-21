@@ -1,0 +1,762 @@
+<!-- <mobiquity-pay-signup-header></mobiquity-pay-signup-header> -->
+<div class="container mx-auto px-3 md:px-0 flex flex-col md:flex-row">
+  <!-- Left Section Starts -->
+  <div class="md:w-2/12 mb-4 nav-adjustment">
+    <div class="main-progress flex flex-row justify-evenly md:flex-col">
+      <div
+        (click)="displayNextSection('contacts')"
+        class="register-progress flex flex-col flex-1 md:flex-row items-center text-center md:text-left cursor-pointer"
+        style="width: 145px"
+      >
+        <div
+          class="rounded-full w-6 h-6 text-xs md:text-sm md:w-10 md:h-10 bg-progress flex justify-center text-white items-center"
+        >
+          1
+        </div>
+        <p class="md:ml-2.5 text-xs font-bold" [innerHTML]="this.signupJsonData[0]?.label">
+          <!-- Contact & <br />Personal details-->
+        </p>
+      </div>
+      <div
+        (click)="displayNextSection('address')"
+        class="register-progress flex flex-col flex-1 md:flex-row items-center text-center cursor-pointer"
+      >
+        <div
+          class="rounded-full w-6 h-6 md:w-10 md:h-10 text-xs md:text-sm flex justify-center items-center"
+          [ngClass]="wizardFormObj.address ? 'bg-progress text-white' : 'bg-white text-gray-400 border border-gray-400'"
+        >
+          2
+        </div>
+        <p
+          class="md:ml-2.5 text-xs"
+          [innerHTML]="this.signupJsonData[1]?.label"
+          [ngClass]="wizardFormObj.address ? 'font-bold' : 'text-gray-400'"
+        >
+          <!-- Address<br />Details-->
+          <!--  {{this.signupJsonData[1].label}}-->
+        </p>
+      </div>
+      <div
+        (click)="displayNextSection('kyc')"
+        class="register-progress flex flex-col flex-1 md:flex-row items-center text-center cursor-pointer"
+      >
+        <div
+          class="rounded-full w-6 h-6 md:w-10 md:h-10 text-xs md:text-sm flex justify-center items-center"
+          [ngClass]="wizardFormObj.kyc ? 'bg-progress text-white' : 'bg-white text-gray-400 border border-gray-400'"
+        >
+          3
+        </div>
+        <p
+          [innerHTML]="this.signupJsonData[2]?.label"
+          class="md:ml-2.5 text-xs"
+          [ngClass]="wizardFormObj.kyc ? 'font-bold' : 'text-gray-400'"
+        >
+          <!-- KYC<br />Details-->
+          <!--  {{this.signupJsonData[2].label}}-->
+        </p>
+      </div>
+      <div
+        (click)="displayNextSection('pin')"
+        class="register-progress flex flex-col flex-1 md:flex-row items-center text-center cursor-pointer"
+      >
+        <div
+          class="rounded-full w-6 h-6 md:w-10 md:h-10 text-xs md:text-sm flex justify-center items-center"
+          [ngClass]="wizardFormObj.pin ? 'bg-progress text-white' : 'bg-white text-gray-400 border border-gray-400'"
+        >
+          4
+        </div>
+        <p
+          [innerHTML]="this.signupJsonData[3]?.label"
+          class="md:ml-2.5 text-xs"
+          [ngClass]="wizardFormObj.pin ? 'font-bold' : 'text-gray-400'"
+        >
+          <!-- Set<br />PIN--><!-- {{this.signupJsonData[3].label}}-->
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- Left Section Ends  -->
+
+  <!-- Center Content Starts  -->
+  <div class="md:w-10/12 border rounded-md shadow-sm shadow-gray-200 p-5 mx-2 mb-12" style="width: 48rem">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div *ngIf="activeForm === 'contacts'">
+        <div class="p-3">
+          <h4 class="text-base font-bold text-dropdown-custom"> {{ signupJsonData[0]['sections'][0].label }}</h4>
+        </div>
+        <div class="flex flex-wrap">
+          <div class="flex flex-col p-3 w-full md:w-1/2 relative">
+            <mobiquity-pay-input-box
+              mobiquityNumberOnly
+              [input]="formField[0]"
+              [form]="registerForm"
+              (focusout)="isMobileAlreadyExist(registerForm.value.mobileNumber)"
+            ></mobiquity-pay-input-box>
+
+            <div
+              class="absolute bottom-[25px] right-[29px] cursor-pointer"
+              *ngIf="!isMobValOTP && isMobValUnique"
+              (click)="generateOTP()"
+            >
+              <p class="text-small text-wrong-otp font-medium">Verify</p>
+            </div>
+            <div class="absolute bottom-[25px] right-[29px]" *ngIf="!isMobValUnique && mobile">
+              <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7.37727 0C3.55191 0 0.447266 3.10464 0.447266 6.93C0.447266 10.7554 3.55191 13.86 7.37727 13.86C11.2026 13.86 14.3073 10.7554 14.3073 6.93C14.3073 3.10464 11.2026 0 7.37727 0ZM7.37727 7.623C6.99612 7.623 6.68427 7.31115 6.68427 6.93V4.158C6.68427 3.77685 6.99612 3.465 7.37727 3.465C7.75842 3.465 8.07027 3.77685 8.07027 4.158V6.93C8.07027 7.31115 7.75842 7.623 7.37727 7.623ZM8.07027 10.395H6.68427V9.009H8.07027V10.395Z"
+                  fill="#FA5A53"
+                />
+              </svg>
+            </div>
+            <div class="absolute bottom-[25px] right-[29px]" *ngIf="isMobValOTP">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.447266 7.22852C0.447266 5.372 1.18476 3.59152 2.49752 2.27877C3.81027 0.966013 5.59075 0.228516 7.44727 0.228516C9.30378 0.228516 11.0843 0.966013 12.397 2.27877C13.7098 3.59152 14.4473 5.372 14.4473 7.22852C14.4473 9.08503 13.7098 10.8655 12.397 12.1783C11.0843 13.491 9.30378 14.2285 7.44727 14.2285C5.59075 14.2285 3.81027 13.491 2.49752 12.1783C1.18476 10.8655 0.447266 9.08503 0.447266 7.22852H0.447266ZM7.0478 10.2245L11.0779 5.18638L10.3499 4.60398L6.9134 8.89825L4.47927 6.87012L3.88193 7.58692L7.0478 10.2254V10.2245Z"
+                  fill="#28C064"
+                />
+              </svg>
+            </div>
+            <div class="absolute top-[70px] left-[20px]" style="position: absolute; top: 72px">
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[0].key].touched && fc[formField[0].key].invalid"
+              >
+                {{ formField[0].validations }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2 relative">
+            <mobiquity-pay-input-box
+              [input]="formField[1]"
+              [form]="registerForm"
+              (focusout)="isEmailAlreadyExist(registerForm.value.emailId)"
+            ></mobiquity-pay-input-box>
+            <div class="absolute bottom-[25px] right-[29px]" *ngIf="!isEmailUnique && email">
+              <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7.37727 0C3.55191 0 0.447266 3.10464 0.447266 6.93C0.447266 10.7554 3.55191 13.86 7.37727 13.86C11.2026 13.86 14.3073 10.7554 14.3073 6.93C14.3073 3.10464 11.2026 0 7.37727 0ZM7.37727 7.623C6.99612 7.623 6.68427 7.31115 6.68427 6.93V4.158C6.68427 3.77685 6.99612 3.465 7.37727 3.465C7.75842 3.465 8.07027 3.77685 8.07027 4.158V6.93C8.07027 7.31115 7.75842 7.623 7.37727 7.623ZM8.07027 10.395H6.68427V9.009H8.07027V10.395Z"
+                  fill="#FA5A53"
+                />
+              </svg>
+            </div>
+            <div class="absolute bottom-[25px] right-[29px]" *ngIf="isEmailUnique">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.447266 7.22852C0.447266 5.372 1.18476 3.59152 2.49752 2.27877C3.81027 0.966013 5.59075 0.228516 7.44727 0.228516C9.30378 0.228516 11.0843 0.966013 12.397 2.27877C13.7098 3.59152 14.4473 5.372 14.4473 7.22852C14.4473 9.08503 13.7098 10.8655 12.397 12.1783C11.0843 13.491 9.30378 14.2285 7.44727 14.2285C5.59075 14.2285 3.81027 13.491 2.49752 12.1783C1.18476 10.8655 0.447266 9.08503 0.447266 7.22852H0.447266ZM7.0478 10.2245L11.0779 5.18638L10.3499 4.60398L6.9134 8.89825L4.47927 6.87012L3.88193 7.58692L7.0478 10.2254V10.2245Z"
+                  fill="#28C064"
+                />
+              </svg>
+            </div>
+
+            <div class="absolute top-[70px] left-[20px]" style="position: absolute; top: 72px">
+              <p class="text-xs text-wrong-otp font-medium my-2" *ngIf="hasErrorEmail">{{ errorMessage }}</p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2 relative">
+            <mobiquity-pay-input-box
+              [input]="formField[2]"
+              [form]="registerForm"
+              (focusout)="validateReferralCode(registerForm.value.referralCode)"
+            ></mobiquity-pay-input-box>
+            <div class="absolute bottom-[25px] right-[29px]" *ngIf="isrefCode">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.447266 7.22852C0.447266 5.372 1.18476 3.59152 2.49752 2.27877C3.81027 0.966013 5.59075 0.228516 7.44727 0.228516C9.30378 0.228516 11.0843 0.966013 12.397 2.27877C13.7098 3.59152 14.4473 5.372 14.4473 7.22852C14.4473 9.08503 13.7098 10.8655 12.397 12.1783C11.0843 13.491 9.30378 14.2285 7.44727 14.2285C5.59075 14.2285 3.81027 13.491 2.49752 12.1783C1.18476 10.8655 0.447266 9.08503 0.447266 7.22852H0.447266ZM7.0478 10.2245L11.0779 5.18638L10.3499 4.60398L6.9134 8.89825L4.47927 6.87012L3.88193 7.58692L7.0478 10.2254V10.2245Z"
+                  fill="#28C064"
+                />
+              </svg>
+            </div>
+            <div class="absolute bottom-[25px] right-[29px]" *ngIf="!isrefCode && refCode">
+              <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7.37727 0C3.55191 0 0.447266 3.10464 0.447266 6.93C0.447266 10.7554 3.55191 13.86 7.37727 13.86C11.2026 13.86 14.3073 10.7554 14.3073 6.93C14.3073 3.10464 11.2026 0 7.37727 0ZM7.37727 7.623C6.99612 7.623 6.68427 7.31115 6.68427 6.93V4.158C6.68427 3.77685 6.99612 3.465 7.37727 3.465C7.75842 3.465 8.07027 3.77685 8.07027 4.158V6.93C8.07027 7.31115 7.75842 7.623 7.37727 7.623ZM8.07027 10.395H6.68427V9.009H8.07027V10.395Z"
+                  fill="#FA5A53"
+                />
+              </svg>
+            </div>
+            <div class="absolute top-[70px] left-[20px]">
+              <p class="text-xs text-wrong-otp font-medium my-2" *ngIf="hasErrorCode">{{ errorMessage }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="p-3">
+          <h4 class="text-base font-bold text-dropdown-custom">{{ signupJsonData[0]['sections'][1].label }}</h4>
+        </div>
+        <div class="flex flex-wrap">
+          <div class="flex flex-col p-3 w-full md:w-1/2">
+            <mobiquity-pay-input-box [input]="formField[3]" [form]="registerForm"></mobiquity-pay-input-box>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[3].key].touched && fc[formField[3].key].invalid"
+              >
+                {{ formField[3].validations }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2">
+            <mobiquity-pay-input-box [input]="formField[4]" [form]="registerForm"></mobiquity-pay-input-box>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[4].key].touched && fc[formField[4].key].invalid"
+              >
+                {{ formField[4].validations }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2">
+            <mobiquity-pay-input-box [input]="formField[5]" [form]="registerForm"></mobiquity-pay-input-box>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[5].key].touched && fc[formField[5].key].invalid"
+              >
+                {{ formField[5].validations }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2 relative">
+            <mobiquity-pay-date-picker [input]="formField[6]" [form]="registerForm"></mobiquity-pay-date-picker>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[6].key].touched && fc[formField[6].key].invalid"
+              >
+                {{ formField[6].validations }}
+              </p>
+            </div>
+          </div>
+
+          <div class="flex flex-col p-3 w-full md:w-3/5">
+            <mobiquity-pay-radio-button-group
+              [input]="formField[8]"
+              [form]="registerForm"
+            ></mobiquity-pay-radio-button-group>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[8].key].touched && fc[formField[8].key].invalid"
+              >
+                {{ formField[8].validations }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2">
+            <mobiquity-pay-image-upload
+              *ngIf="!isProfile"
+              (change)="fileUrlChange($event)"
+            ></mobiquity-pay-image-upload>
+            <div *ngIf="isProfile" class="profile-image-content">
+              <div class="profile">
+                <div class="profile-img">
+                  <img class="w-100 pr-2" src="https://i.imgur.com/Nho5TnJ.jpg" alt="" />
+                </div>
+                <p>profile</p>
+              </div>
+              <div class="icons flex align-items">
+                <div class="file-input">
+                  <input
+                    (change)="fileUrlChange($event)"
+                    type="file"
+                    name="file-input"
+                    id="file-input"
+                    class="file-input__input"
+                    accept="image/jpeg"
+                  />
+                  <label class="file-input__label" for="file-input">
+                    <i class="fa-solid fa-rotate-right fa-lg"></i>
+                  </label>
+                </div>
+                <span (click)="resetProfile()"><i class="fa-solid cursor-pointer fa-trash-can fa-lg ml-4"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center my-6">
+          <button
+            [disabled]="isStepOne()"
+            (click)="displayNextSection('address')"
+            class="bg-login-btn-custom px-14 text-sm font-medium text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
+            >Next</button
+          >
+        </div>
+        <div class="text-center text-sm my-4">
+          <p>
+            Already have an account?
+            <a class="text-login-custom" href="login-modal-2.html"> Login</a>
+          </p>
+        </div>
+      </div>
+      <div *ngIf="activeForm === 'address'">
+        <div class="flex justify-between items-center">
+          <div class="p-3 flex items-center">
+            <div class="mr-4">
+              <a (click)="goBack('contacts')">
+                <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10.666 4.39341H2.75935L5.17935 1.48675C5.29251 1.3506 5.34695 1.17508 5.3307 0.998797C5.31444 0.822513 5.22883 0.659905 5.09268 0.546746C4.95654 0.433587 4.78102 0.379146 4.60473 0.395399C4.42845 0.411652 4.26584 0.497269 4.15268 0.633413L0.819349 4.63341C0.796923 4.66523 0.776868 4.69865 0.759349 4.73341C0.759349 4.76675 0.759349 4.78675 0.712682 4.82008C0.682465 4.89652 0.666643 4.97789 0.666016 5.06008C0.666643 5.14227 0.682465 5.22364 0.712682 5.30008C0.712682 5.33341 0.712682 5.35341 0.759349 5.38675C0.776868 5.42151 0.796923 5.45493 0.819349 5.48675L4.15268 9.48675C4.21536 9.562 4.29386 9.62252 4.38258 9.664C4.4713 9.70548 4.56807 9.72691 4.66602 9.72675C4.82178 9.72705 4.97274 9.6728 5.09268 9.57341C5.16019 9.51745 5.21599 9.44871 5.25689 9.37115C5.29779 9.29358 5.32299 9.20871 5.33104 9.12139C5.33909 9.03408 5.32984 8.94603 5.30381 8.86229C5.27778 8.77856 5.23548 8.70078 5.17935 8.63341L2.75935 5.72675H10.666C10.8428 5.72675 11.0124 5.65651 11.1374 5.53148C11.2624 5.40646 11.3327 5.23689 11.3327 5.06008C11.3327 4.88327 11.2624 4.7137 11.1374 4.58868C11.0124 4.46365 10.8428 4.39341 10.666 4.39341Z"
+                    fill="#C4C4C4"
+                  />
+                </svg>
+              </a>
+            </div>
+            <h4 class="text-base font-bold text-dropdown-custom">
+              <!-- Address Details-->
+              {{ signupJsonData[1]['sections'][0].label }}
+            </h4>
+          </div>
+          <div>
+            <a href="#" class="text-login-custom text-xs font-semibold">Skip</a>
+          </div>
+        </div>
+        <div class="flex flex-wrap">
+          <div class="flex flex-col p-3 w-full md:w-1/2">
+            <mobiquity-pay-input-box [input]="formField[10]" [form]="registerForm"></mobiquity-pay-input-box>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[10].key].touched && fc[formField[10].key].invalid"
+              >
+                {{ formField[10].validations }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2">
+            <mobiquity-pay-input-box [input]="formField[11]" [form]="registerForm"></mobiquity-pay-input-box>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[11].key].touched && fc[formField[11].key].invalid"
+              >
+                {{ formField[11].validations }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2">
+            <mobiquity-pay-select-box
+              [input]="formField[12]"
+              [form]="registerForm"
+              (change)="getStateByCountry(registerForm.value.country, 13)"
+            ></mobiquity-pay-select-box>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[12].key].touched && fc[formField[12].key].invalid"
+              >
+                {{ formField[12].validations }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2">
+            <mobiquity-pay-input-box
+              [input]="formField[15]"
+              [form]="registerForm"
+              mobiquityNumberOnly
+            ></mobiquity-pay-input-box>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[15].key].touched && fc[formField[15].key].invalid"
+              >
+                {{ formField[15].validations }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2">
+            <mobiquity-pay-select-box
+              [input]="formField[13]"
+              [form]="registerForm"
+              (change)="getCitiesByState(registerForm.value.state, 14)"
+            ></mobiquity-pay-select-box>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[13].key].touched && fc[formField[13].key].invalid"
+              >
+                {{ formField[13].validations }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col p-3 w-full md:w-1/2">
+            <mobiquity-pay-select-box [input]="formField[14]" [form]="registerForm"></mobiquity-pay-select-box>
+            <div>
+              <p
+                class="text-xs text-wrong-otp font-medium my-2"
+                *ngIf="fc[formField[14].key].touched && fc[formField[14].key].invalid"
+              >
+                {{ formField[14].validations }}
+              </p>
+            </div>
+          </div>
+
+          <div class="text-center w-full my-6">
+            <button
+              [disabled]="isStepTwo()"
+              (click)="displayNextSection('kyc')"
+              class="bg-login-btn-custom px-14 font-medium text-sm text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
+              >Next</button
+            >
+          </div>
+        </div>
+      </div>
+      <div *ngIf="activeForm === 'kyc'">
+        <div class="border rounded-md shadow-sm shadow-gray-200 px-9 py-4 mb-4">
+          <div class="flex justify-between items-center">
+            <div class="p-3 flex items-center">
+              <div class="mr-4">
+                <a (click)="goBack('address')">
+                  <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10.666 4.39341H2.75935L5.17935 1.48675C5.29251 1.3506 5.34695 1.17508 5.3307 0.998797C5.31444 0.822513 5.22883 0.659905 5.09268 0.546746C4.95654 0.433587 4.78102 0.379146 4.60473 0.395399C4.42845 0.411652 4.26584 0.497269 4.15268 0.633413L0.819349 4.63341C0.796923 4.66523 0.776868 4.69865 0.759349 4.73341C0.759349 4.76675 0.759349 4.78675 0.712682 4.82008C0.682465 4.89652 0.666643 4.97789 0.666016 5.06008C0.666643 5.14227 0.682465 5.22364 0.712682 5.30008C0.712682 5.33341 0.712682 5.35341 0.759349 5.38675C0.776868 5.42151 0.796923 5.45493 0.819349 5.48675L4.15268 9.48675C4.21536 9.562 4.29386 9.62252 4.38258 9.664C4.4713 9.70548 4.56807 9.72691 4.66602 9.72675C4.82178 9.72705 4.97274 9.6728 5.09268 9.57341C5.16019 9.51745 5.21599 9.44871 5.25689 9.37115C5.29779 9.29358 5.32299 9.20871 5.33104 9.12139C5.33909 9.03408 5.32984 8.94603 5.30381 8.86229C5.27778 8.77856 5.23548 8.70078 5.17935 8.63341L2.75935 5.72675H10.666C10.8428 5.72675 11.0124 5.65651 11.1374 5.53148C11.2624 5.40646 11.3327 5.23689 11.3327 5.06008C11.3327 4.88327 11.2624 4.7137 11.1374 4.58868C11.0124 4.46365 10.8428 4.39341 10.666 4.39341Z"
+                      fill="#C4C4C4"
+                    />
+                  </svg>
+                </a>
+              </div>
+              <h4 class="text-base font-bold text-dropdown-custom"> {{ signupJsonData[2]['sections'][0].label }}</h4>
+            </div>
+          </div>
+          <p class="pl-3 text-xs font-medium">Document 1</p>
+          <div class="flex flex-wrap">
+            <div class="flex flex-col p-3 w-full md:w-1/2">
+              <mobiquity-pay-select-box
+                [input]="formField[16]"
+                [form]="registerForm"
+                (change)="selectedDocType(registerForm.value.kycIdType)"
+              ></mobiquity-pay-select-box>
+              <div>
+                <p
+                  class="text-xs text-wrong-otp font-medium my-2"
+                  *ngIf="fc[formField[16].key].touched && fc[formField[16].key].invalid"
+                >
+                  {{ formField[16].validations }}
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col p-3 w-full md:w-1/2">
+              <mobiquity-pay-input-box [input]="formField[17]" [form]="registerForm"></mobiquity-pay-input-box>
+              <div>
+                <p
+                  class="text-xs text-wrong-otp font-medium my-2"
+                  *ngIf="fc[formField[17].key].touched && fc[formField[17].key].invalid"
+                >
+                  {{ formField[17].validations }}
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col p-3 w-full md:w-1/2">
+              <mobiquity-pay-input-box [input]="formField[18]" [form]="registerForm"></mobiquity-pay-input-box>
+              <div>
+                <p
+                  class="text-xs text-wrong-otp font-medium my-2"
+                  *ngIf="fc[formField[18].key].touched && fc[formField[18].key].invalid"
+                >
+                  {{ formField[18].validations }}
+                </p>
+              </div>
+            </div>
+            <div class="flex flex-col p-3 w-full md:w-1/2 relative">
+              <mobiquity-pay-date-picker [input]="formField[19]" [form]="registerForm"></mobiquity-pay-date-picker>
+              <div>
+                <p
+                  class="text-xs text-wrong-otp font-medium my-2"
+                  *ngIf="fc[formField[19].key].touched && fc[formField[19].key].invalid"
+                >
+                  {{ formField[19].validations }}
+                </p>
+              </div>
+            </div>
+            <div class="w-full ml-3">
+              <label class="text-dropdown-custom text-xs mb-2 font-medium" for="">Upload file</label>
+            </div>
+            <div class="p-3 w-full md:w-1/3">
+              <label class="text-black font-medium text-small mb-2 flex items-center" for="">Front View</label>
+              <div class="my-2" *ngIf="!isKYCFront">
+                <div
+                  class="relative h-20 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer"
+                >
+                  <div class="absolute">
+                    <div class="flex flex-col items-center">
+                      <span class="block text-gray-400 text-small font-normal">Click here or drop here to upload</span>
+                      <span class="block text-dropdown-custom font-medium text-xs mt-2">CHOOSE FILE</span>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    class="cursor-pointer h-full w-full opacity-0"
+                    name=""
+                    accept="image/jpeg"
+                    (change)="uploadKYCDoc($event)"
+                  />
+                </div>
+              </div>
+              <div *ngIf="isKYCFront" class="profile-image-content">
+                <div class="profile">
+                  <div class="profile-img">
+                    <img class="w-100 pr-2" src="https://i.imgur.com/Nho5TnJ.jpg" alt="" />
+                  </div>
+                </div>
+                <div class="icons flex align-items">
+                  <div class="file-input">
+                    <input
+                      (change)="uploadKYCDoc($event)"
+                      type="file"
+                      name="file-input"
+                      id="file-input"
+                      class="file-input__input"
+                      accept="image/jpeg"
+                    />
+                    <label class="file-input__label" for="file-input">
+                      <i class="fa-solid fa-rotate-right fa-lg"></i>
+                    </label>
+                  </div>
+                  <span (click)="resetProfile()"><i class="fa-solid cursor-pointer fa-trash-can fa-lg ml-4"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="p-3 w-full md:w-1/3">
+              <label class="text-black font-medium text-small mb-2 flex items-center" for="">Back View</label>
+              <div *ngIf="!isKYCBack" class="my-2">
+                <div
+                  class="relative h-20 rounded-lg border-dashed border-2 border-gray-200 bg-white flex justify-center items-center hover:cursor-pointer"
+                >
+                  <div class="absolute">
+                    <div class="flex flex-col items-center">
+                      <span class="block text-gray-400 text-small font-normal">Click here or drop here to upload</span>
+                      <span class="block text-dropdown-custom font-medium text-xs mt-2">CHOOSE FILE</span>
+                    </div>
+                  </div>
+                  <input
+                    type="file"
+                    class="cursor-pointer h-full w-full opacity-0"
+                    name=""
+                    accept="image/jpeg"
+                    (change)="uploadKYCBDoc($event)"
+                  />
+                </div>
+              </div>
+              <div *ngIf="isKYCBack" class="profile-image-content">
+                <div class="profile">
+                  <div class="profile-img">
+                    <img class="w-100 pr-2" src="https://i.imgur.com/Nho5TnJ.jpg" alt="" />
+                  </div>
+                </div>
+                <div class="icons flex align-items">
+                  <div class="file-input">
+                    <input
+                      (change)="uploadKYCBDoc($event)"
+                      type="file"
+                      name="file-input"
+                      id="file-input"
+                      class="file-input__input"
+                      accept="image/jpeg"
+                    />
+                    <label class="file-input__label" for="file-input">
+                      <i class="fa-solid fa-rotate-right fa-lg"></i>
+                    </label>
+                  </div>
+                  <span (click)="resetProfile()"><i class="fa-solid cursor-pointer fa-trash-can fa-lg ml-4"></i></span>
+                </div>
+              </div>
+            </div>
+            <div class="w-full ml-3 -mt-3">
+              <p class="text-xs text-gray-400"> (Upload file upto 5MB in PNG, JPEG, PDF format) </p>
+            </div>
+            <div class="text-center w-full my-6">
+              <button
+                [disabled]="isAddKYC()"
+                (click)="displayNextSection('kyc-done')"
+                class="bg-login-btn-custom px-14 font-medium text-sm text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
+                >Add</button
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kyc done step 3.1 -->
+      <div *ngIf="activeForm === 'kyc-done'">
+        <div class="border rounded-md shadow-sm shadow-gray-200 px-5 py-4 mb-4">
+          <div class="flex justify-between items-center">
+            <div class="py-3 flex items-center">
+              <div class="mr-4">
+                <a (click)="goBack('kyc')">
+                  <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10.666 4.39341H2.75935L5.17935 1.48675C5.29251 1.3506 5.34695 1.17508 5.3307 0.998797C5.31444 0.822513 5.22883 0.659905 5.09268 0.546746C4.95654 0.433587 4.78102 0.379146 4.60473 0.395399C4.42845 0.411652 4.26584 0.497269 4.15268 0.633413L0.819349 4.63341C0.796923 4.66523 0.776868 4.69865 0.759349 4.73341C0.759349 4.76675 0.759349 4.78675 0.712682 4.82008C0.682465 4.89652 0.666643 4.97789 0.666016 5.06008C0.666643 5.14227 0.682465 5.22364 0.712682 5.30008C0.712682 5.33341 0.712682 5.35341 0.759349 5.38675C0.776868 5.42151 0.796923 5.45493 0.819349 5.48675L4.15268 9.48675C4.21536 9.562 4.29386 9.62252 4.38258 9.664C4.4713 9.70548 4.56807 9.72691 4.66602 9.72675C4.82178 9.72705 4.97274 9.6728 5.09268 9.57341C5.16019 9.51745 5.21599 9.44871 5.25689 9.37115C5.29779 9.29358 5.32299 9.20871 5.33104 9.12139C5.33909 9.03408 5.32984 8.94603 5.30381 8.86229C5.27778 8.77856 5.23548 8.70078 5.17935 8.63341L2.75935 5.72675H10.666C10.8428 5.72675 11.0124 5.65651 11.1374 5.53148C11.2624 5.40646 11.3327 5.23689 11.3327 5.06008C11.3327 4.88327 11.2624 4.7137 11.1374 4.58868C11.0124 4.46365 10.8428 4.39341 10.666 4.39341Z"
+                      fill="#C4C4C4"
+                    />
+                  </svg>
+                </a>
+              </div>
+              <h4 class="text-base font-bold text-dropdown-custom"> {{ signupJsonData[2]['sections'][0].label }}</h4>
+            </div>
+          </div>
+          <div class="md:ml-7 ml-0 flex items-center justify-between">
+            <div>
+              <p class="font-medium text-xs mb-1">{{ this.KYCData[0].kycIdType }}</p>
+              <p class="font-medium text-xs text-dropdown-custom">
+                {{ this.KYCData[0].name }} - {{ this.KYCData[0].kycIdValue }}
+              </p>
+            </div>
+            <div class="flex items-center">
+              <a class="mx-3 font-medium text-xs text-kyc-done" href="">View</a>
+              <div>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M0.816406 10.4805C0.816406 7.96091 1.8173 5.54455 3.59889 3.76295C5.38049 1.98136 7.79685 0.980469 10.3164 0.980469C12.836 0.980469 15.2523 1.98136 17.0339 3.76295C18.8155 5.54455 19.8164 7.96091 19.8164 10.4805C19.8164 13 18.8155 15.4164 17.0339 17.198C15.2523 18.9796 12.836 19.9805 10.3164 19.9805C7.79685 19.9805 5.38049 18.9796 3.59889 17.198C1.8173 15.4164 0.816406 13 0.816406 10.4805H0.816406ZM9.77427 14.5465L15.2437 7.709L14.2557 6.9186L9.59187 12.7465L6.28841 9.99407L5.47774 10.9669L9.77427 14.5477V14.5465Z"
+                    fill="#28C064"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center my-6">
+          <a
+            (click)="displayNextSection('pin')"
+            class="bg-login-btn-custom px-14 font-medium text-sm text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
+            >Next</a
+          >
+        </div>
+      </div>
+
+      <!-- Set PIN step 4 -->
+      <div *ngIf="activeForm === 'pin'">
+        <div class="border rounded-md shadow-sm shadow-gray-200 px-5 py-4 mb-4">
+          <div class="flex justify-between items-center">
+            <div class="p-3 flex items-center">
+              <div class="mr-4">
+                <a (click)="goBack('kyc-done')">
+                  <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10.666 4.39341H2.75935L5.17935 1.48675C5.29251 1.3506 5.34695 1.17508 5.3307 0.998797C5.31444 0.822513 5.22883 0.659905 5.09268 0.546746C4.95654 0.433587 4.78102 0.379146 4.60473 0.395399C4.42845 0.411652 4.26584 0.497269 4.15268 0.633413L0.819349 4.63341C0.796923 4.66523 0.776868 4.69865 0.759349 4.73341C0.759349 4.76675 0.759349 4.78675 0.712682 4.82008C0.682465 4.89652 0.666643 4.97789 0.666016 5.06008C0.666643 5.14227 0.682465 5.22364 0.712682 5.30008C0.712682 5.33341 0.712682 5.35341 0.759349 5.38675C0.776868 5.42151 0.796923 5.45493 0.819349 5.48675L4.15268 9.48675C4.21536 9.562 4.29386 9.62252 4.38258 9.664C4.4713 9.70548 4.56807 9.72691 4.66602 9.72675C4.82178 9.72705 4.97274 9.6728 5.09268 9.57341C5.16019 9.51745 5.21599 9.44871 5.25689 9.37115C5.29779 9.29358 5.32299 9.20871 5.33104 9.12139C5.33909 9.03408 5.32984 8.94603 5.30381 8.86229C5.27778 8.77856 5.23548 8.70078 5.17935 8.63341L2.75935 5.72675H10.666C10.8428 5.72675 11.0124 5.65651 11.1374 5.53148C11.2624 5.40646 11.3327 5.23689 11.3327 5.06008C11.3327 4.88327 11.2624 4.7137 11.1374 4.58868C11.0124 4.46365 10.8428 4.39341 10.666 4.39341Z"
+                      fill="#C4C4C4"
+                    />
+                  </svg>
+                </a>
+              </div>
+              <div class="flex items-center">
+                <h4 class="text-base font-bold text-dropdown-custom"> {{ signupJsonData[3]['sections'][0].label }}</h4>
+                <div class="cursor-pointer ml-2">
+                  <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M5.63281 1.06055C4.57195 1.06055 3.55453 1.48197 2.80439 2.23212C2.05424 2.98227 1.63281 3.99968 1.63281 5.06055C1.63281 6.12141 2.05424 7.13883 2.80439 7.88897C3.55453 8.63912 4.57195 9.06055 5.63281 9.06055C6.69368 9.06055 7.71109 8.63912 8.46124 7.88897C9.21139 7.13883 9.63281 6.12141 9.63281 5.06055C9.63281 3.99968 9.21139 2.98227 8.46124 2.23212C7.71109 1.48197 6.69368 1.06055 5.63281 1.06055ZM0.632812 5.06055C0.632812 2.29905 2.87131 0.0605469 5.63281 0.0605469C8.39431 0.0605469 10.6328 2.29905 10.6328 5.06055C10.6328 7.82205 8.39431 10.0605 5.63281 10.0605C2.87131 10.0605 0.632812 7.82205 0.632812 5.06055ZM5.63281 7.56055C5.76542 7.56055 5.8926 7.50787 5.98637 7.4141C6.08013 7.32033 6.13281 7.19316 6.13281 7.06055V5.06055C6.13281 4.92794 6.08013 4.80076 5.98637 4.70699C5.8926 4.61323 5.76542 4.56055 5.63281 4.56055C5.5002 4.56055 5.37303 4.61323 5.27926 4.70699C5.18549 4.80076 5.13281 4.92794 5.13281 5.06055V7.06055C5.13281 7.19316 5.18549 7.32033 5.27926 7.4141C5.37303 7.50787 5.5002 7.56055 5.63281 7.56055ZM5.63281 2.56055C5.5002 2.56055 5.37303 2.61323 5.27926 2.70699C5.18549 2.80076 5.13281 2.92794 5.13281 3.06055C5.13281 3.19316 5.18549 3.32033 5.27926 3.4141C5.37303 3.50787 5.5002 3.56055 5.63281 3.56055H5.63781C5.77042 3.56055 5.8976 3.50787 5.99137 3.4141C6.08513 3.32033 6.13781 3.19316 6.13781 3.06055C6.13781 2.92794 6.08513 2.80076 5.99137 2.70699C5.8976 2.61323 5.77042 2.56055 5.63781 2.56055H5.63281Z"
+                      fill="#B5B5B5"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="md:ml-10 ml-0 flex flex-wrap items-center justify-between">
+            <div class="flex flex-col p-3 w-full md:w-1/2 relative">
+              <mobiquity-pay-pin-box
+                [input]="formField[21]"
+                (focusout)="validatePINMatch($event)"
+                [form]="registerForm"
+                mobiquityNumberOnly
+              ></mobiquity-pay-pin-box>
+
+              <div class="absolute top-[50px] right-set cursor-pointer">
+                <svg width="15" height="14" viewBox="0 0 15 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M14.9048 7.01769C14.7696 6.83267 11.5782 2.4837 7.50005 2.4837C3.42192 2.4837 0.229162 6.82926 0.0953424 7.01769C0.0333905 7.1033 0 7.20659 0 7.31263C0 7.41867 0.0333905 7.52196 0.0953424 7.60757C0.230514 7.79259 3.42192 12.1416 7.50005 12.1416C11.5782 12.1416 14.7709 7.79259 14.9048 7.60757C14.9668 7.52201 15.0003 7.4187 15.0003 7.31263C15.0003 7.20656 14.9668 7.10326 14.9048 7.01769ZM7.50207 11.142C4.49856 11.142 1.8965 8.25548 1.1267 7.31195C1.89245 6.36774 4.48977 3.4839 7.50207 3.4839C10.5144 3.4839 13.107 6.36979 13.8774 7.314C13.1063 8.25753 10.5103 11.142 7.50207 11.142Z"
+                    fill="#BBBBBB"
+                  ></path>
+                  <path
+                    d="M7.50022 4.31543C6.9134 4.31543 6.33976 4.4912 5.85184 4.82054C5.36392 5.14987 4.98362 5.61796 4.75906 6.16562C4.53449 6.71329 4.47573 7.31592 4.59021 7.89732C4.7047 8.47871 4.98728 9.01275 5.40222 9.43191C5.81717 9.85107 6.34584 10.1365 6.92139 10.2522C7.49693 10.3678 8.0935 10.3085 8.63565 10.0816C9.1778 9.85478 9.64118 9.47062 9.96721 8.97774C10.2932 8.48486 10.4672 7.90539 10.4672 7.3126C10.4655 6.51826 10.1523 5.75696 9.59625 5.19527C9.04022 4.63358 8.28658 4.31723 7.50022 4.31543ZM7.50022 9.31094C7.10896 9.31094 6.72649 9.19373 6.40117 8.97415C6.07585 8.75457 5.8223 8.44247 5.67257 8.07732C5.52284 7.71218 5.48367 7.31038 5.56 6.92274C5.63633 6.5351 5.82474 6.17903 6.1014 5.89956C6.37806 5.62009 6.73055 5.42976 7.11429 5.35266C7.49803 5.27555 7.89579 5.31511 8.25726 5.46636C8.61874 5.61761 8.9277 5.87375 9.14507 6.20238C9.36244 6.531 9.47846 6.91737 9.47846 7.3126C9.47793 7.84243 9.26934 8.35039 8.89846 8.72504C8.52759 9.09968 8.02472 9.3104 7.50022 9.31094Z"
+                    fill="#BBBBBB"
+                  ></path>
+                  <path
+                    d="M13.3343 1.44815L12.8564 0.965393L1.38675 12.5517L1.86465 13.0344L13.3343 1.44815Z"
+                    fill="#BBBBBB"
+                  ></path>
+                  <path
+                    d="M13.8123 1.44813L12.8564 0.482605L0.908845 12.5516L1.86465 13.5171L13.8123 1.44813Z"
+                    stroke="white"
+                  ></path>
+                </svg>
+              </div>
+              <div class="absolute top-[70px]" style="position: absolute; top: 73px">
+                <p
+                  class="text-xs text-wrong-otp font-medium my-2"
+                  *ngIf="fc[formField[21].key].touched && fc[formField[21].key].invalid"
+                >
+                  {{ formField[21].validations }}
+                </p>
+              </div>
+              <div class="absolute top-[70px]" *ngIf="hasPINError">
+                <p class="text-xs text-wrong-otp font-medium my-2">{{ errorMessage }}</p>
+              </div>
+            </div>
+            <div class="flex flex-col p-3 w-full md:w-1/2 relative">
+              <mobiquity-pay-pin-box
+                [input]="formField[22]"
+                (focusout)="validatePINMatch($event)"
+                [form]="registerForm"
+                mobiquityNumberOnly
+              ></mobiquity-pay-pin-box>
+
+              <!--  <div class="absolute top-[50px] right-set cursor-pointer">
+                <svg
+                  width="15"
+                  height="14"
+                  viewBox="0 0 15 14"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M14.9048 7.01769C14.7696 6.83267 11.5782 2.4837 7.50005 2.4837C3.42192 2.4837 0.229162 6.82926 0.0953424 7.01769C0.0333905 7.1033 0 7.20659 0 7.31263C0 7.41867 0.0333905 7.52196 0.0953424 7.60757C0.230514 7.79259 3.42192 12.1416 7.50005 12.1416C11.5782 12.1416 14.7709 7.79259 14.9048 7.60757C14.9668 7.52201 15.0003 7.4187 15.0003 7.31263C15.0003 7.20656 14.9668 7.10326 14.9048 7.01769ZM7.50207 11.142C4.49856 11.142 1.8965 8.25548 1.1267 7.31195C1.89245 6.36774 4.48977 3.4839 7.50207 3.4839C10.5144 3.4839 13.107 6.36979 13.8774 7.314C13.1063 8.25753 10.5103 11.142 7.50207 11.142Z"
+                    fill="#BBBBBB"
+                  ></path>
+                  <path
+                    d="M7.50022 4.31543C6.9134 4.31543 6.33976 4.4912 5.85184 4.82054C5.36392 5.14987 4.98362 5.61796 4.75906 6.16562C4.53449 6.71329 4.47573 7.31592 4.59021 7.89732C4.7047 8.47871 4.98728 9.01275 5.40222 9.43191C5.81717 9.85107 6.34584 10.1365 6.92139 10.2522C7.49693 10.3678 8.0935 10.3085 8.63565 10.0816C9.1778 9.85478 9.64118 9.47062 9.96721 8.97774C10.2932 8.48486 10.4672 7.90539 10.4672 7.3126C10.4655 6.51826 10.1523 5.75696 9.59625 5.19527C9.04022 4.63358 8.28658 4.31723 7.50022 4.31543ZM7.50022 9.31094C7.10896 9.31094 6.72649 9.19373 6.40117 8.97415C6.07585 8.75457 5.8223 8.44247 5.67257 8.07732C5.52284 7.71218 5.48367 7.31038 5.56 6.92274C5.63633 6.5351 5.82474 6.17903 6.1014 5.89956C6.37806 5.62009 6.73055 5.42976 7.11429 5.35266C7.49803 5.27555 7.89579 5.31511 8.25726 5.46636C8.61874 5.61761 8.9277 5.87375 9.14507 6.20238C9.36244 6.531 9.47846 6.91737 9.47846 7.3126C9.47793 7.84243 9.26934 8.35039 8.89846 8.72504C8.52759 9.09968 8.02472 9.3104 7.50022 9.31094Z"
+                    fill="#BBBBBB"
+                  ></path>
+                  <path
+                    d="M13.3343 1.44815L12.8564 0.965393L1.38675 12.5517L1.86465 13.0344L13.3343 1.44815Z"
+                    fill="#BBBBBB"
+                  ></path>
+                  <path
+                    d="M13.8123 1.44813L12.8564 0.482605L0.908845 12.5516L1.86465 13.5171L13.8123 1.44813Z"
+                    stroke="white"
+                  ></path>
+                </svg>
+              </div>-->
+              <div class="absolute top-[70px]" style="position: absolute; top: 73px">
+                <p
+                  class="text-xs text-wrong-otp font-medium my-2"
+                  *ngIf="fc[formField[22].key].touched && fc[formField[22].key].invalid"
+                >
+                  {{ formField[22].validations }}
+                </p>
+              </div>
+              <div class="absolute top-[70px]" *ngIf="hasPINError">
+                {{ errorMessage }}
+              </div>
+            </div>
+          </div>
+          <div class="text-center mt-12 mb-6">
+            <button
+              (click)="CreateProfile()"
+              [disabled]="registerForm.invalid"
+              class="bg-login-btn-custom px-14 font-medium text-sm text-indigo-900 rounded-md py-4 hover:bg-progress hover:text-indigo-200 transition-all"
+              >Save & Register</button
+            >
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

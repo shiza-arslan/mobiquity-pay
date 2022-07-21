@@ -1,0 +1,369 @@
+{
+  "forgotPin": {
+    "title": "Broche Réinitialiser",
+    "tagline": "Saisissez le numéro de mobile associé au compte",
+    "fields": [
+      {
+        "label": "Numéro de portable",
+        "placeholder": "Entrez le numéro de téléphone portable"
+      }
+    ],
+    "buttons": [
+      {
+        "title": "Procéder"
+      }
+    ]
+  },
+  "home": {
+    "Send": "Envoyer",
+    "Money": "Argent",
+    "Request": "Demande",
+    "Transfer": "Transférer",
+    "To_Bank": "à la Banque",
+    "International": "International",
+    "Mobile": "Mobile",
+    "Recharge": "Recharger",
+    "Postpaid": "Port payé",
+    "Bill": "Facture",
+    "Electricity": "Électricité",
+    "Broadband": "Haut débit",
+    "Landline": "Téléphone fixe",
+    "TV": "la télé",
+    "Water": "Eau",
+    "Gas": "Gaz",
+    "Withdraw": "Se désister",
+    "Cash": "En espèces",
+    "Pay": "Payer",
+    "Merchant": "Marchand",
+    "View": "Voir",
+    "Less": "Moins",
+    "Pay_now": "Payez maintenant",
+    "About_MobiquityPay": "À propos de MobiquityPay",
+    "About_MobiquityPay_Description": "Reconnue par plus de 27 millions d'utilisateurs, MobiquityPay est l'une des plateformes les plus populaires pour la recharge en ligne, le paiement de factures et d'autres services financiers. Le portail MobiquityPay offre une expérience simple, pratique et sécurisée et son interface conviviale permet aux utilisateurs d'effectuer des transactions en un rien de temps et sans tracas.",
+    "Online_Recharge_Title": "Recharge en ligne – Mobile, DTH, etc.",
+    "Online_Recharge_Description": "En matière de recharge en ligne, Mobiquitypay répond à tous vos besoins et propose des récompenses et des offres de cashback exceptionnelles.",
+    "Utility_Bill_Payments_Title": "Paiements des factures de services publics - Paiement des factures d'électricité, de gaz et d'eau",
+    "Utility_Bill_Payments_Description": "En ce qui concerne le paiement des factures de services publics, Mobiquitypay répond à tous vos besoins et propose des récompenses et des offres de remboursement exceptionnelles.",
+    "Other_Financial_Services_Title": "Autres services financiers - envoyer de l'argent, recevoir de l'argent, payer le marchand",
+    "Other_Financial_Services_Description": "En ce qui concerne les autres services financiers, Mobiquitypay répond à tous vos besoins et propose des récompenses et des offres de cashback exceptionnelles."
+  },
+
+  "footer": [
+    {
+      "Popular_services": "Services populaires",
+      "Add_money": "Ajouter de l'argent",
+      "Send_money": "Envoyer de l'argent",
+      "Transfer_to_bank": "Virement bancaire"
+    },
+    {
+      "Other_sevices": "Autres services",
+      "Pay_merchant": "Payer le marchand",
+      "Recharge": "Recharger",
+      "Electricity_bill": "Facture d'électricité",
+      "Mobile_postpaid": "Mobile postpayé",
+      "Water_bill": "Facture d'eau",
+      "Withdraw_cash": "Retirer de l'argent",
+      "Request_money": "Demande de l'argent"
+    },
+    {
+      "Company": "Compagnie",
+      "About_us": "À propos de nous",
+      "Customer_support": "Service client",
+      "Buisness_Query": "Requête commerciale"
+    },
+    {
+      "Legal": "Juridique",
+      "Privacy_policy": "Politique de confidentialité",
+      "Terms_and_Conditions": "Termes et conditions",
+      "Cookie_policy": "Politique relative aux cookies"
+    },
+    {
+      "Locate_us": "Localisez-nous",
+      "Agent_Merchant_locator": "Localisateur d'agents/marchands"
+    },
+    {
+      "Download_our_app": "Téléchargez notre application"
+    },
+    {
+      "All_Rights_Reserved": "Paiement Mobiquity 2022. Tous les droits sont réservés."
+    }
+  ],
+  "header": {
+    "btn_register": "S'inscrire",
+    "btn_login": "Connexion",
+    "Welcome": "Bienvenu!",
+    "Guest": "Invité",
+    "View_Wallets": "Voir les portefeuilles",
+    "Pending_Transactions": "Transactions en attente",
+    "View_History": "Voir l'historique",
+    "Wallet_balance": "Solde du portefeuille"
+  },
+
+  "login": {
+    "title": "Connectez-vous via un numéro de téléphone portable",
+    "tagline": "Entrez votre numéro de mobile et votre code PIN pour vous connecter.",
+    "label": ["Numéro de portable", "PIN"],
+    "a": ["NIP oublié ?", "S'inscrire"],
+    "b": ["CONNEXION"],
+    "p": ["Vous n'avez pas de compte ?"]
+  },
+  "otp": {
+    "title": "Vérification du numéro de téléphone portable",
+    "headings": ["Vérification"],
+    "paragraphs": ["Entrez OTP envoyé à ", "Renvoyer OTP dans 00:", "Tentatives restantes 4"],
+    "spans": ["+91 9872819277"],
+    "buttons": ["Vérifier"]
+  },
+  "register": {
+    "cols": [
+      {
+        "fields": [
+          { "p": "Contacter &", "br": "Détails personnels" },
+          { "p": "Adresse", "br": "Des détails" },
+          { "p": "KYC", "br": "Des détails" },
+          { "p": "Régler", "br": "PIN" }
+        ]
+      },
+      {
+        "parts": [
+          {
+            "h": "Détails du contact",
+            "sh": "Détails personnels",
+            "div": [
+              {
+                "label": "Numéro de portable",
+                "placeholder": "Entrez le numéro de téléphone portable"
+              },
+              {
+                "label": "identifiant de messagerie",
+                "placeholder": "Entrez l'identifiant de messagerie (facultatif)"
+              },
+              {
+                "label": "Code de Parrainage",
+                "placeholder": "Entrez (facultatif)"
+              },
+              {
+                "label": "Prénom",
+                "placeholder": "entrez votre prénom"
+              },
+              {
+                "label": "Deuxième nom",
+                "placeholder": "Entrez le deuxième prénom (facultatif)"
+              },
+              {
+                "label": "Nom de famille",
+                "placeholder": "Entrer le nom de famille"
+              },
+              {
+                "label": "Date de naissance",
+                "placeholder": "Sélectionnez la date (facultatif)"
+              },
+              {
+                "label": "ID de paiement",
+                "placeholder": "Entrez l'ID de paiement (facultatif)"
+              },
+              {
+                "label": "Le sexe",
+                "radio1": "Mâle",
+                "radio2": "Femelle",
+                "radio3": "Autre"
+              },
+              {
+                "span": "Il peut contenir 7 à 30 caractères, chiffres ou caractères spéciaux parmi &, *, !"
+              },
+              {
+                "label": "Télécharger une photo de profil",
+                "span": ["Cliquez ici ou déposez ici pour télécharger", "CHOISIR LE FICHIER"],
+                "p": "(Téléchargez le fichier jusqu'à 5 Mo au format PNG, JPEG, PDF)"
+              },
+              {
+                "label": "Identifiant de connexion",
+                "placeholder": "Entrez l'identifiant de connexion"
+              },
+              {
+                "label": "Titre"
+              },
+              {
+                "label": "langue préférée"
+              },
+              {
+                "label": "CIF",
+                "placeholder": "Entrez CIF"
+              }
+            ],
+            "a": ["Suivant", "Connexion"],
+            "p": ["Vous avez déjà un compte?"],
+            "otp": ["Vous n'avez pas reçu l'OTP ?", "Renvoyer"]
+          },
+          {
+            "fields": [
+              {
+                "p": "Contacter & ",
+                "br": "Détails personnels"
+              },
+              {
+                "p": "Adresse",
+                "br": "Des détails"
+              },
+              {
+                "p": "KYC",
+                "br": "Des détails"
+              },
+              {
+                "p": "Régler",
+                "br": "PIN"
+              },
+              {
+                "label": "Adresse 1",
+                "placeholder": "Entrer l'adresse"
+              },
+              {
+                "label": "Adresse Ligne 2",
+                "placeholder": "Entrer l'adresse"
+              },
+              {
+                "label": "Pays",
+                "option1": "Choisissez le pays",
+                "option2": "Pakistan",
+                "option3": "Angleterre",
+                "option4": "Oman"
+              },
+              {
+                "label": "code postal",
+                "placeholder": "Entrez le code postal"
+              },
+              {
+                "label": "État",
+                "option1": "Sélectionnez l'état",
+                "option2": "État A",
+                "option3": "État B",
+                "option4": "État C"
+              },
+              {
+                "label": "Ville",
+                "placeholder": "Sélectionnez une ville",
+                "option1": "Sélectionnez une ville",
+                "option2": "Ville A",
+                "option3": "Ville B",
+                "option4": "Ville C"
+              },
+              {
+                "h2": ["Obtenez jusqu'à ", " sur les paiements de factures"],
+                "span": "30 % de remboursement",
+                "p": "Automatisez le paiement de vos factures et obtenez 30 % de cashback",
+                "b": "Payez maintenant"
+              }
+            ],
+            "h": "Détails de l'adresse",
+            "a": ["Sauter", "Suivant"],
+            "num": ["1", "2", "3", "4"]
+          },
+          {
+            "h": "Détails de KYC",
+            "sh": ["Pièce 1", "Téléverser un fichier", "Pièce 2", "Télécharger des documents"],
+            "fields": [
+              {
+                "label": "Type de document",
+                "options": ["Sélectionnez le document", "Document Un", "Document Deux", "Document Trois"]
+              },
+              {
+                "label": "numéro d'identification",
+                "placeholder": "Entrez le numéro d'identification"
+              },
+              {
+                "label": "Nom du titulaire du document",
+                "options": ["Entrez le nom", "Nom Un", "Nom Deux", "Nom Trois"]
+              },
+              {
+                "label": "Date d'expiration",
+                "placeholder": "Sélectionner une date"
+              },
+              {
+                "label": "Vue de face",
+                "spans": ["Cliquez ici ou déposez ici pour télécharger", "CHOISIR LE FICHIER"]
+              },
+              {
+                "label": "Vue arrière",
+                "spans": ["Cliquez ici ou déposez ici pour télécharger", "CHOISIR LE FICHIER"]
+              },
+              {
+                "h2": ["Obtenez jusqu'à ", " sur les paiements de factures"],
+                "span": "30 % de remboursement",
+                "p": "Automatisez le paiement de vos factures et obtenez 30 % de cashback",
+                "b": "Payez maintenant"
+              },
+              {
+                "label": "Période de grâce KYC (jours)",
+                "placeholder": "Entrez la période de grâce KYC (jours)"
+              },
+              {
+                "label": "Pays délivré en",
+                "placeholder": "Entrez le pays délivré en"
+              },
+              {
+                "label": "Date de délivrance le",
+                "placeholder": "ID KYC Date d'émission le"
+              },
+              {
+                "label": "Valide à partir de",
+                "placeholder": "Identifiant KYC Valable à partir de"
+              },
+              {
+                "label": "Valide jusqu'au",
+                "placeholder": "ID KYC valide jusqu'à"
+              },
+              {
+                "label": "Faire de ce primaire"
+              }
+            ],
+            "a": ["Ajouter", "Suivant"],
+            "p": ["(Téléchargez le fichier jusqu'à 5 Mo au format PNG, JPEG, PDF)"]
+          },
+          {
+            "a": ["Suivant", "Afficher"],
+            "h": "Détails KYC",
+            "cards": [
+              {
+                "p": ["Document 1 - Passeport", "Rahul Bose- H2004536"]
+              },
+              {
+                "p": ["Document 2 - Carte PAN", "Rahul Bose- FXMPS6100Q"]
+              }
+            ]
+          },
+          {
+            "h": "Définir le NIP",
+            "fields": [
+              {
+                "label": "Sécurité"
+              },
+              {
+                "label": "Autorisation"
+              },
+              {
+                "label": "Réglementaire"
+              },
+              {
+                "label": "Commercialisation"
+              },
+              {
+                "label": "Entrez le NIP",
+                "placeholder": "Entrez le NIP"
+              },
+              {
+                "label": "Confirmer le NIP",
+                "placeholder": "Entrez le NIP"
+              }
+            ],
+            "a": ["Enregistrer et s'inscrire"]
+          }
+        ]
+      },
+      {
+        "h": ["Obtenez jusqu'à ", "30 % de remise en argent", " sur les paiements de factures"],
+        "p": ["Automatisez le paiement de vos factures et obtenez 30 % de cashback"],
+        "div": ["Payez maintenant"]
+      }
+    ]
+  }
+}

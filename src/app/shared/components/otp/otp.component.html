@@ -1,0 +1,63 @@
+<div class="w-full flex justify-center items-center">
+  <div style="width: 550px" class="rounded-[8px] bg-white p-3 mx-auto shadow-[17px_34px_114px_14px_rgba(0,0,0,0.1)]">
+    <div class="rounded-[8px] border border-pops-border mx-auto p-7 pb-2 bg-white">
+      <div class="flex items-center justify-between pb-5 pt-1 border-b border-gray-200">
+        <div>
+          <h3 class="font-bold text-base text-mobile-ver">{{ translation?.title }}</h3>
+        </div>
+        <div class="cursor-pointer" (click)="closeModal()">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle
+              cx="11"
+              cy="11"
+              r="10"
+              stroke="#DBDBDB"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path d="M14 8L8 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8 8L14 14" stroke="#DBDBDB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </div>
+      </div>
+      <div class="pt-6 flex flex-col justify-center items-center">
+        <h4 class="text-dropdown-custom text-base mb-4 font-bold">{{ translation?.headings[0] }}</h4>
+        <p class="text-sm font-medium"
+          >{{ translation?.paragraphs[0] }} <span class="text-round-edit-2">{{ mobile }}</span>
+        </p>
+        <span class="text-wrong-otp" *ngIf="hasErrors"> {{ errorMessage }}</span>
+        <div class="flex justify-center">
+          <!--   <input maxlength="1" type="text" class="m-3 p-3 text-center border-b border-black w-1/6" (keyup)="keytab($event)">
+              <input maxlength="1" type="text" class="m-3 p-3 text-center border-b border-black w-1/6" (keyup)="keytab($event)">
+              <input maxlength="1" type="text" class="m-3 p-3 text-center border-b border-black w-1/6" (keyup)="keytab($event)">
+              <input maxlength="1" type="text" class="m-3 p-3 text-center border-b border-black w-1/6">-->
+
+          <ng-otp-input
+            (onInputChange)="onOtpChange($event)"
+            [config]="{
+              length: 6,
+              isPasswordInput: true,
+              inputClass: 'm-3 p-3 text-center border-b border-black w-1/6'
+            }"
+          ></ng-otp-input>
+        </div>
+        <p class="pt-8 text-xs text-gray-500 font-medium" *ngIf="timeLeft != 0"
+          >{{ translation?.paragraphs[1] }}{{ timeLeft }}</p
+        >
+        <p class="pt-8 text-xs text-gray-500 font-medium" *ngIf="timeLeft == 0"
+          >Do not get the OTP? <span style="cursor: pointer; color: #2196f3" (click)="reSendOTP()">Resend</span></p
+        >
+        <p class="pt-3 text-xs text-gray-500 font-medium">{{ translation?.paragraphs[2] }}</p>
+        <div class="text-center w-full mt-16">
+          <button
+            [disabled]="otp.length < 6 || hasErrors"
+            (click)="verifyOTP()"
+            class="bg-login-btn-custom px-14 font-medium text-sm text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
+            >Verify</button
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
