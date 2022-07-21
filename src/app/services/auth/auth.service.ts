@@ -19,7 +19,9 @@ export class AuthService {
       formData.append('grant_type', 'client_credentials');
       this.http.post(this.baseUrl + 'mobiquitypay/oauth/token', formData, httpOptions).subscribe({
         next: (res: any) => {
+          console.log(res);
           sessionStorage.setItem('access_token', res.access_token);
+          sessionStorage.setItem('token_expiry_time', res.expires_in);
           resolve();
         },
         error: (err: any) => {

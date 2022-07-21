@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { async } from '@angular/core/testing';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
+import { UowService } from '@mobiquity/services';
 @Component({
   selector: 'mobiquity-pay-layout',
   templateUrl: './layout.component.html',
@@ -15,7 +16,8 @@ export class LayoutComponent implements OnInit {
   showWelcomeHeader: boolean | undefined;
   showFooter: boolean | undefined;
   showNavigation: boolean | undefined;
-  constructor(private router: Router) {
+  isTokenRefresh: boolean = false;
+  constructor(private router: Router, private services: UowService) {
     this.getCurrentRoute();
   }
   async getCurrentRoute() {
@@ -44,6 +46,15 @@ export class LayoutComponent implements OnInit {
       });
     });
   }
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.services.authService.generateBearer().then(() => {
+      sessionStorage.setItem('isTokenRefresh', this.isTokenRefresh == false ? 'false' : 'true');
+      setTimeout(() => {
+        this.isTokenRefresh = true;
+        this.services.authService.generateBearer();
+        alert('your token is generated');
+      }, 12000);
+    });
+  }
   ngOnChange() {}
 }
