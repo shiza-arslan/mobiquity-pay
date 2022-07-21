@@ -47,9 +47,9 @@ export class OtpComponent implements OnInit {
   ngOnInit(): void {
     console.log('normalUser', this.isRegUser);
     this.selectedLanguage = 'en';
-    this.mobile = localStorage.getItem('mobile');
-    if (localStorage.getItem('language')) {
-      this.selectedLanguage = localStorage.getItem('language');
+    this.mobile = sessionStorage.getItem('mobile');
+    if (sessionStorage.getItem('language')) {
+      this.selectedLanguage = sessionStorage.getItem('language');
     }
     this.service.translateService.language.subscribe((res: any) => {
       this.service.translateService.get().subscribe((data: any) => {
@@ -67,7 +67,7 @@ export class OtpComponent implements OnInit {
       let validationObj = {
         otp: this.otp,
         language: this.selectedLanguage,
-        resumeServiceRequestId: localStorage.getItem('serviceRequestId'),
+        resumeServiceRequestId: sessionStorage.getItem('serviceRequestId'),
       };
       this.service.loginService.validateOTPVIAFP(validationObj).subscribe(
         async (res: any) => {
@@ -75,7 +75,7 @@ export class OtpComponent implements OnInit {
             // this.activeModal.dismiss();
             this.closeModal();
             this.spinner.hide();
-            localStorage.setItem('serviceRequestId', res.serviceRequestId);
+            sessionStorage.setItem('serviceRequestId', res.serviceRequestId);
             // const modalRef = this.modalSerivce.open(ChangePinComponent, { animation: false, backdrop: false });
             // modalRef.componentInstance.isForgotPassword = true;
             this.matDialog.open(ChangePinComponent, {
@@ -97,14 +97,14 @@ export class OtpComponent implements OnInit {
       let confirmObj = {
         otp: this.otp,
         language: this.selectedLanguage,
-        resumeServiceRequestId: localStorage.getItem('serviceRequestId'),
+        resumeServiceRequestId: sessionStorage.getItem('serviceRequestId'),
       };
       this.service.loginService.loginConfirm(confirmObj).subscribe(
         async (res: any) => {
           if (res.status === 'SUCCEEDED') {
             // this.activeModal.dismiss();
             this.closeModal();
-            localStorage.setItem('access_token', res.token.access_token);
+            sessionStorage.setItem('access_token', res.token.access_token);
             await this.service.loginService.loginSuccessfully();
             this.spinner.hide();
             this.router.navigate(['/']);
@@ -122,7 +122,7 @@ export class OtpComponent implements OnInit {
     } else {
       let postObj = {
         otp: this.otp,
-        resumeServiceRequestId: localStorage.getItem('serviceRequestId'),
+        resumeServiceRequestId: sessionStorage.getItem('serviceRequestId'),
       };
       this.service.loginService.verifyOTP(postObj).subscribe(
         async (res: any) => {
@@ -134,7 +134,7 @@ export class OtpComponent implements OnInit {
             } else {
               // this.activeModal.dismiss();
               // this.service.loginService.generateBearer().subscribe(async (res: any) => {
-              // localStorage.setItem('access_token', res.access_token);
+              // sessionStorage.setItem('access_token', res.access_token);
               await this.service.loginService.loginSuccessfully();
 
               this.router.navigate(['/']);
@@ -170,7 +170,7 @@ export class OtpComponent implements OnInit {
   reSendOTP() {
     this.hasErrors = false;
     // this.service.loginService.generateBearer().subscribe(async (res: any) => {
-    //  localStorage.setItem('access_token', res.access_token);
+    //  sessionStorage.setItem('access_token', res.access_token);
     this.service.loginService.resendOTP().subscribe(
       async (data: any) => {
         console.log('res resend', data);

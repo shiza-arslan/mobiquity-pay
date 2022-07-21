@@ -75,8 +75,8 @@ export class SignupFormComponent implements OnInit, OnChanges {
 
     this.spinner.show();
 
-    if (localStorage.getItem('language')) {
-      this.language = localStorage.getItem('language');
+    if (sessionStorage.getItem('language')) {
+      this.language = sessionStorage.getItem('language');
     }
     this.service.translateService.language.subscribe((res: any) => {
       this.service.translateService.getLang().subscribe((lang: any) => {
@@ -100,7 +100,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
         // this.formField[8].value = 'GEN_MAL';
 
         // this.service.loginService.generateBearer().subscribe((res: any) => {
-        // localStorage.setItem('access_token', res.access_token);
+        // sessionStorage.setItem('access_token', res.access_token);
 
         this.service.signupService.getSelfRegistration(this.language).subscribe((regData: any) => {
           this.countriesList = regData.countryList;
@@ -279,8 +279,8 @@ export class SignupFormComponent implements OnInit, OnChanges {
   generateOTP() {
     if (this.mobile && this.isMobValUnique) {
       this.service.loginService.generateOtp(this.mobile).subscribe(async (res: any) => {
-        localStorage.setItem('serviceRequestId', res.serviceRequestId);
-        localStorage.setItem('mobile', this.mobile);
+        sessionStorage.setItem('serviceRequestId', res.serviceRequestId);
+        sessionStorage.setItem('mobile', this.mobile);
         // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
         const dialogRef = this.matDialog.open(OtpComponent, {
           data: { isRegUser: true },

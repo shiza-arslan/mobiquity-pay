@@ -12,11 +12,17 @@ export class PreLoginComponent implements OnInit {
   // translation: any = [];
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
-    if (sessionStorage.getItem('access_token')) {
-      this.authService.generateBearer().subscribe((res: any) => {
-        sessionStorage.setItem('access_token', res.access_token);
-      });
-    }
+    this.authService.generateBearer().then(() => {
+      setTimeout(() => {
+        this.authService.generateBearer();
+        alert('your token is generated');
+      }, 12000);
+    });
+    // if (sessionStorage.getItem('access_token')) {
+    //   this.authService.generateBearer().subscribe((res: any) => {
+    //     sessionStorage.setItem('access_token', res.access_token);
+    //   });
+    // }
   }
 
   // this.language = 'en';

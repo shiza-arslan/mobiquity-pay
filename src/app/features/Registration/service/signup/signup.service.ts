@@ -118,7 +118,7 @@ export class SignupService {
     // return this.api.post(this.appUrl + this.apiUrlService.uploadFile(mobile, type), httpOptions);
     let body = new FormData();
     body.append('file', file);
-    const token = localStorage.getItem('access_token');
+    const token = sessionStorage.getItem('access_token');
     const httpOptions = {
       headers: new HttpHeaders({
         Accept: '*/*',
@@ -136,7 +136,7 @@ export class SignupService {
 
   uploadFileKYC(file: any, mobile: any, type: any, docType: any) {
     // const body = new FormData();
-    // const token = localStorage.getItem('access_token');
+    // const token = sessionStorage.getItem('access_token');
     // const httpOptions = {
     //   headers: new HttpHeaders({
     //     Accept: '*/*',
@@ -151,7 +151,7 @@ export class SignupService {
     // );
     let body = new FormData();
     body.append('file', file, file.name);
-    const token = localStorage.getItem('access_token');
+    const token = sessionStorage.getItem('access_token');
     const httpOptions = {
       headers: new HttpHeaders({
         Accept: '*/*',
@@ -166,7 +166,7 @@ export class SignupService {
     );
   }
   RegisterUser(payLoad: any) {
-    const token = localStorage.getItem('access_token');
+    const token = sessionStorage.getItem('access_token');
 
     let httpOptions = {
       headers: new HttpHeaders({

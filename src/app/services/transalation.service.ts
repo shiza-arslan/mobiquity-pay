@@ -9,8 +9,8 @@ export class TranslationService {
   public language = new BehaviorSubject<string>('en');
   selectedLanguage: any;
   constructor(private http: HttpClient) {
-    if (localStorage.getItem('language')) {
-      this.selectedLanguage = localStorage.getItem('language');
+    if (sessionStorage.getItem('language')) {
+      this.selectedLanguage = sessionStorage.getItem('language');
       document.querySelector('html')?.setAttribute('lang', this.selectedLanguage);
       this.language.next(this.selectedLanguage);
       this.get();

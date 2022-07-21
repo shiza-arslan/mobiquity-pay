@@ -10,6 +10,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FeatureModule } from '../app/features/feature.module';
 import { InterceptorModule } from './common/interceptors/interceptor.module';
 import { HomeModule } from './home/home.module';
+
 /**
  * AoT requires an exported function for factories
  *

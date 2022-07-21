@@ -30,8 +30,8 @@ export class SignupHeaderComponent implements OnInit {
   constructor(private matDialog: MatDialog, private service: UowService) {}
 
   ngOnInit(): void {
-    if (localStorage.getItem('language')) {
-      this.selectedLanguage = localStorage.getItem('language');
+    if (sessionStorage.getItem('language')) {
+      this.selectedLanguage = sessionStorage.getItem('language');
     }
   }
 
@@ -41,6 +41,6 @@ export class SignupHeaderComponent implements OnInit {
   changeLanguage(lang: string) {
     this.service.translateService.setLang(lang);
     this.selectedLanguage = lang;
-    localStorage.setItem('language', lang);
+    sessionStorage.setItem('language', lang);
   }
 }
