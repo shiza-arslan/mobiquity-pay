@@ -1,12 +1,17 @@
-const { join } = require('path');
-
-/** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    join(__dirname, 'src/**/!(*.stories|*.spec).{ts,html}'),
-  ],
+  prefix: '',
+  purge: {
+    enabled: true,
+    content: [
+      './src/**/*.{html,ts}',
+    ]
+  },
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     extend: {},
   },
+  variants: {
+    extend: {},
+  },
   plugins: [],
-}
+};
