@@ -1,11 +1,7 @@
 import { WebConfig } from '../utils/models/web-config.model';
-import { NavigationConfig } from '../utils/models/navigation-config.model';
 
 export const getWebConfig = (): WebConfig => {
   return window['config' as any] as unknown as WebConfig;
-};
-export const getNavigationConfig = (): NavigationConfig => {
-  return window['navigationConfig' as any] as unknown as NavigationConfig;
 };
 export const environment = {
   constants: {

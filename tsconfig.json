@@ -27,7 +27,7 @@
       "@mobiquity/api": ["src/app/data-access/index.ts"],
       "@mobiquity/common": ["src/app/common/index.ts"],
       "@mobiquity/services":["src/app/services/index.ts"],
-      "@mobiquity/navigationConfig":["src/app/util/index"],
+      "@mobiquity/webConfig":["src/app/util/index"],
       "@mobiquity/PipeModule":["src/app/common/index"],
     }
   },
