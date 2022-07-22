@@ -11,7 +11,7 @@ import { ApiUrlService } from '../../../../services/api-url.service';
 @Injectable({
   providedIn: 'root',
 })
-export class LoginService {
+export class UserService {
   baseUrl = EpConfig.getServerUrl();
   appURL = EpConfig.getMockUrl();
   private isLoggedIn = new BehaviorSubject<boolean>(false);
