@@ -71,9 +71,12 @@
     },
     "AuthConfig":{
       "refreshTokenBrforeExpiry":30
+    },
+    "profileDetails": {
+      "authProfile": "SubsDefault",
+      "marketingProfile": "SUBSDefaultMP",
+      "regulatoryProfile": "FULL_KYC",
+      "securityProfile": "SP.100011"
     }
-    
   }
-    
-
 }

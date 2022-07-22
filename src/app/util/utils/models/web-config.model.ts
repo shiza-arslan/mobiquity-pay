@@ -10,5 +10,12 @@ export interface WebConfig {
     AuthConfig: {
       refreshTokenBrforeExpiry: number;
     };
+    profileDetails: {
+      authProfile: string,
+      marketingProfile: string,
+      regulatoryProfile: string,
+      securityProfile: string
+    };
+
   };
 }

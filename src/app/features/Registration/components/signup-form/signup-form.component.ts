@@ -12,6 +12,8 @@ import { ErrorPopupComponent } from '../../../../shared/components/error-popup/e
 import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
 
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { getWebConfig } from '@mobiquity/webConfig';
+
 import { SuccessPinComponent } from '../../../../shared/components/success-pin/success-pin.component';
 
 @Component({
@@ -24,6 +26,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
   formFields: Observable<any> | any;
   formField: FormField<string>[] = [];
   registerForm: FormGroup | any;
+  config = getWebConfig();
   get fc() {
     return this.registerForm.controls;
   }
@@ -407,7 +410,8 @@ export class SignupFormComponent implements OnInit, OnChanges {
   CreateProfile() {
     let payload = {
       payload: {
-        profileDetails: environment.constants.profileDetails,
+        //profileDetails: environment.constants.profileDetails,
+        profileDetails: this.config.screenSettings.profileDetails,
         userInformation: {
           basicInformation: {
             dateOfBirth: this.registerForm.value.dateOfBirth,
