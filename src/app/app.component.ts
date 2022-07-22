@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { UowService } from '@mobiquity/services';
 import { Subject } from 'rxjs';
 import { InactivityPopupComponent } from './shared/components/inactivity-popup/inactivity-popup.component';
+import { getWebConfig } from '@mobiquity/webConfig';
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,8 @@ export class AppComponent {
   selectedLanguage: any = 'en';
   textDir = 'ltr';
   userActvity: any;
-  inactivitySpan = 600000;
-  inactivityPopupspan = 60000;
+  inactivitySpan = getWebConfig().screenSettings.inActivityPrams.inactivitySpan;
+  inactivityPopupspan = getWebConfig().screenSettings.inActivityPrams.inactivityPopupspan;
   userInactive: Subject<any> = new Subject();
   keepAlive: boolean | undefined;
   // sessionStorage.getItem('isLoggedIn') != 'false' && sessionStorage.getItem('isLoggedIn') != null

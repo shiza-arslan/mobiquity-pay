@@ -11,11 +11,14 @@ export interface WebConfig {
       refreshTokenBrforeExpiry: number;
     };
     profileDetails: {
-      authProfile: string,
-      marketingProfile: string,
-      regulatoryProfile: string,
-      securityProfile: string
+      authProfile: string;
+      marketingProfile: string;
+      regulatoryProfile: string;
+      securityProfile: string;
     };
-
+    inActivityPrams: {
+      inactivitySpan: number;
+      inactivityPopupspan: number;
+    };
   };
 }
