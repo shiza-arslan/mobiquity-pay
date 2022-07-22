@@ -27,7 +27,7 @@ export class AuthService {
       sessionStorage.removeItem('access_token');
       this.http.post(this.baseUrl + 'mobiquitypay/oauth/token', formData, httpOptions).subscribe({
         next: (res: any) => {
-          console.log(res);
+          //console.log(res);
           sessionStorage.setItem('access_token', res.access_token);
           sessionStorage.setItem('token_expiry_time', res.expires_in);
           resolve();
@@ -36,7 +36,7 @@ export class AuthService {
           reject(err);
         },
         complete: () => {
-          console.log('complete');
+          // console.log('complete');
         },
       });
     });
@@ -64,7 +64,7 @@ export class AuthService {
           reject(err);
         },
         complete: () => {
-          console.log('complete');
+          // console.log('complete');
         },
       });
     });

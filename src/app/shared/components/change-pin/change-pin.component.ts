@@ -7,6 +7,7 @@ import { LoginComponent } from '../../../features/PreLogin/component/login/login
 import { SuccessPinComponent } from '../success-pin/success-pin.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorPopupComponent } from '../error-popup/error-popup.component';
+import { getWebConfig } from '@mobiquity/webConfig';
 
 @Component({
   selector: 'mobiquity-pay-change-pin',
@@ -21,7 +22,9 @@ export class ChangePinComponent implements OnInit {
   mobile: any;
   type = 'password';
   resetForm!: FormGroup;
+  Config = getWebConfig();
 
+  maxLengthPIN = this.Config.screenSettings.validations.maxLengthPIN;
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -63,26 +66,23 @@ export class ChangePinComponent implements OnInit {
   changePin() {
     if (this.resetForm.invalid || this.hasErrors) return;
     if (this.isForgotPassword) {
-        this.service.loginService.resetPIN({ ...this.resetForm.value, language: this.selectedLanguage }).subscribe(
-          async (res: any) => {
+      this.service.loginService.resetPIN({ ...this.resetForm.value, language: this.selectedLanguage }).subscribe(
+        async (res: any) => {
+          this.closeModal();
+
+          if (res.status === 'SUCCEEDED') {
+            this.matDialog.open(SuccessPinComponent);
+          }
+        },
+        (error: any) => {
+          if (error.status === 'FAILED') {
             this.closeModal();
-
-            if (res.status === 'SUCCEEDED') {
-              this.matDialog.open(SuccessPinComponent);
-
-            }
-          },
-          (error: any) => {
-            if (error.status === 'FAILED') {
-
-              this.closeModal();
-              this.matDialog.open(ErrorPopupComponent, {
-                data: error.errors[0].message,
-              });
-            }
-          },
-        );
-
+            this.matDialog.open(ErrorPopupComponent, {
+              data: error.errors[0].message,
+            });
+          }
+        },
+      );
     } else {
       this.service.loginService
         .changePin({ ...this.resetForm.value, language: this.selectedLanguage, mobile: this.mobile })

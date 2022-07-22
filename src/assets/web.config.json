@@ -81,6 +81,29 @@
     "inActivityPrams" : {
       "inactivitySpan" : 600000,
       "inactivityPopupspan" : 60000
-    }
+    },
+    "validations" : {
+      "maxLengthUser" :14,
+      "maxLengthPIN" :4
+    },
+    "languages" : [
+      {
+        "label": "English",
+        "lang": "en"
+      },
+      {
+        "label": "Arabic",
+        "lang": "ar"
+      },
+      {
+        "label": "French",
+        "lang": "french"
+      },
+      {
+        "label": "Spanish",
+        "lang": "spanish"
+      }
+    ]
+
   }
 }

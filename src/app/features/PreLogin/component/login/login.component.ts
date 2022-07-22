@@ -12,6 +12,8 @@ import { map } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorPopupComponent } from '../../../../shared/components/error-popup/error-popup.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { getWebConfig } from '@mobiquity/webConfig';
+import { config } from 'rxjs';
 
 @Component({
   selector: 'mobiquity-pay-login',
@@ -22,24 +24,10 @@ export class LoginComponent implements OnInit {
   selectedLanguage: any = 'en';
   translation: any;
   type = 'password';
-  languages = [
-    {
-      label: 'English',
-      lang: 'en',
-    },
-    {
-      label: 'Arabic',
-      lang: 'ar',
-    },
-    {
-      label: 'French',
-      lang: 'french',
-    },
-    {
-      label: 'Spanish',
-      lang: 'spanish',
-    },
-  ];
+  Config = getWebConfig();
+  maxLengthUser = this.Config.screenSettings.validations.maxLengthUser;
+  maxLengthPIN = this.Config.screenSettings.validations.maxLengthPIN;
+  languages = this.Config.screenSettings.languages;
   loginForm!: FormGroup;
 
   constructor(
@@ -86,7 +74,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.spinner.show();
     sessionStorage.setItem('mobile', this.loginForm.value.mobile);
-   // sessionStorage.setItem('mpin', this.loginForm.value.pin);
+    // sessionStorage.setItem('mpin', this.loginForm.value.pin);
     this.service.loginService
       .login({ ...this.loginForm.value, language: this.selectedLanguage })
       .pipe(map((res1: any) => res1))
@@ -94,12 +82,12 @@ export class LoginComponent implements OnInit {
         async (res: any) => {
           if (res.status == 'PAUSED') {
             sessionStorage.setItem('serviceRequestId', res.serviceRequestId);
-             // sessionStorage.setItem('access_token', res.access_token);
-              this.closeModal();
-              this.spinner.hide();
-              this.matDialog.open(OtpComponent, {
-                data: { isNormalUser: true },
-              });
+            // sessionStorage.setItem('access_token', res.access_token);
+            this.closeModal();
+            this.spinner.hide();
+            this.matDialog.open(OtpComponent, {
+              data: { isNormalUser: true },
+            });
           } else if (res.status == 'SUCCEEDED') {
             //sessionStorage.setItem('access_token', res.token.access_token);
             await this.service.loginService.loginSuccessfully();
@@ -119,7 +107,6 @@ export class LoginComponent implements OnInit {
               data: error.errorUserMsg,
             });
           } else if (error.status === 'FAILED' && error.errors[0].code === 'FTL01') {
-
             this.closeModal();
             // this.activeModal.dismiss();
             // const modalRef = this.modalSerivce.open(ChangePinComponent, { animation: false, backdrop: false });
