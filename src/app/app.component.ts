@@ -32,7 +32,7 @@ export class AppComponent {
   }
 
   ngOnInit() {
-    if (true) {
+    if (sessionStorage.getItem('isLoggedIn') != 'false' && sessionStorage.getItem('isLoggedIn') != null) {
       this.setTimeout();
       this.userInactive.subscribe(() => {
         // sessionStorage.removeItem('access_token');
