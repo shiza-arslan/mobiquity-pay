@@ -46,7 +46,7 @@ export class LogoHeaderComponent implements OnInit {
       this.selectedLanguage = lang;
     });
 
-    if (sessionStorage.getItem('isLoggedIn')) {
+    if (sessionStorage.getItem('isLoggedIn')!='false' && sessionStorage.getItem('isLoggedIn')!=null) {
       this.isLoggedIn = sessionStorage.getItem('isLoggedIn');
     } else {
       this.service.loginService.getIsLoggedIn().subscribe((data: any) => {

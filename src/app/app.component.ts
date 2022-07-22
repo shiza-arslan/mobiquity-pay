@@ -14,7 +14,9 @@ export class AppComponent {
   userInactive: Subject<any> = new Subject();
 
   constructor(private Service: UowService) {
-    if (sessionStorage.getItem('isLoggedIn')){
+    if (sessionStorage.getItem('isLoggedIn')!='false' && sessionStorage.getItem('isLoggedIn')!=null){
+      //sessionStorage.removeItem('isLoggedIn')
+      debugger;
       this.setTimeout();
       this.userInactive.subscribe(() => {
         sessionStorage.removeItem('access_token');
