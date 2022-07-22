@@ -77,6 +77,10 @@
       "marketingProfile": "SUBSDefaultMP",
       "regulatoryProfile": "FULL_KYC",
       "securityProfile": "SP.100011"
+    },
+    "inActivityPrams" : {
+      "inactivitySpan" : 600000,
+      "inactivityPopupspan" : 60000
     }
   }
 }
