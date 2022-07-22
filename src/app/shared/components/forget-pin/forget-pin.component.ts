@@ -10,7 +10,7 @@ import { ErrorPopupComponent } from '../error-popup/error-popup.component';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomerSupportComponent } from '../customer-support/customer-support.component';
 import { SuccessPinComponent } from '../success-pin/success-pin.component';
-
+import { getWebConfig } from '@mobiquity/webConfig';
 @Component({
   selector: 'mobiquity-pay-forget-pin',
   templateUrl: './forget-pin.component.html',
@@ -20,6 +20,9 @@ export class ForgetPinComponent implements OnInit {
   selectedLanguage: any = 'en';
   translation: any;
   FGPin!: FormGroup;
+  Config = getWebConfig();
+  maxLength = this.Config.screenSettings.validations.maxLengthUser;
+
   constructor(
     private fb: FormBuilder,
     private router: Router,

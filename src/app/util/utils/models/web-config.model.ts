@@ -20,5 +20,10 @@ export interface WebConfig {
       inactivitySpan: number;
       inactivityPopupspan: number;
     };
+    validations: {
+      maxLengthUser: number;
+      maxLengthPIN: number;
+    };
+    languages: [];
   };
 }

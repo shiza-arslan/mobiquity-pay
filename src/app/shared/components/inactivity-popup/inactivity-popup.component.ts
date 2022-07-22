@@ -21,7 +21,7 @@ export class InactivityPopupComponent implements OnInit {
   }
 
   keepaLive() {
-    this.dialogRef.close('true');
+    this.dialogRef.close(true);
   }
   login() {
     this.closeModal();
