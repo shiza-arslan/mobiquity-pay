@@ -27,6 +27,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
   formField: FormField<string>[] = [];
   registerForm: FormGroup | any;
   config = getWebConfig();
+
   get fc() {
     return this.registerForm.controls;
   }
@@ -410,7 +411,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
   CreateProfile() {
     let payload = {
       payload: {
-        //profileDetails: environment.constants.profileDetails,
+        //profileDetails:  this.config.screenSettings.constants.profileDetails,
         profileDetails: this.config.screenSettings.profileDetails,
         userInformation: {
           basicInformation: {
@@ -427,28 +428,28 @@ export class SignupFormComponent implements OnInit, OnChanges {
             middleName: this.registerForm.value.middleName,
             city: this.registerForm.value.city,
             postalCode: this.registerForm.value.postalCode,
-            authenticationIdType: environment.constants.identifierType,
+            authenticationIdType: this.config.screenSettings.constants.identifierType,
             referralCode: this.registerForm.value.referralCode,
             emailId: this.registerForm.value.emailId,
             gender: this.registerForm.value.gender,
             country: this.registerForm.value.country,
             loginId: this.mobile,
           },
-          workspaceInformation: environment.constants.workspaceInformation,
+          workspaceInformation: this.config.screenSettings.constants.workspaceInformation,
         },
         kycs: this.KYCData,
         deviceInfo: {
-          deviceId: environment.constants.deviceInfo.deviceId,
-          os: environment.constants.deviceInfo.os,
-          appVersion: environment.constants.deviceInfo.appVersion,
-          appName: environment.constants.deviceInfo.appName,
-          providerIpAddress: environment.constants.deviceInfo.providerIpAddress,
-          model: environment.constants.deviceInfo.model,
-          appIdentifier: environment.constants.deviceInfo.appIdentifier,
-          isPublicDevice: environment.constants.deviceInfo.isPublicDevice,
+          deviceId: this.config.screenSettings.constants.deviceInfo.deviceId,
+          os: this.config.screenSettings.constants.deviceInfo.os,
+          appVersion: this.config.screenSettings.constants.deviceInfo.appVersion,
+          appName: this.config.screenSettings.constants.deviceInfo.appName,
+          providerIpAddress: this.config.screenSettings.constants.deviceInfo.providerIpAddress,
+          model: this.config.screenSettings.constants.deviceInfo.model,
+          appIdentifier: this.config.screenSettings.constants.deviceInfo.appIdentifier,
+          isPublicDevice: this.config.screenSettings.constants.deviceInfo.isPublicDevice,
         },
       },
-      source: environment.constants.bearerCode,
+      source: this.config.screenSettings.constants.bearerCode,
     };
     this.spinner.show();
     this.service.signupService.RegisterUser(payload).subscribe(

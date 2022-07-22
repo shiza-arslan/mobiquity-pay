@@ -8,6 +8,8 @@ import { environment } from '../../../../util/constants/app.constant';
 import { apiEndPoints } from '../../../../util/constants/url.constants';
 import { Api } from '../../../../services/api';
 import { ApiUrlService } from '../../../../services/api-url.service';
+import { getWebConfig } from '@mobiquity/webConfig';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -15,6 +17,7 @@ export class SignupService {
   baseUrl = EpConfig.getMockUrl();
   appUrl = EpConfig.getServerUrl();
   formFields: any;
+  Config = getWebConfig();
   formG: FormGroup | any;
   constructor(private http: HttpClient, private api: Api, private apiUrlService: ApiUrlService) {}
   getsignupformData(lang: string) {
@@ -101,7 +104,7 @@ export class SignupService {
   }
   validateReferralCode(refCode: any) {
     const postData = {
-      workspaceId: environment.constants.workspaceId,
+      workspaceId: this.Config.screenSettings.constants.workspaceId,
       referralCode: refCode,
     };
 
