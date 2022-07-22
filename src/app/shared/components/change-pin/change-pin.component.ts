@@ -63,33 +63,26 @@ export class ChangePinComponent implements OnInit {
   changePin() {
     if (this.resetForm.invalid || this.hasErrors) return;
     if (this.isForgotPassword) {
-      this.service.loginService.generateBearer().subscribe(async (res: any) => {
-        sessionStorage.setItem('access_token', res.access_token);
         this.service.loginService.resetPIN({ ...this.resetForm.value, language: this.selectedLanguage }).subscribe(
           async (res: any) => {
-            // this.activeModal.dismiss();
             this.closeModal();
 
             if (res.status === 'SUCCEEDED') {
-              // const modalRef = this.modalSerivce.open(SuccessPinComponent, { animation: false, backdrop: false });
               this.matDialog.open(SuccessPinComponent);
-              // this.router.navigate(['/login']);
-              // redirect to  login after popup
+
             }
           },
           (error: any) => {
             if (error.status === 'FAILED') {
-              // this.activeModal.dismiss();
+
               this.closeModal();
-              // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
               this.matDialog.open(ErrorPopupComponent, {
                 data: error.errors[0].message,
               });
-              // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
             }
           },
         );
-      });
+
     } else {
       this.service.loginService
         .changePin({ ...this.resetForm.value, language: this.selectedLanguage, mobile: this.mobile })

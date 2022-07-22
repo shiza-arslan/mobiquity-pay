@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.spinner.show();
     sessionStorage.setItem('mobile', this.loginForm.value.mobile);
-    sessionStorage.setItem('mpin', this.loginForm.value.pin);
+   // sessionStorage.setItem('mpin', this.loginForm.value.pin);
     this.service.loginService
       .login({ ...this.loginForm.value, language: this.selectedLanguage })
       .pipe(map((res1: any) => res1))
@@ -94,22 +94,14 @@ export class LoginComponent implements OnInit {
         async (res: any) => {
           if (res.status == 'PAUSED') {
             sessionStorage.setItem('serviceRequestId', res.serviceRequestId);
-            this.service.loginService.generateBearer().subscribe((res: any) => {
-              sessionStorage.setItem('access_token', res.access_token);
-
-              // this.activeModal.dismiss();
+             // sessionStorage.setItem('access_token', res.access_token);
               this.closeModal();
               this.spinner.hide();
-
               this.matDialog.open(OtpComponent, {
-                data: { isNormalUser: false },
+                data: { isNormalUser: true },
               });
-              // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
-              // modalRef.componentInstance.isNormalUser = true;
-            });
-            //this.router.navigate(['/otp']);
           } else if (res.status == 'SUCCEEDED') {
-            sessionStorage.setItem('access_token', res.token.access_token);
+            //sessionStorage.setItem('access_token', res.token.access_token);
             await this.service.loginService.loginSuccessfully();
             this.spinner.hide();
             // this.activeModal.dismiss();
@@ -127,9 +119,7 @@ export class LoginComponent implements OnInit {
               data: error.errorUserMsg,
             });
           } else if (error.status === 'FAILED' && error.errors[0].code === 'FTL01') {
-            this.service.loginService.generateBearer().subscribe((res: any) => {
-              sessionStorage.setItem('access_token', res.access_token);
-            });
+
             this.closeModal();
             // this.activeModal.dismiss();
             // const modalRef = this.modalSerivce.open(ChangePinComponent, { animation: false, backdrop: false });

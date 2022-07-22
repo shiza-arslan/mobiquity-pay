@@ -61,7 +61,7 @@ export class LoginService {
       this.api
         .get(
           this.baseUrl +
-            `mobiquity-pay/v1/security-profile?workspace=${environment.constants.workspaceId}&identifierValue=${mobile}&identifierType=${environment.constants.identifierType}`,
+            `mobiquitypay/v1/security-profile?workspace=${environment.constants.workspaceId}&identifierValue=${mobile}&identifierType=${environment.constants.identifierType}`,
         )
         .subscribe((res: any) => {
           this.securityProfile.next(res.securityProfile);
