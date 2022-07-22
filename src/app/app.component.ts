@@ -14,11 +14,16 @@ export class AppComponent {
   userInactive: Subject<any> = new Subject();
 
   constructor(private Service: UowService) {
-    this.setTimeout();
-    this.userInactive.subscribe(() => {
-      sessionStorage.removeItem('access_token');
-      alert('your access_token is remove from session');
-    });
+    if (sessionStorage.getItem('isLoggedIn')){
+      this.setTimeout();
+      this.userInactive.subscribe(() => {
+        sessionStorage.removeItem('access_token');
+        alert('your access_token is remove from session');
+      });
+    }else{
+      sessionStorage.setItem('isLoggedIn', 'false');
+    }
+
   }
   setTimeout() {
     this.userActvity = setTimeout(() => this.userInactive.next(undefined), 6000);
