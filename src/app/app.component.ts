@@ -14,8 +14,9 @@ export class AppComponent {
   selectedLanguage: any = 'en';
   textDir = 'ltr';
   userActvity: any;
-  inactivitySpan = getWebConfig().screenSettings.inActivityPrams.inactivitySpan;
-  inactivityPopupspan = getWebConfig().screenSettings.inActivityPrams.inactivityPopupspan;
+  Config = getWebConfig();
+  inactivitySpan = this.Config.screenSettings.inActivityPrams.inactivitySpan;
+  inactivityPopupspan = this.Config.screenSettings.inActivityPrams.inactivityPopupspan;
   userInactive: Subject<any> = new Subject();
   keepAlive: boolean | undefined;
   // sessionStorage.getItem('isLoggedIn') != 'false' && sessionStorage.getItem('isLoggedIn') != null
