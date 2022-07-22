@@ -2584,11 +2584,16 @@ input[type='radio']:checked + label {
   .register-progress:after {
     height: 50%;
   }
-
   .register-progress:after {
     width: 2px;
     background-color: #d1d5db;
     left: 18px;
+    transform: translate(90%, -75%);
+  }
+  [lang='ar'].register-progress:after {
+    width: 2px;
+    background-color: #d1d5db;
+    right: 18px;
     transform: translate(90%, -75%);
   }
 
