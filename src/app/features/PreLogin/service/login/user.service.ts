@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { apiEndPoints } from '../../../../util/constants/url.constants';
 import { Api } from '../../../../services/api';
 import { ApiUrlService } from '../../../../services/api-url.service';
+import { getWebConfig } from '@mobiquity/webConfig';
 @Injectable({
   providedIn: 'root',
 })
@@ -19,6 +20,8 @@ export class UserService {
   private authorizationProfile = new BehaviorSubject<any>(null);
   private securityProfile = new BehaviorSubject<any>(null);
   private walletBalance = new BehaviorSubject<any>(null);
+  Config = getWebConfig();
+
   constructor(
     private http: HttpClient,
     private deviceService: DeviceDetectorService,
@@ -26,7 +29,7 @@ export class UserService {
     private apiUrlService: ApiUrlService,
   ) {}
   login(data: any) {
-    const body = environment.constants;
+    const body = this.Config.screenSettings.constants;
     body.identifierValue = data.mobile;
     body.authenticationValue = data.pin;
     body.deviceInfo.browser = this.deviceService.browser;
@@ -46,8 +49,10 @@ export class UserService {
   }
   generateOtp(phone: any) {
     const body = {
-      identifierType: environment.constants.identifierType,
-      otpServiceCode: environment.constants.otpServiceCode,
+      //identifierType:  this.Config.screenSettings.constants.identifierType,
+      // otpServiceCode:  this.Config.screenSettings.constants.otpServiceCode,
+      identifierType: this.Config.screenSettings.constants.identifierType,
+      otpServiceCode: this.Config.screenSettings.constants.otpServiceCode,
       identifierValue: phone,
     };
 
@@ -61,7 +66,7 @@ export class UserService {
       this.api
         .get(
           this.baseUrl +
-            `mobiquitypay/v1/security-profile?workspace=${environment.constants.workspaceId}&identifierValue=${mobile}&identifierType=${environment.constants.identifierType}`,
+            `mobiquitypay/v1/security-profile?workspace=${this.Config.screenSettings.constants.workspaceId}&identifierValue=${mobile}&identifierType=${this.Config.screenSettings.constants.identifierType}`,
         )
         .subscribe((res: any) => {
           this.securityProfile.next(res.securityProfile);
@@ -103,13 +108,13 @@ export class UserService {
   changePin(data: any) {
     const postData = {
       confirmedAuthenticationValue: data.confirmPin,
-      identifierType: environment.constants.identifierType,
+      identifierType: this.Config.screenSettings.constants.identifierType,
       identifierValue: data.mobile,
       language: data.language,
       newAuthenticationValue: data.pin,
       oldAuthenticationValue: '0000',
-      requestedBy: environment.constants.requestedBy,
-      workspaceId: environment.constants.workspaceId,
+      requestedBy: this.Config.screenSettings.constants.requestedBy,
+      workspaceId: this.Config.screenSettings.constants.workspaceId,
     };
 
     return this.api.post(this.baseUrl + apiEndPoints.login.changePinUrl, postData);
@@ -126,11 +131,11 @@ export class UserService {
   }
   forgetPin(data: any) {
     const reqData = {
-      bearerCode: environment.constants.bearerCode,
-      //otpServiceCode: environment.constants.otpServiceCode,
+      bearerCode: this.Config.screenSettings.constants.bearerCode,
+      //otpServiceCode:  this.Config.screenSettings.constants.otpServiceCode,
       identifierValue: data.mobile,
-      identifierType: environment.constants.identifierType,
-      workspaceId: environment.constants.workspaceId,
+      identifierType: this.Config.screenSettings.constants.identifierType,
+      workspaceId: this.Config.screenSettings.constants.workspaceId,
       language: data.language,
     };
 

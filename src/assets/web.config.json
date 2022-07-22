@@ -86,6 +86,38 @@
       "maxLengthUser" :14,
       "maxLengthPIN" :4
     },
+    "constants": {
+      "bearerCode": "WEB",
+      "language": "en",
+      "workspaceId": "SUBSCRIBER",
+      "identifierType": "MSISDN",
+      "otpServiceCode": "SUBREG",
+      "identifierValue": "",
+      "authenticationValue": "0000",
+      "isTokenRequired": "Y",
+      "requestedBy": "SELF",
+      "deviceInfo": {
+        "appName": "mobilePay",
+        "appVersion": 10.2,
+        "deviceId": "8c9397df59ebe355003cd5729b6e8a20",
+        "browser": "",
+        "isPublicDevice": "N",
+        "appIdentifier": "com.comviva.mobiquity-pay.consumer.DEV",
+        "latitude": "",
+        "longitude":"",
+        "mac": "",
+        "model": "",
+        "networkOperator": "",
+        "networkType": "",
+        "os": "",
+        "providerIpAddress": "115.99.200.37"
+      },
+      "workspaceInformation": {
+        "categoryCode": "SUBS",
+        "workspace1": "SUBSCRIBER",
+        "categoryName": "Subscriber"
+      }
+    },
     "languages" : [
       {
         "label": "English",
@@ -104,6 +136,8 @@
         "lang": "spanish"
       }
     ]
+    
+   
 
   }
 }
