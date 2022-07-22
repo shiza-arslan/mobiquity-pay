@@ -2568,6 +2568,7 @@ input[type='radio']:checked + label {
   transform: translate(90%, -50%);
 }
 
+
 .register-progress:last-of-type::after {
   display: none;
 }
@@ -2586,8 +2587,13 @@ input[type='radio']:checked + label {
     width: 2px;
     background-color: #d1d5db;
     left: 18px;
+    right: 18px;
     transform: translate(90%, -75%);
   }
+  .ar-nav-adj{
+    width: 40% !important;
+  }
+
   .register-progress:last-of-type::after {
     display: block;
   }
@@ -3294,3 +3300,8 @@ input::placeholder {
 .footer-icon-align{
   align-items: center;
 }
+.ar-text-adjustment{
+  position: absolute;
+  right: 35%;
+}
+
