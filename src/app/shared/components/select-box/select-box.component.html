@@ -1,5 +1,6 @@
 <div [formGroup]="form" class="form-group">
   <label class="text-dropdown-custom text-xs font-medium mb-2" for="">{{ input?.label }}</label>
+
   <select
     name="Country"
     id=""
@@ -9,6 +10,9 @@
   >
     <option [value]="opt.key" *ngFor="let opt of input.options; let i = index"> {{ opt.value }}</option>
   </select>
+  <svg class="fill-current ml-auto h-4 w-4 svg-pos" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+  </svg>
   <!-- <div *ngIf="f[input.key].touched && f[ input.key].invalid" class="alert alert-danger">
     <div *ngIf="f[input.key].errors && f[input.key].errors['required']">{{input.label}} is required.</div>
 

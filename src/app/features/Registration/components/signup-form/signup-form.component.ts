@@ -465,7 +465,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
         this.spinner.hide();
         // const modalRef = this.modalSerivce.open(SuccessPopupComponent, { animation: false, backdrop: false });
         // modalRef.componentInstance.message = resData.message;
-        this.matDialog.open(SuccessPinComponent, {
+        this.matDialog.open(SuccessPopupComponent, {
           data: resData.message,
         });
         this.resetWizard();
