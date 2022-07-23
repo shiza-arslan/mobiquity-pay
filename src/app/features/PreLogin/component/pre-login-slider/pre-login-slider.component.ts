@@ -53,8 +53,8 @@ export class PreLoginSliderComponent implements OnInit {
     this.service.preLoginService.getPreLoginData(this.language).subscribe((data: any) => {
       this.preLoginData = data;
 
-      this.first_slider = this.preLoginData.bannersfirst.en;
-      this.second_slider = this.preLoginData.bannerssecond.en;
+      this.first_slider = this.preLoginData.banners[1];
+      this.second_slider = this.preLoginData.banners[2];
       // console.log(this.first_slider);
       // console.log(this.second_slider);
       // this.slickModal.unslick();
