@@ -3311,21 +3311,25 @@ input::placeholder {
   background-color: rgb(107 69 189 / var(--tw-bg-opacity));
   color: rgb(199 210 254 / var(--tw-text-opacity));
 }
-.icon-seetings select {
+select {
   -webkit-appearance: none;
   appearance: none;
 }
-.icon-seetings .select-wrapper {
+.select-wrapper {
   position: relative;
 }
 
-.icon-seetings .select-wrapper::after {
-  font-size: 1rem;
-  top: 30px;
-  right: 30px;
-  position: relative;
-  content: '\f107' !important;
-  font-weight: 900;
-  margin-right: 4px;
-  pointer-events: none;
+.select-wrapper::after {
+  content: '';
+  display: inline-block;
+
+  width: 0.5rem;
+  margin-right: 12px;
+  height: 0.5rem;
+  border-bottom: 1px solid #7d82b5;
+  border-left: 1px solid #7d82b5;
+  border-bottom-left-radius: 2px;
+  transform: rotate(-45deg) translate(0%, 0%);
+  transform-origin: center center;
+  transition: transform ease-in-out 100ms;
 }

@@ -322,7 +322,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
     }
   }
   uploadKYCDoc(event: any) {
-    this.mobile = '232323232323';
+    // this.mobile = '232323232323';
     this.spinner.show();
     if (event.target.files.length > 0 && this.mobile && this.docTypeKYC) {
       let fileUrl = event.target.files[0];
