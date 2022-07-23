@@ -8,7 +8,8 @@
         class="register-progress flex flex-col flex-1 md:flex-row items-center text-center md:text-left cursor-pointer"
         style="width: 145px"
       >
-        <div [ngClass]="{'ar-nav-adj' : language=='ar'}"
+        <div
+          [ngClass]="{ 'ar-nav-adj': language == 'ar' }"
           class="rounded-full w-6 h-6 text-xs md:text-sm md:w-10 md:h-10 bg-progress flex justify-center text-white items-center"
         >
           1
@@ -78,6 +79,7 @@
   <!-- Left Section Ends  -->
 
   <!-- Center Content Starts  -->
+
   <div class="md:w-10/12 border rounded-md shadow-sm shadow-gray-200 p-5 mx-2 mb-12" style="width: 48rem">
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div *ngIf="activeForm === 'contacts'">
@@ -283,15 +285,13 @@
           <button
             [disabled]="isStepOne()"
             (click)="displayNextSection('address')"
-            class="bg-login-btn-custom px-14 text-sm font-medium text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
+            [ngClass]="{ 'btn-active': !isStepOne() }"
+            class="bg-login-btn-custom px-14 text-sm font-medium text-indigo-900 rounded-md py-3 transition-all"
             >Next</button
           >
         </div>
         <div class="text-center text-sm my-4">
-          <p>
-            Already have an account?
-            <a class="text-login-custom" href="login-modal-2.html"> Login</a>
-          </p>
+          <p>Already have an account? <a class="text-login-custom" (click)="openModal()"> Login</a></p>
         </div>
       </div>
       <div *ngIf="activeForm === 'address'">
@@ -400,7 +400,8 @@
             <button
               [disabled]="isStepTwo()"
               (click)="displayNextSection('kyc')"
-              class="bg-login-btn-custom px-14 font-medium text-sm text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
+              [ngClass]="{ 'btn-active': !isStepTwo() }"
+              class="bg-login-btn-custom px-14 text-sm font-medium text-indigo-900 rounded-md py-3 transition-all"
               >Next</button
             >
           </div>
@@ -573,7 +574,8 @@
               <button
                 [disabled]="isAddKYC()"
                 (click)="displayNextSection('kyc-done')"
-                class="bg-login-btn-custom px-14 font-medium text-sm text-indigo-900 rounded-md py-3 hover:bg-progress hover:text-indigo-200 transition-all"
+                [ngClass]="{ 'btn-active': !isAddKYC() }"
+                class="bg-login-btn-custom px-14 text-sm font-medium text-indigo-900 rounded-md py-3 transition-all"
                 >Add</button
               >
             </div>

@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../util/constants/app.constant';
 import { ErrorPopupComponent } from '../../../../shared/components/error-popup/error-popup.component';
 import { SuccessPopupComponent } from '../../../../shared/components/success-popup/success-popup.component';
-
+import { LoginComponent } from 'src/app/features/PreLogin/component/login/login.component';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { getWebConfig } from '@mobiquity/webConfig';
 
@@ -206,7 +206,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
     this.formField[index].options = cities;
   }
   isStepOne() {
-    //return false;
+    return false;
     if (
       this.registerForm.controls['mobileNumber'].valid &&
       this.registerForm.controls['emailId'].valid &&
@@ -226,7 +226,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
     }
   }
   isStepTwo() {
-    //return false;
+    return false;
     if (
       this.registerForm.controls['address1'].valid &&
       this.registerForm.controls['address2'].valid &&
@@ -408,6 +408,12 @@ export class SignupFormComponent implements OnInit, OnChanges {
       this.errorMessage = '';
     }
   }
+
+  openModal() {
+    this.resetWizard();
+    this.matDialog.open(LoginComponent);
+  }
+
   CreateProfile() {
     let payload = {
       payload: {

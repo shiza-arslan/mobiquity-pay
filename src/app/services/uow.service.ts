@@ -6,6 +6,7 @@ import { IpGeolocationService } from './auth/ip-geolocation.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from './auth/auth.service';
 import { TranslationService } from './transalation.service';
+
 @Injectable({
   providedIn: 'root',
 })
