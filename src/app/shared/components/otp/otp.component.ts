@@ -39,14 +39,12 @@ export class OtpComponent implements OnInit {
     //@Inject(MAT_DIALOG_DATA) public isnormalUser: boolean,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
-
     this.isRegUser = data.isRegUser;
     this.isForgotPassword = data.isForgotPassword;
     this.isNormalUser = data.isNormalUser;
   }
 
   ngOnInit(): void {
-
     this.selectedLanguage = 'en';
     this.mobile = sessionStorage.getItem('mobile');
     if (sessionStorage.getItem('language')) {
