@@ -81,7 +81,7 @@
       "authProfile": "SubsDefault",
       "marketingProfile": "SUBSDefaultMP",
       "regulatoryProfile": "FULL_KYC",
-      "securityProfile": "SP.100011"
+      "securityProfile": "SP.8991658432498188"
     },
     "inActivityPrams" : {
       "inactivitySpan" : 600000,
@@ -119,7 +119,7 @@
       },
       "workspaceInformation": {
         "categoryCode": "SUBS",
-        "workspace1": "SUBSCRIBER",
+        "workspace": "SUBSCRIBER",
         "categoryName": "Subscriber"
       }
     },
