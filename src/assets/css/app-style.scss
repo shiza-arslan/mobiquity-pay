@@ -3322,7 +3322,6 @@ select {
 .select-wrapper::after {
   content: '';
   display: inline-block;
-
   width: 0.5rem;
   margin-right: 12px;
   height: 0.5rem;
@@ -3332,4 +3331,19 @@ select {
   transform: rotate(-45deg) translate(0%, 0%);
   transform-origin: center center;
   transition: transform ease-in-out 100ms;
+}
+input[type='date']::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  border-radius: 4px;
+  position: relative;
+  left: 24px;
+  opacity: 0.1;
+  filter: invert(0.8);
+  z-index: 1;
+  font-size: 20px;
+}
+.svg-pos {
+  position: relative;
+  right: 20px;
+  bottom: 30px;
 }
