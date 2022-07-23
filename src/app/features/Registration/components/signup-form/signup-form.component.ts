@@ -73,10 +73,6 @@ export class SignupFormComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.language = 'en';
-    this.service.signupService.getSelfRegistration('en').subscribe((res: any) => {
-      // console.log('country', res);
-    });
-
     this.spinner.show();
 
     if (sessionStorage.getItem('language')) {
@@ -101,10 +97,6 @@ export class SignupFormComponent implements OnInit, OnChanges {
       this.service.signupService.getFormControls(this.signupJsonData).then((res: any) => {
         this.formField = this.service.signupService.formFields;
         this.registerForm = this.service.signupService.formG;
-        // this.formField[8].value = 'GEN_MAL';
-
-        // this.service.loginService.generateBearer().subscribe((res: any) => {
-        // sessionStorage.setItem('access_token', res.access_token);
 
         this.service.signupService.getSelfRegistration(this.language).subscribe((regData: any) => {
           this.countriesList = regData.countryList;
@@ -264,12 +256,6 @@ export class SignupFormComponent implements OnInit, OnChanges {
           this.isMobValUnique = false;
           this.hasError = true;
           this.errorMessage = 'Mobile already exist!';
-          // const modalRef = this.modalSerivce.open(ErrorPopupComponent, {
-          //   animation: false,
-          //   backdrop: false,
-          //   keyboard: false,
-          // });
-          // modalRef.componentInstance.errorMessage = 'Account already registered! Please try with another number.';
 
           this.matDialog.open(ErrorPopupComponent, {
             data: 'Account already registered! Please try with another number.',
@@ -285,23 +271,18 @@ export class SignupFormComponent implements OnInit, OnChanges {
       this.service.loginService.generateOtp(this.mobile).subscribe(async (res: any) => {
         sessionStorage.setItem('serviceRequestId', res.serviceRequestId);
         sessionStorage.setItem('mobile', this.mobile);
-        // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
         const dialogRef = this.matDialog.open(OtpComponent, {
           data: { isRegUser: true },
         });
         dialogRef.afterClosed().subscribe((result) => {
           this.isMobValOTP = result;
         });
-        // modalRef.componentInstance.isRegUser = true;
-        // modalRef.result.then((result) => {
-        //   this.isMobValOTP = result;
-        // });
+
       });
     }
   }
   fileUrlChange(event: any) {
-    //this.resetProfile();
-    //this.mobile = '232323232323';
+
     if (event.target.files.length > 0 && this.mobile) {
       this.spinner.show();
       let fileUrl = event.target.files[0];
@@ -314,15 +295,14 @@ export class SignupFormComponent implements OnInit, OnChanges {
       });
       this.spinner.hide();
     } else {
-      // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-      // modalRef.componentInstance.errorMessage = 'Please verify mobile number before moving forward.';
+
       this.matDialog.open(ErrorPopupComponent, {
         data: 'Please verify mobile number before moving forward.',
       });
     }
   }
   uploadKYCDoc(event: any) {
-    // this.mobile = '232323232323';
+
     this.spinner.show();
     if (event.target.files.length > 0 && this.mobile && this.docTypeKYC) {
       let fileUrl = event.target.files[0];
@@ -342,7 +322,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
         this.isKYCBack = true;
         this.registerForm.value.kycImageUrl = res.payload.documentId;
         this.kycImageUrl = res.payload.documentId;
-        // debugger;
+
         this.spinner.hide();
       });
     }
@@ -371,12 +351,11 @@ export class SignupFormComponent implements OnInit, OnChanges {
         });
       }
     } else {
-      // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-      // modalRef.componentInstance.errorMessage = 'Please verify mobile number before moving forward.';
+
       this.matDialog.open(ErrorPopupComponent, {
         data: 'Please verify mobile number before moving forward.',
       });
-      //this.matDialog.open(ErrorPopupComponent);
+
     }
   }
   validateReferralCode(refCode: any) {
@@ -417,7 +396,6 @@ export class SignupFormComponent implements OnInit, OnChanges {
   CreateProfile() {
     let payload = {
       payload: {
-        //profileDetails:  this.config.screenSettings.constants.profileDetails,
         profileDetails: this.config.screenSettings.profileDetails,
         userInformation: {
           basicInformation: {
@@ -460,11 +438,10 @@ export class SignupFormComponent implements OnInit, OnChanges {
     this.spinner.show();
     this.service.signupService.RegisterUser(payload).subscribe(
       (resData: any) => {
-        //this.activeModal.dismiss();
+
 
         this.spinner.hide();
-        // const modalRef = this.modalSerivce.open(SuccessPopupComponent, { animation: false, backdrop: false });
-        // modalRef.componentInstance.message = resData.message;
+
         this.matDialog.open(SuccessPopupComponent, {
           data: resData.message,
         });
@@ -472,8 +449,7 @@ export class SignupFormComponent implements OnInit, OnChanges {
       },
       (error: any) => {
         this.spinner.hide();
-        // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-        // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+
         this.matDialog.open(ErrorPopupComponent, {
           data: error.errors[0].message,
         });

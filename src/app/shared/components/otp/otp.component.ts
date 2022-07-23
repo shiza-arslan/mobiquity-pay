@@ -23,11 +23,6 @@ export class OtpComponent implements OnInit {
   isNormalUser = false;
   isRegUser = false;
 
-  //  isForgotPassword = false;
-  // @Input() public isForgotPassword: any = false;
-
-  // @Input() public isRegUser: any = false;
-
   constructor(
     private service: UowService,
     private matDialog: MatDialog,
@@ -35,8 +30,7 @@ export class OtpComponent implements OnInit {
     private router: Router,
     private dialogRef: MatDialogRef<OtpComponent>,
     private route: ActivatedRoute,
-    //@Inject(MAT_DIALOG_DATA) public isforgotPassword: boolean,
-    //@Inject(MAT_DIALOG_DATA) public isnormalUser: boolean,
+
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.isRegUser = data.isRegUser;
@@ -75,8 +69,7 @@ export class OtpComponent implements OnInit {
             this.closeModal();
             this.spinner.hide();
             sessionStorage.setItem('serviceRequestId', res.serviceRequestId);
-            // const modalRef = this.modalSerivce.open(ChangePinComponent, { animation: false, backdrop: false });
-            // modalRef.componentInstance.isForgotPassword = true;
+
             this.matDialog.open(ChangePinComponent, {
               data: true,
             });
@@ -86,7 +79,6 @@ export class OtpComponent implements OnInit {
           this.spinner.hide();
           if (error.status === 'FAILED') {
             this.hasErrors = true;
-            //const modalRef = this.modalSerivce.open(ErrorComponent, { animation: false, backdrop:false});
 
             this.errorMessage = error.errors[0].message;
           }
@@ -101,7 +93,7 @@ export class OtpComponent implements OnInit {
       this.service.loginService.loginConfirm(confirmObj).subscribe(
         async (res: any) => {
           if (res.status === 'SUCCEEDED') {
-            // this.activeModal.dismiss();
+
             this.closeModal();
             sessionStorage.setItem('access_token', res.token.access_token);
             await this.service.loginService.loginSuccessfully();
@@ -113,7 +105,6 @@ export class OtpComponent implements OnInit {
           this.spinner.hide();
           if (error.status === 'FAILED') {
             this.hasErrors = true;
-            //const modalRef = this.modalSerivce.open(ErrorComponent, { animation: false, backdrop:false});
             this.errorMessage = error.errors[0].message;
           }
         },
@@ -129,15 +120,12 @@ export class OtpComponent implements OnInit {
             this.spinner.hide();
             if (this.isRegUser) {
               this.dialogRef.close(true);
-              // this.activeModal.close(true);
             } else {
-              // this.activeModal.dismiss();
-              // this.service.loginService.generateBearer().subscribe(async (res: any) => {
-              // sessionStorage.setItem('access_token', res.access_token);
+
               await this.service.loginService.loginSuccessfully();
 
               this.router.navigate(['/']);
-              // });
+
             }
           }
         },
@@ -168,8 +156,7 @@ export class OtpComponent implements OnInit {
   }
   reSendOTP() {
     this.hasErrors = false;
-    // this.service.loginService.generateBearer().subscribe(async (res: any) => {
-    //  sessionStorage.setItem('access_token', res.access_token);
+
     this.service.loginService.resendOTP().subscribe(
       async (data: any) => {
         console.log('res resend', data);

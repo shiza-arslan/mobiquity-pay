@@ -59,33 +59,23 @@ export class ForgetPinComponent implements OnInit {
       (res: any) => {
         sessionStorage.setItem('serviceRequestId', res.serviceRequestId);
         if (res.status === 'PAUSED') {
-          // this.service.loginService.generateBearer().subscribe((res: any) => {
-          // sessionStorage.setItem('access_token', res.access_token);
-          // this.activeModal.dismiss();
+
           this.closeModal();
           this.spinner.hide();
-          // const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop: false });
-          // modalRef.componentInstance.isForgotPassword = true;
+
           this.matDialog.open(OtpComponent, {
             data: { isForgotPassword: true },
           });
-          //  });
 
-          /* const modalRef = this.modalSerivce.open(OtpComponent, { animation: false, backdrop:false});
-          modalRef.componentInstance.isForgotPassword = true;*/
-          /* this.router.navigate(['/otp'], {
-            queryParams: { isForgotPassword: true },
-          });*/
         }
       },
       (error: any) => {
         this.spinner.hide();
         console.log('error res', error);
         if (error.status === 'FAILED') {
-          // this.activeModal.dismiss();
+
           this.closeModal();
-          // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-          // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+
           this.matDialog.open(ErrorPopupComponent, {
             data: error.errors[0].message,
           });
@@ -94,9 +84,8 @@ export class ForgetPinComponent implements OnInit {
     );
   }
   customerSupport() {
-    // this.activeModal.dismiss();
+
     this.closeModal();
-    // const modalRef = this.modalSerivce.open(CustomerSupportComponent, { animation: false, backdrop: false });
     this.matDialog.open(CustomerSupportComponent);
   }
 

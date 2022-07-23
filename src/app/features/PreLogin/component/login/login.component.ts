@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.selectedLanguage = 'en';
-
     if (sessionStorage.getItem('language')) {
       this.selectedLanguage = sessionStorage.getItem('language');
     }
@@ -74,7 +73,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.spinner.show();
     sessionStorage.setItem('mobile', this.loginForm.value.mobile);
-    // sessionStorage.setItem('mpin', this.loginForm.value.pin);
+
     this.service.loginService
       .login({ ...this.loginForm.value, language: this.selectedLanguage })
       .pipe(map((res1: any) => res1))
@@ -82,17 +81,16 @@ export class LoginComponent implements OnInit {
         async (res: any) => {
           if (res.status == 'PAUSED') {
             sessionStorage.setItem('serviceRequestId', res.serviceRequestId);
-            // sessionStorage.setItem('access_token', res.access_token);
+
             this.closeModal();
             this.spinner.hide();
             this.matDialog.open(OtpComponent, {
               data: { isNormalUser: true },
             });
           } else if (res.status == 'SUCCEEDED') {
-            //sessionStorage.setItem('access_token', res.token.access_token);
+
             await this.service.loginService.loginSuccessfully();
             this.spinner.hide();
-            // this.activeModal.dismiss();
             this.closeModal();
             this.router.navigate(['/']);
           }
@@ -101,19 +99,13 @@ export class LoginComponent implements OnInit {
           this.spinner.hide();
 
           if ((error.status === 'FAILED' && error.errors[0].code === 'AUTH_06') || error.errors[0].code === 'AUTH01') {
-            // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-            // modalRef.componentInstance.errorMessage = error.error.errorUserMsg;
             this.matDialog.open(ErrorPopupComponent, {
               data: error.errorUserMsg,
             });
           } else if (error.status === 'FAILED' && error.errors[0].code === 'FTL01') {
             this.closeModal();
-            // this.activeModal.dismiss();
-            // const modalRef = this.modalSerivce.open(ChangePinComponent, { animation: false, backdrop: false });
             this.matDialog.open(ChangePinComponent);
           } else {
-            // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-            // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
             this.matDialog.open(ErrorPopupComponent, {
               data: error.errors[0].message,
             });
@@ -122,8 +114,6 @@ export class LoginComponent implements OnInit {
       );
   }
   forgetPIN() {
-    // this.activeModal.dismiss();
-    // const modalRef = this.modalSerivce.open(ForgetPinComponent, { animation: false, backdrop: false });
     this.dialogRef.close();
     this.matDialog.open(ForgetPinComponent);
   }

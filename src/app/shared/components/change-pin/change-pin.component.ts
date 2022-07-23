@@ -88,21 +88,16 @@ export class ChangePinComponent implements OnInit {
         .changePin({ ...this.resetForm.value, language: this.selectedLanguage, mobile: this.mobile })
         .subscribe(
           async (res: any) => {
-            // this.activeModal.dismiss();
             this.closeModal();
             if (res.status === 'SUCCEEDED') {
-              // const modalRef = this.modalSerivce.open(SuccessPinComponent, { animation: false, backdrop: false });
               this.matDialog.open(SuccessPinComponent);
-              // this.router.navigate(['/login']);
-              // redirect to  login after popup
+
             }
           },
           (error: any) => {
             if (error.status === 'FAILED') {
-              // this.activeModal.dismiss();
               this.closeModal();
-              // const modalRef = this.modalSerivce.open(ErrorPopupComponent, { animation: false, backdrop: false });
-              // modalRef.componentInstance.errorMessage = error.error.errors[0].message;
+
               this.matDialog.open(ErrorPopupComponent, {
                 data: error.errors[0].message,
               });

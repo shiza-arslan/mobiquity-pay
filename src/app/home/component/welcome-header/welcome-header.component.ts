@@ -15,24 +15,6 @@ export class WelcomeHeaderComponent implements OnInit {
   userData: any;
   BalanceInquiry: any;
   translation: any = [];
-  languages = [
-    {
-      label: 'English',
-      lang: 'en',
-    },
-    {
-      label: 'Arabic',
-      lang: 'ar',
-    },
-    {
-      label: 'French',
-      lang: 'french',
-    },
-    {
-      label: 'Spanish',
-      lang: 'spanish',
-    },
-  ];
   constructor(private matDialog: MatDialog, private service: UowService, private route: Router) {}
 
   ngOnInit(): void {
@@ -74,7 +56,7 @@ export class WelcomeHeaderComponent implements OnInit {
   }
 
   isUserLoggedIn() {
-    if (sessionStorage.getItem('isLoggedIn')) {
+    if (sessionStorage.getItem('isLoggedIn')!==null && sessionStorage.getItem('isLoggedIn')!=='false') {
       //to do
     } else {
       this.matDialog.open(LoginComponent);

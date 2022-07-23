@@ -34,7 +34,7 @@ export class NavigationComponent implements OnInit {
     });
   }
   isUserLoggedIn() {
-    if (sessionStorage.getItem('isLoggedIn')) {
+    if (sessionStorage.getItem('isLoggedIn')!==null && sessionStorage.getItem('isLoggedIn')!=='false') {
       //to do
     } else {
       // const modalRef = this.modalSerivce.open(LoginComponent);

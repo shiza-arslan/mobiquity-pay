@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MatDialog } from '@angular/material/dialog';
 import { LoginComponent } from '../../../features/PreLogin/component/login/login.component';
 import { UowService } from '@mobiquity/services';
+import { getWebConfig } from '@mobiquity/webConfig';
 @Component({
   selector: 'mobiquity-pay-signup-header',
   templateUrl: './signup-header.component.html',
@@ -9,24 +10,8 @@ import { UowService } from '@mobiquity/services';
 })
 export class SignupHeaderComponent implements OnInit {
   selectedLanguage: any = 'en';
-  languages = [
-    {
-      label: 'English',
-      lang: 'en',
-    },
-    {
-      label: 'Arabic',
-      lang: 'ar',
-    },
-    {
-      label: 'French',
-      lang: 'french',
-    },
-    {
-      label: 'Spanish',
-      lang: 'spanish',
-    },
-  ];
+  Config = getWebConfig();
+  languages = this.Config.screenSettings.languages;
   constructor(private matDialog: MatDialog, private service: UowService) {}
 
   ngOnInit(): void {

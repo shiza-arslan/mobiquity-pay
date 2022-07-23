@@ -40,7 +40,7 @@ export class AuthInterceptor implements HttpInterceptor {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
     let authorizedRequest: HttpRequest<any>;
-    if (accessToken) {
+    if (accessToken && !req.headers.has("Authorization")) {
       authorizedRequest = req.clone({ headers: req.headers.set('Authorization', `Bearer ${accessToken}`) });
     } else {
       authorizedRequest = req;
