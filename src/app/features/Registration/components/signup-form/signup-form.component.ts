@@ -28,6 +28,8 @@ export class SignupFormComponent implements OnInit, OnChanges {
   registerForm: FormGroup | any;
   config = getWebConfig();
 
+  type = 'password';
+
   get fc() {
     return this.registerForm.controls;
   }
@@ -408,7 +410,13 @@ export class SignupFormComponent implements OnInit, OnChanges {
       this.errorMessage = '';
     }
   }
-
+  showPassword() {
+    if (this.type == 'text') {
+      this.type = 'password';
+    } else {
+      this.type = 'text';
+    }
+  }
   openModal() {
     this.resetWizard();
     this.matDialog.open(LoginComponent);
